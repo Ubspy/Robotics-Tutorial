@@ -1,5 +1,5 @@
 # Basic Java
-- [ ] Basic Java "Hello World!" program
+- [x] Basic Java "Hello World!" program
 - [ ] Numeric variables
 - [ ] Numeric operations
 - [ ] Additional variable types

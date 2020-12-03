@@ -23,7 +23,7 @@ Select Java:
 You can give what ever name you like for the file, but I'd recommend something you can look at later and know what you were working on. While the default names can be funny, they're not practical when you're trying to find when you were learning about functions, for example.
 
 ## Hello World!
-Finally, we can start coding! When you open up your file you'll notice there's already a program written in there. My interface might look different from yours, that's because I have `dark mode` turned on, don't worry though other than my eyes hurting less, there's no other differences.
+Finally, we can start coding! When you open up your file you'll notice there's already a program written in there. My interface might look different from yours, that's because I have `dark mode` turned on, don't worry though other than my eyes hurting less, there are no other differences.
 ![Hello World](pictures/hello-world.png)
  If you press the run button on the top, your program will run on the left, you'll notice the program outputted
  > Hello, world!
@@ -40,4 +40,18 @@ class Main
  I can already hear you asking:
  > What on earth is a main method?
 
- Well a main method is just
+ Well a main method is required for any program to run, it's the method that the code starts running at. Why is this important? Well eventually we will have a lot of different methods all over the program, but the method called `main` is always the one Java starts at. 
+
+ Now you're probably wondering about the curly brackets, the `{` and `}`. Those are used as wrappers. After the first line, we open the curly brackets, and everything inside them is what the class called `Main` contains. Anything outside the last closing bracket isn't in the main class, and Java will probably not like. Same thing goes for the main method, the curly brackets after
+ ```Java
+ public static void main(String[] args)
+ ```
+ are just what is contained inside of the main function. I understand for now that block of code is really confusing, what do all those words mean? There's a lot of them and I only really understand `main`. Trust me, we *will* get there, but you just have to trust me for now and understand that all that means is it's the main function. The last line of intrest is inside the main function:
+ ```Java
+ System.out.println("Hello, world!");
+ ```
+ Again, what does all of it mean? I promise it'll make more sense down the line, but right now you just need to trust me that this is how you tell Java to print something into the console. Go ahead and try it yourself, have it print whatever you want! All you need to do is follow this format:
+ ```Java
+ System.out.println("Put whatever you want here inside these quotation marks");
+ ```
+ Congratulations! You are now a *real* programmer! You have just completed exercise one!
