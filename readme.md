@@ -97,7 +97,7 @@ int number;
 ```
 We now have a variable! We have a variable named `number`, it's important to note that you can name a variable whatever you want. Well, not whatever you want, unfortunately there are some rules for naming variables. but we'll get to that later, for now just use `number` like I am. 
 
-So what do we do with it? Well let's set it to something so we can store it for later. Let's actually assign the variable to something. Pick a number, any number that doesn't have a decimal place, just keep it classy please, this is a school activity. Let's now set the variable to that number:
+So what do we do with it? Well let's set it to something so we can store it for later. Let's actually assign the variable to something. Pick a number, any number that doesn't have a decimal place, just keep it classy please, this is a school activity. Let's now set the variable to that number on a new line:
 ```Java
 number = 5;
 ```
@@ -119,7 +119,8 @@ class Main
 {
   public static void main(String[] args)
   {
-    int number = 5;
+    int number;
+    number = 5;
 
     System.out.println(number);
   }
@@ -147,3 +148,86 @@ That being said, there are still naming conventions, you'll notice how I capital
 * Pascal case: FrontLeftMotorSpeed, very similar to cammel Case, except the first letter is capitalized
 * Snail case: front_left_motor_speed, a little different, here the words are all separated by underscores
 Now I'm obviously biased, since I use cammel case regularly, but I recommend you use cammel case because it's what both Java, and WPILIB use in their variables. If you prefer one style over the other, that's fine, but I want to remind you that having differently styled variables in different areas makes the code look like a mess, which is why I recommend everyone for their robot and Java code to use cammel case.
+
+## Arithmetic operations
+Now we can store values, which is nice but what can we *do* with it? Well the first and obvious thing is we can use math to mess with the variables. They're are called `arithmetic operators`, we can use these in terms of `number literals` or other `variables`. The first set should all be operators that you're familiar with:
+* \+ : addition
+* \- : subtraction
+* \* : multiplication
+* / : division
+
+The last operator is a little more complicated. The `modulus` operator (%) returns the remainder of a division, for example, 5 / 2 is 2.5, or 2 with a remainder of 1, so 5 % 2 would return the value 1.
+
+## Assignment operations
+Now math isn't the only thing we can do with variables, as seen before we can also assign them. You're already faimiar with the basic assignment operator `=` but there are more believe it or not. Sometimes you want to add a specific number to a variable. Let's say you're making a program to track how many times the robot has spun in a full circle, you'd want to add 1 to the variable, so how do we do this? Way back before fancy assignment operators, we had to type this out:
+```Java
+spinCount = spinCount + 1;
+```
+Hopefully you see how this works, you take the `spinCount` variable and set it to itself plus 1. But, programmers are lazy. This was too much typing, so later they came up with these assignment operators, that are shorthand, or just a shorter way or writing the above expression:
+* += : this is the same as setting a variable to itself plus a number (ex: `number += 5` is the same as `number = number + 5`)
+* -= : this is the same as setting a variable to itself minus a number (ex: `number -= 5` is the same as `number = number - 5`)
+* *= : this is the same as setting a variable to itself multiplied by a number (ex: `number *= 5` is the same as `number = number * 5`)
+* /= : this is the same as setting a variable to itself divided by a number (ex: `number /= 5` is the same as `number = number / 5`)
+
+The last two are a little bit more unusual, but because programmers like to add one to a variable so often, we created an even smaller shortcut for that
+* ++ : adds one to a variable (ex: `number++` is the same as `number += 1` or `number = number + 1`)
+* -- : subtracts one to a variable (ex: `number--` is the same as `number -= 1` or `number = number - 1`)
+
+## User input
+Now as interesting as it is to assign the variable yourself, but what if instead every time we run the program we can give it a different number? Normally, with most languages you cover this in the beginning, but unfortunately, Java makes it a little complicated, and I didn't want to scare anyone off. Let's try and make a program that takes a number, and gives us the negative of that number. Now I'm going to give you a few lines of code, and they won't all make sense, but you just need to trust me for now, it will make more sense later.
+
+The first thing you want to do, is add this line to the very top of your code (above `class Main`)
+```Java
+import java.util.Scanner;
+```
+I'm going to be saying this a lot in the beginning, but you just need to trust me for now, I promise later I will explain this line properly, but you need this to be able to get user input. Next, add this to the beginning of your main function (right after the open curly bracket { for the main function)
+```Java
+Scanner scanner = new Scanner(System.in);
+```
+Yeah there's a lot here, and not all of it makes sense, but just ignore this for now if possible. This just set it up so we can actually get user input. The next thing we want to do you should be familiar with, print out a line that asks the user to type in a number. Just incase you forgot what that would look like, let me show you here:
+```Java
+System.out.println("Please give a number: ");
+```
+Now the only thing left to do is actually get the input. So considering we need to store this somewhere, we should create a variable for it! Go ahead and go to the next line and `define a variable`, don't set it to anything just yet. It should something like this:
+```Java
+int userInput;
+```
+
+Now that we've defined the variable we'll initialize it. We need to give it a value, that value will be the user input that they type into the console. To do that, we do something similar to when we printed the output, add the following after the variable declaration:
+```Java
+int userInput = scanner.nextInt();
+```
+You'll notice I defined, and initialized the variable on the same line, this is something you can do, so I thought I would show it off just for clarification.
+
+Now we have their user input stored in our variable! Let's do something with it. Let's give back the number squared. Go ahead and try it yourself, there's two ways you can do it, you can make a new variable and store the number squared there, then print out the squared variable. You could also just square the number inside the print statement.
+
+That will look something like this:
+```Java
+System.out.println(userInput * userInput);
+```
+
+Now we're really close, but you might notice repl shows a little warning that we need to close the scanner. You can leave it alone, but at the very end I would add this line:
+```Java
+scanner.close();
+```
+Again, I know this doesn't make a ton of sense, but all you really need to know is that this closes the input reader properly before the program quits.
+
+In the end, your program should look something like this:
+```Java
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please give a number: ");
+        int number = scanner.nextInt();
+
+        System.out.println(number * number);
+        scanner.close();
+    }
+}
+```
+Look at that! We're getting somewhere! I think you know enough to where I can direct you to the exercises.  
