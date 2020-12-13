@@ -1,0 +1,1 @@
+You'll probably want to use a variable type that can store decimal values
