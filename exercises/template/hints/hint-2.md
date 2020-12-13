@@ -1,0 +1,1 @@
+You want to get two numbers through user input, and then print back out the area using the area formula (base * height / 2)

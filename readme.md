@@ -174,6 +174,24 @@ The last two are a little bit more unusual, but because programmers like to add 
 * ++ : adds one to a variable (ex: `number++` is the same as `number += 1` or `number = number + 1`)
 * -- : subtracts one to a variable (ex: `number--` is the same as `number -= 1` or `number = number - 1`)
 
+## Other variable types
+So you probably noticed a problem with the division operator, what if we want to store a decimal value? Or what if we want to store something that isn't a number? Well lucky for you there are more variable types than integers. Declaring and initializing variables is always in the same format of
+```Java
+[variableType] variableName = [value];
+```
+Or as an example:
+```Java
+double circleRadius = 5.4;
+```
+
+What does a double mean? I'll get to that in just a second, but every variable type works this way. I'm going to start here with only variables that store numbers:
+* int: you've seen this one already, but it stores a whole number integer, positive or negative
+* float: this is called a "floating point" number, I could get into the specifics of why it's called that but for now I'll just say that it holds a positive or negative with 32 significant digits (if you don't know what that means, take it as it can store 32 individual numbers, so if a float was 52.X that X could be up to 30 numbers long). It has about the same range as an integer
+* double: this is called a "double precision number," this is because it has twice the precision as a float, and can store 64 significant digits. The range is approximately the same, but it can store a lot more information. That does come at a cost though, because it takes up twice the amount of space.
+* boolean: this is a very different type of variable, it only stores two values: 0 or 1, we represent those in Java as either `true` or `false`, you might think there's not much reason to use a boolean, but I assure you they show up everywhere in programming
+
+This isn't a full and complete list of number variable types, there's stuff like `short` and `long` or even `unsigned` numbers, but frankly I never used those even outside of robotics coding, so I'm going to cut the list here. Also, there are other variable types that store numbers, but for now I just want to stick with these so you can familiarize yourself with them.
+
 ## User input
 Now as interesting as it is to assign the variable yourself, but what if instead every time we run the program we can give it a different number? Normally, with most languages you cover this in the beginning, but unfortunately, Java makes it a little complicated, and I didn't want to scare anyone off. Let's try and make a program that takes a number, and gives us the negative of that number. Now I'm going to give you a few lines of code, and they won't all make sense, but you just need to trust me for now, it will make more sense later.
 
@@ -198,9 +216,18 @@ Now that we've defined the variable we'll initialize it. We need to give it a va
 ```Java
 int userInput = scanner.nextInt();
 ```
+
+If you wanted to get a double, or a float, it would look like the below code. This will be pretty much the same for any variable type.
+```Java
+double userInput = scanner.nextDouble();
+float userInput = scanner.nextFloat();
+```
+
 You'll notice I defined, and initialized the variable on the same line, this is something you can do, so I thought I would show it off just for clarification.
 
 Now we have their user input stored in our variable! Let's do something with it. Let's give back the number squared. Go ahead and try it yourself, there's two ways you can do it, you can make a new variable and store the number squared there, then print out the squared variable. You could also just square the number inside the print statement.
+
+One more thing I would like to note: you can get input as many times as you want, there's not a limit. If you wanted to get two numbers, all you need to do is make a new variable. I normally like to print out asking the user for what specifically I'm looking for before getting input, but it's not required.
 
 That will look something like this:
 ```Java
@@ -224,7 +251,7 @@ class Main
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please give a number: ");
-        int number = scanner.nextInt();
+        float number = scanner.nextFloat();
 
         System.out.println(number * number);
         scanner.close();
@@ -233,3 +260,5 @@ class Main
 ```
 Look at that! We're getting somewhere! I think you know enough to where I can direct you to the exercises. 
 I'm too tired to continue, keep writing about how to access the exercies and then write the first one 
+
+## Strings

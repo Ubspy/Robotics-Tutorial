@@ -1,7 +1,8 @@
 # Basic Java
 - [x] Basic Java "Hello World!" program
-- [ ] Numeric variables
-- [ ] Numeric operations
+- [x] Numeric variables
+- [x] Numeric operations
+- [x] User input
 - [ ] Additional variable types
 - [ ] If statements
 - [ ] Boolean operations
