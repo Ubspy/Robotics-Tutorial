@@ -11,6 +11,7 @@ Second, when it comes to robotics stuff, look at [WPILIB](https://docs.wpilib.or
 For documentation, everything in the [WPILIB libraries](https://first.wpi.edu/FRC/roborio/release/docs/java/index.html) is really well documented. We'll talk more about documentation later but for now you can look up any class you need to use and get all the methods as well at what they do.
 
 The last bit I'll give, if you're confused about something, feel free to open up an issue on this repository. To do that, go to the top of the github page while looking at this repo (you should already be there) and click on the issues tab:
+Side note: if the pictures here are too small for you to see, just click on them, it'll open it up in a bigger size
 ![Issue](pictures/github-issue-1.png)
 
 Then click where is says `create new issue`:
@@ -260,5 +261,8 @@ class Main
 ```
 Look at that! We're getting somewhere! I think you know enough to where I can direct you to the exercises. 
 I'm too tired to continue, keep writing about how to access the exercies and then write the first one 
+
+## Comments
+
 
 ## Strings
