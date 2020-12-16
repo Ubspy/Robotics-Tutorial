@@ -263,6 +263,67 @@ Look at that! We're getting somewhere! I think you know enough to where I can di
 I'm too tired to continue, keep writing about how to access the exercies and then write the first one 
 
 ## Comments
+Hopefully you've done your first exercise by now, and hopefully it wasn't too bad, there is one thing I'd like to talk about before we continue with coding concepts, and that's comments in code. You'll notice in the solution I wrote something like:
+```Java
+// You can use a float here too
+```
 
+Now maybe you figured this out already but you can leave notes in your code! It's really nice because as long as you put the right symbols before (I'll show you in a second) you can put whatever you want. I just wanted to clear this up because if you look at any of the previous robot code that I wrote, comments will be **everywhere**. As they should be for your code as well, comments are a really good way of describing what's going on, so if someone else is looking over it they don't get lost. Especially when learning something new, it's nice to leave notes for yourself so you can go back and look later. Leaving comments on your code is part of what's called `good documentation`, which is just a fancy way of saying you can easily understand someone's code if you weren't the one who wrote it. The other big part is naming your variables, which we've already talked about!
 
-## Strings
+As for leaving a comment, it's really simple:
+```Java
+// Two slashes starts a single line comment, you can't type any code on this line, and the next line will act as code again
+int num = 5; // If you put the slashes after a program statement, your commend can even be on the same line, but you can't do the opposite, no code can be written past those slashes
+
+/* A slash followed by a star is the start of a multi-line comment
+   this comment will expand through multiple lines, it's really helpful if you need to take out a big chunk of code
+   everything inside the multi-line comment will not be read as code by the compiler
+   the only way to end the commend is with a star and a slash, just like this: */
+```
+
+## If statements
+Now we're starting to get into some of the interesting stuff, there are a lot of cases when programming when you only want to run a section of code *if* a condition is true. For example: let's say you're coding the robot, and you don't want a specific motor to ever go backwards. Shouldn't there be a way to make it so if the input from the controller is negative, we don't move the motor? Well yes! There actually is! 
+
+Since that example may have been a little too out there, let's back it up to where we are in terms of writing programs. Let's use the first exercise as an example, there was no way to stop the user from inputting any negative numbers, you'll notice if you put in a negative number, it would give you a negative area, which isn't exactly possible. So, how can we stop that? We use this thing called an `if statement`. An `if statement` will have three main parts: the declaraction of the `if statement`, the `boolean statement` or the condition and then the program statements to run if the condition is true.
+
+### What is a boolean statement?
+Remember the `boolean` variable type? If not here's a quick refresher, it's a value that either shows up as `true` or `false`, which can also be represented as 0 (false) or 1 (true). A `boolean statement` is a statement that will evalulate as either 0 or 1, just the same as a boolean. So what exactly makes a boolean statement? Well we can use `comparison operators` to make boolean statements
+
+### Comparison operators
+I bet you thought you were done with operators, not quite. This last set is really easy, it's just comparing two values, this will either be a `variable`, or a `literal` value. Here is a list of comparison operators:
+* == : the equals operator, it checks if the actual values of both sides are equal to each other, remember that just one = sign is the assignment operator, to compare you need to use two
+* != : not equal to, this is the opposite of the equals operator
+* < : less than, this one, as well as the rest will hopefully speak for themselves
+* \> : greater than
+* <= : less than or equal to, please note that the equals sign *has* to come after the <, meaning you can't type "=<"
+* \>= : greater than or equal to, the order is just as important as it was for the other ones
+
+That's it! That wasn't so bad, was it? Now that we have the comparison operator, let's take a look at an example `boolean statement`. Let's keep using this example of negative numbers. Let's say we have a variable called `userInput`, and it is a number, doesn't really matter what type. To see if it's negative, all we need to do is check if it's less than zero. See if you can write out what the boolean statement will be before looking at it.
+
+Here is what that boolean statement will look like:
+```Java
+userInput < 0
+```
+
+Really not so bad, is it? Now you'll notice that I didn't put a semi-colon at the end, that's because this will end up going inside the if statement, so I didn't bother to put one in. Now let's go ahead and take a look at the anatomy of an if statement (please note that [] just denotes where things should go, and they they're not real values, YOU WILL NOT BE USING [] IN JAVA, not for a while at least)
+```
+if([boolean statement])
+{
+  [what to do if the boolean statement is true]
+}
+```
+
+Let's go ahead and continue with our previous example of getting rid of negative numbers. If we want to turn a negative number into a positive one, what to do we? There is the absolute value, but let's pretent that doesn't exist in Java (it does, but I'm going to stay away from it for now). Using the operators we know, how can we turn a negative number into a positive one? Well the easiest way I can think of is to do the following:
+```Java
+userInput *= -1;
+```
+All we need to do is set `userInput` equal to itself, but multiplied by negative one. Those of you who remember from math, a negative number times a negative number is a positive one. And any number times 1 is itself, so this will do exactly what we want. I want you to go ahead and try writing that out now to see what it might look like. You have every part you need, you just need to put it together.
+```Java
+if(userInput < 0)
+{
+  userInput *= -1;
+}
+```
+Here is exactly what it would look like. You're probably asking yourself about the semicolon, where it is? Well an `if statement` isn't a program statement, it's a condition. We're setting up a condition to run, what's inside the `if statement` *is* a program statement, which is why we need semicolons. Additionally, you have have as many lines as you want inside the `if statement`, as long as they're surrounded by the curly brackets `{}`.
+
+Now you know about if statements!
