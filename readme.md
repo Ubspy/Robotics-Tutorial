@@ -230,10 +230,13 @@ Now we have their user input stored in our variable! Let's do something with it.
 
 One more thing I would like to note: you can get input as many times as you want, there's not a limit. If you wanted to get two numbers, all you need to do is make a new variable. I normally like to print out asking the user for what specifically I'm looking for before getting input, but it's not required.
 
-That will look something like this:
-```Java
-System.out.println(userInput * userInput);
-```
+<details>
+  <summary>Here is what it should look like:</summary>
+  
+  ```Java
+  System.out.println(userInput * userInput);
+  ```
+</details>
 
 Now we're really close, but you might notice repl shows a little warning that we need to close the scanner. You can leave it alone, but at the very end I would add this line:
 ```Java
@@ -314,9 +317,13 @@ if([boolean statement])
 ```
 
 Let's go ahead and continue with our previous example of getting rid of negative numbers. If we want to turn a negative number into a positive one, what to do we? There is the absolute value, but let's pretent that doesn't exist in Java (it does, but I'm going to stay away from it for now). Using the operators we know, how can we turn a negative number into a positive one? Well the easiest way I can think of is to do the following:
-```Java
-userInput *= -1;
-```
+<details>
+  <summary>Click here for the answer</summary>
+  
+  ```Java
+  userInput *= -1;
+  ```
+</details>
 All we need to do is set `userInput` equal to itself, but multiplied by negative one. Those of you who remember from math, a negative number times a negative number is a positive one. And any number times 1 is itself, so this will do exactly what we want. I want you to go ahead and try writing that out now to see what it might look like. You have every part you need, you just need to put it together.
 ```Java
 if(userInput < 0)
@@ -326,4 +333,27 @@ if(userInput < 0)
 ```
 Here is exactly what it would look like. You're probably asking yourself about the semicolon, where it is? Well an `if statement` isn't a program statement, it's a condition. We're setting up a condition to run, what's inside the `if statement` *is* a program statement, which is why we need semicolons. Additionally, you have have as many lines as you want inside the `if statement`, as long as they're surrounded by the curly brackets `{}`.
 
-Now you know about if statements!
+Now you know about if statements! To show you what the whole program would look like with the if statement added, I'll show it below:
+```Java
+import java.util.Scanner;
+
+class Main
+{
+  public static void main(String[] args)
+  {
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Please enter a number:");
+    double userInput = scanner.nextDouble();
+
+    if(userInput < 0)
+    {
+      userInput *= -1;
+    }
+
+    System.out.println(userInput);
+    scanner.close();
+  }
+}
+```
+Before I end this section, I'd like to point out where I put the if statement, I put them after `userInput` was assigned, and before it printed. If I put there if statement after the print, then the number would still be negative. While yes, at the end of the program the numbers would no longer be negative, the unfortunate part is we'd print before we changed them back to positive.
