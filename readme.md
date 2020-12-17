@@ -175,21 +175,15 @@ I recommend you use cammel case because it's what both Java, and WPILIB use in t
 ## Arithmetic operations
 Now we can store values, which is nice but what can we *do* with it? Well the first and obvious thing is we can use math to mess with the variables. They're are called `arithmetic operators`, we can use these in terms of `number literals` or other `variables`. The first set should all be operators that you're familiar with:
 
-Operator | Description
--------- | -----------
-\+ | addition 
-\- | subtraction
-\* | multiplation
-/ | divition
-% | modulus (explained more below)
+Operator	|	Description
+-----------	| -------------
+\+ 			| addition 
+\- 			| subtraction
+\* 			| multiplation
+/ 			| divition
+% 			| modulus (explained more below)
 
-* \+ : addition
-* \- : subtraction
-* \* : multiplication
-* / : division
-Additionally, the basic order of operations (PEMDAS) still applies in pretty much all coding languages, and if you need to use parentheses in your math you can add as many as needed.
-
-The last operator is a little more complicated. The `modulus` operator (%) returns the remainder of a division, for example, 5 / 2 is 2.5, or 2 with a remainder of 1, so 5 % 2 would return the value 1.
+Additionally, the basic order of operations (PEMDAS) still applies in pretty much all coding languages, and if you need to use parentheses in your math you can add as many as needed. The last operator is a little more complicated than your regular math operators. The `modulus` operator (%) returns the remainder of a division, for example, 5 / 2 is 2.5, or 2 with a remainder of 1, so 5 % 2 would return the value 1.
 
 ## Assignment operations
 Now math isn't the only thing we can do with variables, as seen before we can also assign them. You're already faimiar with the basic assignment operator `=` but there are more believe it or not. Sometimes you want to add a specific number to a variable. Let's say you're making a program to track how many times the robot has spun in a full circle, you'd want to add 1 to the variable, so how do we do this? Way back before fancy assignment operators, we had to type this out:
@@ -197,14 +191,18 @@ Now math isn't the only thing we can do with variables, as seen before we can al
 spinCount = spinCount + 1;
 ```
 Hopefully you see how this works, you take the `spinCount` variable and set it to itself plus 1. But, programmers are lazy. This was too much typing, so later they came up with these assignment operators, that are shorthand, or just a shorter way or writing the above expression:
-* += : this is the same as setting a variable to itself plus a number (ex: `number += 5` is the same as `number = number + 5`)
-* -= : this is the same as setting a variable to itself minus a number (ex: `number -= 5` is the same as `number = number - 5`)
-* *= : this is the same as setting a variable to itself multiplied by a number (ex: `number *= 5` is the same as `number = number * 5`)
-* /= : this is the same as setting a variable to itself divided by a number (ex: `number /= 5` is the same as `number = number / 5`)
+Operator	| Description											| Example
+-----------	| ----------------------------------------------------- | -------
++= 			| this sets a variable to itself plus a number			| `number += 5;` is the same as `number = number + 5;`
+-= 			| this sets a variable to itself minus a number			| `number -= 5;` is the same as `number = number - 5;`
+*= 			| this sets a variable to itself multiplied by a number	| `number *= 5;` is the same as `number = number * 5;`
+/= 			| this sets a variable to itself divided by a number	| `number /= 5;` is the same as `number = number / 5;`
 
 The last two are a little bit more unusual, but because programmers like to add one to a variable so often, we created an even smaller shortcut for that
-* ++ : adds one to a variable (ex: `number++` is the same as `number += 1` or `number = number + 1`)
-* -- : subtracts one to a variable (ex: `number--` is the same as `number -= 1` or `number = number - 1`)
+Operator	| Description										| Example
+-----------	| ------------------------------------------------- | -------
+++ 			| this adds one to a variable, or `increments` it	| `number++;` is the same as `number += 1;` or `number = number + 1;`
+-- 			| this adds one to a variable, or `decrements` it	| `number--;` is the same as `number -= 1;` or `number = number - 1;`
 
 ## Other variable types
 So you probably noticed a problem with the division operator, what if we want to store a decimal value? Or what if we want to store something that isn't a number? Well lucky for you there are more variable types than integers. Declaring and initializing variables is always in the same format of
@@ -328,12 +326,15 @@ Remember the `boolean` variable type? If not here's a quick refresher, it's a va
 
 ### Comparison operators
 I bet you thought you were done with operators, not quite. This last set is really easy, it's just comparing two values, this will either be a `variable`, or a `literal` value. Here is a list of comparison operators:
-* == : the equals operator, it checks if the actual values of both sides are equal to each other, remember that just one = sign is the assignment operator, to compare you need to use two
-* != : not equal to, this is the opposite of the equals operator
-* < : less than, this one, as well as the rest will hopefully speak for themselves
-* \> : greater than
-* <= : less than or equal to, please note that the equals sign *has* to come after the <, meaning you can't type "=<"
-* \>= : greater than or equal to, the order is just as important as it was for the other ones
+
+Operator	| Description
+-----------	| -----------
+== 			| the equals operator, it checks if the actual values of both sides are equal to each other, remember that just one = sign is the assignment operator
+!=			| not equal to, this is the opposite of the equals operator
+<			| less than, this one, as well as the rest will hopefully speak for themselves
+\>			| greater than
+<=			| less than or equal to, please note that the equals sign *has* to come after the <, meaning you can't type "=<"
+\>=			| greater than or equal to, the order is just as important as it was for the other ones
 
 That's it! That wasn't so bad, was it? Now that we have the comparison operator, let's take a look at an example `boolean statement`. Let's keep using this example of negative numbers. Let's say we have a variable called `userInput`, and it is a number, doesn't really matter what type. To see if it's negative, all we need to do is check if it's less than zero. See if you can write out what the boolean statement will be before looking at it.
 
