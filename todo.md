@@ -3,14 +3,15 @@
 - [x] Numeric variables
 - [x] Numeric operations
 - [x] User input
-- [ ] Additional variable types
-- [ ] If statements
-- [ ] Boolean operations
+- [x] Additional variable types
+- [x] If statements
+- [x] Boolean operations
 - [ ] Else if/else statements
 - [ ] For loops
 - [ ] While/do while loops
 - [ ] Nested loops (brief)
-- [ ] Arrays & Strings more in-depth
+- [ ] Strings
+- [ ] Arrays
 - [ ] 2D-Arrays?
 - [ ] ArrayList?
 

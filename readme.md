@@ -1,3 +1,25 @@
+# Table of contents
+1. [Introduction](#introduction)
+2. [Resources](#resources)
+3. [Basic Java](#basic-java)
+	1. [Intro](#java-intro)
+	2. [Getting started with an IDE](#getting-started-with-an-ide)
+	3. [Hello World!](#hello-world)
+	4. [Compiler errors](#compiler-errors)
+	5. [Variables](#variables)
+	6. [Naming variables](#naming-variables)
+	7. [Arithmetic operations](#arithmetic-operations)
+	8. [Assignment operations](#assignment-operations)
+	9. [Other variable types](#other-variable-types)
+	10. [User input](#user-input)
+	11. [Comments](#comments)
+	12. [If statements](#if-statements)
+		* [What is a boolean statement?](#what-is-a-boolean-statement)
+		* [Comparison operators](#comparison-operators)
+	13. [Else if statements](#else-if-statements)
+	14. [Else statements](#else-statements)
+	
+
 # Introduction
 Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2016 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
 
@@ -20,7 +42,7 @@ Then click where is says `create new issue`:
 Feel free to leave any concerns there, I'll respond as soon as possible!
 
 # Basic Java
-## Intro
+## Java Intro
 The first set of topics we're going to cover is the basics of the Java programming language. As of my time leaving, there are three official supported languages: Java, C++, and Labview. I chose to have the language for our team be Java, this is for several reasons. This is not because I specifically like Java over the other two, but for learning it's the best decision to start off with. C++, while being very similar to Java, is much more complicated. C++ requires you to work a lot more in depth, which can have many benefits, but it also requires a lot more code for the same actions, and with the limited time avalible to learn before the build season, that's not something I want to mess with. I also chose not to use Labview because simply it's not a real coding language. Learning Java can help you if you wish to further pursue programming, like creating a Minecraft mod, a website, or pursue a computer science degree. While Labview is used in the field, it's for specific products made by National Instruments and is much more limited. Furthermore, learning Java will teach you coding, Labview will teach you Labview, especially when it will come to vision coding I believe learning how a program works on a fundamental level is much more important.
 
 ## Getting started with an IDE
@@ -118,19 +140,19 @@ This will now successfully print the number you stored in! Keep in mind, you sti
 ```Java
 class Main
 {
-  public static void main(String[] args)
-  {
-    int number;
-    number = 5;
+	public static void main(String[] args)
+	{
+		int number;
+		number = 5;
 
-    System.out.println(number);
-  }
+		System.out.println(number);
+		}
 }
 ```
 You can now create and assign numbers. You might be asking what is the point of a variable? Why not just write in 5? Well sometimes we get variables from input from a controller for example, and we need to store those numbers to use later in the program. We'll be getting to input really soon actually.
 
 ## Naming variables
-Before we move onto the next section, we should how to name variables. Remember when I said there were rules, well there are specific things you can't do when naming variables. 
+Before we move onto the next section, we should know how to name variables. Remember when I said there were rules, well there are specific things you can't do when naming variables. 
 
 There are two main types of rules when it comes to naming variables: there's rules set by the Java compiler (your code won't run), and naming conventions that you *can* break, but it makes you code less readable
 
@@ -142,7 +164,7 @@ Let's talk first about the explicit rules set by Java:
 
 Here are some examples of valid variable names: `_motor $speed and sensor` and here's some illegal names `1st_motor -speed %onTarget`
 
-There are also different kind of naming conventions. These aren't hard rules like the last one, these can be broken. You can not use any of these styles in your code and it will run just fine. However, when other people are reading your code, you don't want them questioning which variable does that.  First, when you name a variable, **it needs to be named based off what it's being used for**. While sure you may be able to remember what `number1, number2, number3 and number4` are all used for, this is a team effort. Other people *will* be looking at your code, including you long after you forgot what those variables were all for. Therefore, when naming a variable, we choose a name based off what we're using it for. That way if we see a variable called `frontLeftMotorSpeed` we know exactly what it is, it's the speed of the front left motor, and we don't have to go looking for where we assigned it to see what it does.
+There are also different kind of naming conventions. These aren't hard rules like the last one, these can be broken. You can not use any of these styles in your code and it will run just fine. However, when other people are reading your code, you don't want them questioning which variable does what.  First, when you name a variable, **it needs to be named based off what it's being used for**. While, sure, you might be able to remember what `number1, number2, number3 and number4` are all used for, this is a team effort. Other people *will* be looking at your code, including you long after you forgot what those variables were all for. Therefore, when naming a variable, we choose a name based off what we're using it for. That way if we see a variable called `frontLeftMotorSpeed` we know exactly what it is, it's the speed of the front left motor, and we don't have to go looking for where we assigned it to see what it does.
 
 That being said, there are still naming conventions, you'll notice how I capitalized my variable `frontLeftMotorSpeed`, this is because to most people it's much easier to read that as `frontleftmotorspeed`, being that variables can't have spaces, we need to find a way to easily separate the words. There are many conventions out there, and I'll list the most popular ones:
 * Cammel case: frontLeftMotorSpeed, this is the one I used in my example, the first word is lowercase, but the first letter of every added work is capitalized
@@ -191,6 +213,8 @@ What does a double mean? I'll get to that in just a second, but every variable t
 * double: this is called a "double precision number," this is because it has twice the precision as a float, and can store 64 significant digits. The range is approximately the same, but it can store a lot more information. That does come at a cost though, because it takes up twice the amount of space.
 * boolean: this is a very different type of variable, it only stores two values: 0 or 1, we represent those in Java as either `true` or `false`, you might think there's not much reason to use a boolean, but I assure you they show up everywhere in programming
 
+PUT STRING AND CHAR HERE YOU DINGUS
+
 This isn't a full and complete list of number variable types, there's stuff like `short` and `long` or even `unsigned` numbers, but frankly I never used those even outside of robotics coding, so I'm going to cut the list here. Also, there are other variable types that store numbers, but for now I just want to stick with these so you can familiarize yourself with them.
 
 ## User input
@@ -231,11 +255,11 @@ Now we have their user input stored in our variable! Let's do something with it.
 One more thing I would like to note: you can get input as many times as you want, there's not a limit. If you wanted to get two numbers, all you need to do is make a new variable. I normally like to print out asking the user for what specifically I'm looking for before getting input, but it's not required.
 
 <details>
-  <summary>Here is what it should look like:</summary>
-  
-  ```Java
-  System.out.println(userInput * userInput);
-  ```
+	<summary>Here is what it should look like:</summary>
+
+	```Java
+	System.out.println(userInput * userInput);
+	```
 </details>
 
 Now we're really close, but you might notice repl shows a little warning that we need to close the scanner. You can leave it alone, but at the very end I would add this line:
@@ -276,7 +300,8 @@ Now maybe you figured this out already but you can leave notes in your code! It'
 As for leaving a comment, it's really simple:
 ```Java
 // Two slashes starts a single line comment, you can't type any code on this line, and the next line will act as code again
-int num = 5; // If you put the slashes after a program statement, your commend can even be on the same line, but you can't do the opposite, no code can be written past those slashes
+int num = 5; // If you put the slashes after a program statement
+// your comment can even be on the same line, but you can't do the opposite, no code can be written past those slashes
 
 /* A slash followed by a star is the start of a multi-line comment
    this comment will expand through multiple lines, it's really helpful if you need to take out a big chunk of code
@@ -312,23 +337,23 @@ Really not so bad, is it? Now you'll notice that I didn't put a semi-colon at th
 ```
 if([boolean statement])
 {
-  [what to do if the boolean statement is true]
+	[what to do if the boolean statement is true]
 }
 ```
 
 Let's go ahead and continue with our previous example of getting rid of negative numbers. If we want to turn a negative number into a positive one, what to do we? There is the absolute value, but let's pretent that doesn't exist in Java (it does, but I'm going to stay away from it for now). Using the operators we know, how can we turn a negative number into a positive one? Well the easiest way I can think of is to do the following:
 <details>
-  <summary>Click here for the answer</summary>
-  
-  ```Java
-  userInput *= -1;
-  ```
+	<summary>Click here for the answer</summary>
+
+	```Java
+	userInput *= -1;
+	```
 </details>
 All we need to do is set `userInput` equal to itself, but multiplied by negative one. Those of you who remember from math, a negative number times a negative number is a positive one. And any number times 1 is itself, so this will do exactly what we want. I want you to go ahead and try writing that out now to see what it might look like. You have every part you need, you just need to put it together.
 ```Java
 if(userInput < 0)
 {
-  userInput *= -1;
+	userInput *= -1;
 }
 ```
 Here is exactly what it would look like. You're probably asking yourself about the semicolon, where it is? Well an `if statement` isn't a program statement, it's a condition. We're setting up a condition to run, what's inside the `if statement` *is* a program statement, which is why we need semicolons. Additionally, you have have as many lines as you want inside the `if statement`, as long as they're surrounded by the curly brackets `{}`.
@@ -339,21 +364,105 @@ import java.util.Scanner;
 
 class Main
 {
-  public static void main(String[] args)
-  {
-    Scanner scanner = new Scanner(System.in);
+	public static void main(String[] args)
+	{
+		Scanner scanner = new Scanner(System.in);
 
-    System.out.println("Please enter a number:");
-    double userInput = scanner.nextDouble();
+		System.out.println("Please enter a number:");
+		double userInput = scanner.nextDouble();
 
-    if(userInput < 0)
-    {
-      userInput *= -1;
-    }
+		if(userInput < 0)
+		{
+			userInput *= -1;
+		}
 
-    System.out.println(userInput);
-    scanner.close();
-  }
+		System.out.println(userInput);
+		scanner.close();
+	}
 }
 ```
 Before I end this section, I'd like to point out where I put the if statement, I put them after `userInput` was assigned, and before it printed. If I put there if statement after the print, then the number would still be negative. While yes, at the end of the program the numbers would no longer be negative, the unfortunate part is we'd print before we changed them back to positive.
+
+## Else if statements
+I'm going to give you a quick idea for a program, I want you to tell me is a variable `motorSpeed` (for right now just make this from console input) is positive, negative, or zero. This on a robot would correspond to if the robot is moving forward, backward, or isn't moving at all. You don't need to write it, this isn't a full exercise, but I encourage you to practice. 
+
+<details>
+	<summary>It should look something like this:</summary>
+
+	```Java
+	import java.util.Scanner;
+
+	class Main
+	{
+		public static void main(String[] args)
+		{
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.println("Please enter a number:");
+			double motorSpeed = scanner.nextDouble();
+
+			if(motorSpeed < 0)
+			{
+				System.out.println("The robot is moving backwards"); 
+			}
+
+			if(motorSpeed == 0)
+			{
+				System.out.println("The robot is not moving");
+			}
+
+			if(motorSpeed > 0)
+			{
+				System.out.println("The robot is moving forwards");
+			}
+
+			scanner.close();
+		}
+	}
+	```
+</details>
+
+This is perfectly correct, but there's some problems with it. The problem is `effeciency`, this code will run, but let's say `motorSpeed` is less than 0, and the robot is moving backwards. You'll notice that even if the robot is moving backward it will check if it's still, and then if it's going forwards. While just this running one time isn't that bad, what if this bit of code was looping multiple times a second? Just like it would during the robot code. What we want is a way to have it not check the other two conditions as long as the first one is true. Well lucky us, that's exactly what an `else if` statement is.
+
+An `else if` statement looks very similar to an if statement, with one key difference. There **has** to be a normal `if statement` before it. You cannot have a lingering `else if`. This is because of how they behave, if your `if statement` returns false, any `else if statements` attached to that `if statement` will be ignored, since it can only be one or the other. If you have a chain of `else if statements` (because you can add as many as you want), as soon as one of them evaluates as true, the other ones will be ignored. The way you write an `else if statement` is like this:
+```
+if([boolean statement])
+{
+	[what to do if the boolean statement is true]
+}
+```
+
+Let's take the program above, and this time we will use `else if statements`:
+```Java
+import java.util.Scanner;
+
+class Main
+{
+public static void main(String[] args)
+{
+	Scanner scanner = new Scanner(System.in);
+
+	System.out.println("Please enter a number:");
+	double motorSpeed = scanner.nextDouble();
+
+	if(motorSpeed < 0)
+	{
+		System.out.println("The robot is moving backwards"); 
+	}
+	else if(motorSpeed == 0)
+	{
+		System.out.println("The robot is not moving");
+	}
+	else if(motorSpeed > 0)
+	{
+		System.out.println("The robot is moving forwards");
+	}
+
+	scanner.close();
+}
+}
+```
+
+Now, if we run this, it will check at minimum only one condition, but it can still go through and check all three. If `motorSpeed` is 10 for example, the first `if statement` will return true, and the others will all be ignored. But if it's -10, then it still has to evaluate the first, second, and third boolean statement. This is why ideally, at the top (the regular if statement) you would have the one that's going to return true most of the time. I think it's safe to say a majority of the time during a match our robot will either be still, or moving forward. Congratulations! You know know `else if statements`.
+
+## Else statements
