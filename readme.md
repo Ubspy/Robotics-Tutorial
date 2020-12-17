@@ -174,6 +174,15 @@ I recommend you use cammel case because it's what both Java, and WPILIB use in t
 
 ## Arithmetic operations
 Now we can store values, which is nice but what can we *do* with it? Well the first and obvious thing is we can use math to mess with the variables. They're are called `arithmetic operators`, we can use these in terms of `number literals` or other `variables`. The first set should all be operators that you're familiar with:
+
+Operator | Description
+-------- | -----------
+\+ | addition 
+\- | subtraction
+\* | multiplation
+/ | divition
+% | modulus (explained more below)
+
 * \+ : addition
 * \- : subtraction
 * \* : multiplication
