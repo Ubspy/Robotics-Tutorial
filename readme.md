@@ -347,7 +347,7 @@ Really not so bad, is it? Now you'll notice that I didn't put a semi-colon at th
 ```
 if([boolean statement])
 {
-	[what to do if the boolean statement is true]
+	[what to do if the boolean statement is true];
 }
 ```
 
@@ -411,9 +411,9 @@ I'm going to give you a quick idea for a program, I want you to tell me is a var
 			System.out.println("Please enter a number:");
 			double motorSpeed = scanner.nextDouble();
 
-			if(motorSpeed < 0)
+			if(motorSpeed > 0)
 			{
-				System.out.println("The robot is moving backwards"); 
+				System.out.println("The robot is moving forwards"); 
 			}
 
 			if(motorSpeed == 0)
@@ -421,9 +421,9 @@ I'm going to give you a quick idea for a program, I want you to tell me is a var
 				System.out.println("The robot is not moving");
 			}
 
-			if(motorSpeed > 0)
+			if(motorSpeed < 0)
 			{
-				System.out.println("The robot is moving forwards");
+				System.out.println("The robot is moving backwards");
 			}
 
 			scanner.close();
@@ -436,9 +436,9 @@ This is perfectly correct, but there's some problems with it. The problem is `ef
 
 An `else if` statement looks very similar to an if statement, with one key difference. There **has** to be a normal `if statement` before it. You cannot have a lingering `else if`. This is because of how they behave, if your `if statement` returns false, any `else if statements` attached to that `if statement` will be ignored, since it can only be one or the other. If you have a chain of `else if statements` (because you can add as many as you want), as soon as one of them evaluates as true, the other ones will be ignored. The way you write an `else if statement` is like this:
 ```
-if([boolean statement])
+else if([boolean statement])
 {
-	[what to do if the boolean statement is true]
+	[what to do if the boolean statement is true];
 }
 ```
 
@@ -455,17 +455,17 @@ public static void main(String[] args)
 	System.out.println("Please enter a number:");
 	double motorSpeed = scanner.nextDouble();
 
-	if(motorSpeed < 0)
+	if(motorSpeed > 0)
 	{
-		System.out.println("The robot is moving backwards"); 
+		System.out.println("The robot is moving forwards"); 
 	}
 	else if(motorSpeed == 0)
 	{
 		System.out.println("The robot is not moving");
 	}
-	else if(motorSpeed > 0)
+	else if(motorSpeed < 0)
 	{
-		System.out.println("The robot is moving forwards");
+		System.out.println("The robot is moving backwards");
 	}
 
 	scanner.close();
@@ -476,3 +476,44 @@ public static void main(String[] args)
 Now, if we run this, it will check at minimum only one condition, but it can still go through and check all three. If `motorSpeed` is 10 for example, the first `if statement` will return true, and the others will all be ignored. But if it's -10, then it still has to evaluate the first, second, and third boolean statement. This is why ideally, at the top (the regular if statement) you would have the one that's going to return true most of the time. I think it's safe to say a majority of the time during a match our robot will either be still, or moving forward. Congratulations! You know know `else if statements`.
 
 ## Else statements
+In the circumstances we set up above, there's only 3 possible conditions for our `motorSpeed` value when we're comparing it to 0. Ignoring imaginary numbers, because dear God, please don't make me think about those (also Java doesn't really do those super well as far as I know), `motorSpeed` can only be less than, greater than, or exactly equal to 0. That being said, if our `motorSpeed` variable fails the first two conditions of `motorSpeed > 0` and `motorSpeed == 0`, then it **has** to be less than 0. If that's the case, then why do we will check for it? We still make the computer do the evaluation of `motorSpeed < 0` because we wrote out the comparison operation, but if we get to that last block, we know for a fact it's going to be true. This is where `else statements` come in.
+
+An `else statement` is really easy as long as you understand the `if` and `else if statements`. But like the `else if statements`, `else statements` have special rules. You can only have **one** `else` for each block, unlike `else if` where you can have as many as you want, for an `else` we can only have one condition that's true if none of the others are. That being said, it's logical that the `else statement` has to be at the end, because it's sort of a last resort. Additionally, you cannot have an `else statement` by itself, it has to be attached to an `if`, much like an `else if` does. We only go to the `else statement` if the `if and else if statements` are all false. An else statement also does not need a `boolean statement`, it looks like this:
+```
+else
+{
+	[what to do if the boolean statement is true];
+}
+```
+
+Pretty simple, no boolean statement required. Let's go ahead and take the example from the last section, but use an `else statement`:
+```Java
+import java.util.Scanner;
+
+class Main
+{
+public static void main(String[] args)
+{
+	Scanner scanner = new Scanner(System.in);
+
+	System.out.println("Please enter a number:");
+	double motorSpeed = scanner.nextDouble();
+
+	if(motorSpeed > 0)
+	{
+		System.out.println("The robot is moving forwards"); 
+	}
+	else if(motorSpeed == 0)
+	{
+		System.out.println("The robot is not moving");
+	}
+	else
+	{
+		System.out.println("The robot is moving backwards");
+	}
+
+	scanner.close();
+}
+}
+```
+In this case, if we find that `motorSpeed > 0` is false, and `motorSpeed == 0` is also false, then `motorSpeed` **has** to be less than 0, which is why we have an alse statement. This way, the maximum amount of conditions we will need to test is now two instead of three. You won't always have an `else` or `else if` with your `if statements`, but they certainly help move things along much faster.

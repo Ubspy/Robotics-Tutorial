@@ -6,7 +6,7 @@
 - [x] Additional variable types
 - [x] If statements
 - [x] Boolean operations
-- [ ] Else if/else statements
+- [x] Else if/else statements
 - [ ] For loops
 - [ ] While/do while loops
 - [ ] Nested loops (brief)
