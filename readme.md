@@ -18,6 +18,7 @@
 		* [Comparison operators](#comparison-operators)
 	13. [Else if statements](#else-if-statements)
 	14. [Else statements](#else-statements)
+	15. [For loops](#for-loops)
 	
 
 # Introduction
@@ -214,13 +215,20 @@ Or as an example:
 double circleRadius = 5.4;
 ```
 
-What does a double mean? I'll get to that in just a second, but every variable type works this way. I'm going to start here with only variables that store numbers:
-* int: you've seen this one already, but it stores a whole number integer, positive or negative
-* float: this is called a "floating point" number, I could get into the specifics of why it's called that but for now I'll just say that it holds a positive or negative with 32 significant digits (if you don't know what that means, take it as it can store 32 individual numbers, so if a float was 52.X that X could be up to 30 numbers long). It has about the same range as an integer
-* double: this is called a "double precision number," this is because it has twice the precision as a float, and can store 64 significant digits. The range is approximately the same, but it can store a lot more information. That does come at a cost though, because it takes up twice the amount of space.
-* boolean: this is a very different type of variable, it only stores two values: 0 or 1, we represent those in Java as either `true` or `false`, you might think there's not much reason to use a boolean, but I assure you they show up everywhere in programming
+What does a double mean? I'll get to that in just a second, but every variable type works this way. I'm going to start with variables that store numbers:
+Operator	| Description
+-----------	| -----------
+int 		| you've seen this one already, but it stores a whole number integer, positive or negative
+float		| this is called a "floating point" number, I could get into the specifics of why it's called that but for now I'll just say that it holds a positive or negative with 32 significant digits (if you don't know what that means, take it as it can store 32 individual numbers, so if a float was 52.X that X could be up to 30 numbers long). It has about the same range as an integer
+double		| this is called a "double precision number," this is because it has twice the precision as a float, and can store 64 significant digits. The range is approximately the same, but it can store a lot more information. That does come at a cost though, because it takes up twice the amount of space.
+boolean		| this is a very different type of variable, it only stores two values: 0 or 1, we represent those in Java as either `true` or `false`, you might think there's not much reason to use a boolean, but I assure you they show up everywhere in programming
 
-PUT STRING AND CHAR HERE YOU DINGUS
+There are two other types of variables that we will use, but I wanted them in their own category. There are variables we can use to store letters and words, those are below:
+Operator	| Description
+----------- | -----------
+char		| char is short for character, it can store a single character, which is to say a single letter, number, or symbol, we usually surround those in single quotes like 'a' or '+'
+string		| you've seen these before, remember when we did `System.out.println("Hello, world!");`? Well "Hello, world!" is a string, it's like a sentence, it's called a string because it's viewed as a `string of characters`. As you've seen before, strings are surrounded in double quotes.
+We will cover strings and chars more later, but I thought it would be important to at least have those out there.
 
 This isn't a full and complete list of number variable types, there's stuff like `short` and `long` or even `unsigned` numbers, but frankly I never used those even outside of robotics coding, so I'm going to cut the list here. Also, there are other variable types that store numbers, but for now I just want to stick with these so you can familiarize yourself with them.
 
@@ -517,3 +525,117 @@ public static void main(String[] args)
 }
 ```
 In this case, if we find that `motorSpeed > 0` is false, and `motorSpeed == 0` is also false, then `motorSpeed` **has** to be less than 0, which is why we have an alse statement. This way, the maximum amount of conditions we will need to test is now two instead of three. You won't always have an `else` or `else if` with your `if statements`, but they certainly help move things along much faster.
+
+You're now ready for exercise two! Go ahead and go to the exercies folder and try out the second exercise.
+
+## For loops
+There are often time when you want to do a specific action several times. Sometimes it will be a specific number of times, others it will be until a specific action is complete. For that, we use `loops`. I thought about not even making sections on `loops` but they're important to coding outside of robotics, an they teach some good concepts, but I would like to stress that while coding robots for First Robotics, you will rarely, if ever use `loops`. I went and looked back at what I think is the best robot code I had, which was the 2018 Power Up season. There is not a single loop in the code. It's generally a good idea not to use `loops` in the robot code, this is because the robot code `loops` itself, so writing `loops` inside that scheduled looping code would require the whole robot code to stop and wait for that `loop`. That results in some really weird, or really slow behavior, which isn't what we want. But like I said before, loops are important when not writing robot code, so I'm going to cover them, just not as in depth.
+
+The first type of loop I'm going to cover is a loop where we know how many times it needs to run. Either we set a constant number like "run 10 times" or we use a variable like "run x times". Let's say I asked you to write a program that finds the n-th power of 2. With n being a number given by the user. Hopefully you know what that will look like by now, and if you want more practice I encourage you to start a program where it asks for a number from the user.
+<details>
+	<summary>It should look something like this:</summary>
+
+	```Java
+	import java.util.Scanner;
+
+	class Main
+	{
+		public static void main(String[] args)
+		{
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.println("What power of two do you want? ");
+
+			// We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
+			int powerNum = scanner.nextInt();
+
+			// TODO: get the powerNum-th power of 2
+
+			scanner.close();
+		}
+	}
+	```
+</details>
+
+Now it's time for the for loop. There's three main parts of the `for loop` statement. There's the `variable initializattion and declaration`, the `looping condition`, and the `variable manipulation`. I should note these aren't official, I am just calling it that. You're familiar with all these sections, so all you need to do is figure out how to apply them to for loops.
+
+### Variable initializattion and declaration
+For loops entirely rely on something called an `iterator` variable. Iteration just means "to do something over and over, usually to improve." So the `iterator` variable keeps track of not only where the loop starts, when it ends, how it changes, and where we are in the process of looping. For this part all we need to do is declare and initialize an `iterator` variable. We usually use `i` which is of course short for `iterator`. Since we can't do half a loop, we'll use an int. It should look something like this:
+```Java
+int i = 0;
+```
+
+Why 0? Why not 1? Well later that will make more sense but for now, just use 0 at the start of for loops. There will be scenarios where it makes more sense to start at 1 or maybe 2, but for most cases (including this one) it'll be 0.
+
+### Looping condition
+This is just a `boolean statement` stating when we want to keep looping. When the `boolean statement` returns true, it keeps looping, when it's false, it stops. Given we want to loop `powerNum` times, we want to go until our `iterator` reaches the same number as `powerNum`. This should look like this:
+```Java
+i < powerNum;
+```
+This means that while our `iterator` is less than powerNum, it will keep going through the loop. It starts at 0, and once it's run `powerNum` times then `i` and `powerNum` (assuming we add one each loop). So at that point `i` and `powerNum` are the same, and `i < powerNum` will be *false*, stopping the loop.
+
+### Variable manipulation
+At the end of the loop, we want to change our `iterator` variable somehow. Given that we assumed above that we want to increase by one, we're going to `increment` our `iterator` after each loop.
+```Java
+i++;
+```
+
+Now that we have all the parts, here's what a for loop will look like:
+```
+for([variable initialization and declaration]; [looping condition]; [variable manipulation])
+{
+	[what to do in the loop];
+}
+```
+It's that easy! You just plug in those three parts and you have your loop. You'll notice each part is separated by a semi-colon. This is because they're each their own `program statement`, and the compiler has to be able to tell one apart from the other.
+
+Using what we have go ahead and try to write out the for loop we'll use for finding the powerNum-th power of 2.
+<details>
+	<summary>This is what you should have: </summary>
+
+	```Java
+	for(int i = 0; i < powerNum; i++)
+	{
+
+	}
+	```
+</details>
+
+As for what to put inside the for loop? Well I think we should create a variable to store what the final result will end up being. One important note, **do not create this variable inside the for loop**. What this will do is every single time we loop, it will reset the variable to the value we give it, so it won't ever change. So before the for loop, let's create a int for it (powers of two won't be decimals, so we'll use an int):
+```Java
+int result = 1;
+```
+
+Why do we set it to 1? Well let's think about the strange cases, any number to the 0th power is one, so let's talk about is `powerNum` is 0. In that case, we will get to the for loop, it'll set `i` to 0, and check if `i < powerNum`. Since they're both 0, this is the same as `0 < 0`, which is false. This means the loop will not run, and the final value of `result` will be 1. If they type in 1, it'll multiply 1 by 2, and we'll have 2. Similar with higher powers. Now all we need to do is multiply result by 2 each time we loop, and print out the result. Go ahead and try that out.
+<details>
+	<summary>It should look something like this:</summary>
+
+	```Java
+	import java.util.Scanner;
+
+	class Main
+	{
+		public static void main(String[] args)
+		{
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.println("What power of two do you want? ");
+
+			// We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
+			int powerNum = scanner.nextInt();
+
+			int result = 1;
+
+			for(int i = 0; i < powerNum; i++)
+			{
+				result *= 2;
+			}
+
+			System.out.println("2 to the power of " + powerNum + " is: " + result);
+			scanner.close();
+		}
+	}
+	```
+</details>
+
+My print line probably looks a little funny, you can have a string literal with variables in the same print statement? Well yes, all you need to do is add them to the string. Adding strings isn't like adding numbers, so if you add "Hi there!" and "my name is Jack." The result will be "Hi there!my name is Jack." (that's also why I have spaces in somewhat weird looking spots). You can also add any variable type to a string, and it'll treat it as if it were a string. So if we input 5, this should say "2 to the power of 5 is: 32" which is infact 2^5.
