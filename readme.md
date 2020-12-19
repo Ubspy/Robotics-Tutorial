@@ -149,7 +149,7 @@ class Main
 		number = 5;
 
 		System.out.println(number);
-		}
+	}
 }
 ```
 You can now create and assign numbers. You might be asking what is the point of a variable? Why not just write in 5? Well sometimes we get variables from input from a controller for example, and we need to store those numbers to use later in the program. We'll be getting to input really soon actually.
