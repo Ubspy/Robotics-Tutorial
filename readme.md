@@ -384,21 +384,21 @@ import java.util.Scanner;
 
 class Main
 {
-	public static void main(String[] args)
-	{
-		Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Please enter a number:");
-		double userInput = scanner.nextDouble();
+        System.out.println("Please enter a number:");
+        double userInput = scanner.nextDouble();
 
-		if(userInput < 0)
-		{
-			userInput *= -1;
-		}
+        if(userInput < 0)
+        {
+            userInput *= -1;
+        }
 
-		System.out.println(userInput);
-		scanner.close();
-	}
+        System.out.println(userInput);
+        scanner.close();
+    }
 }
 ```
 Before I end this section, I'd like to point out where I put the if statement, I put them after `userInput` was assigned, and before it printed. If I put there if statement after the print, then the number would still be negative. While yes, at the end of the program the numbers would no longer be negative, the unfortunate part is we'd print before we changed them back to positive.
