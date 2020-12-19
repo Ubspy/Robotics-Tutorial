@@ -291,16 +291,16 @@ import java.util.Scanner;
 
 class Main
 {
-    public static void main(String[] args)
-    {
-        Scanner scanner = new Scanner(System.in);
+	public static void main(String[] args)
+	{
+		Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please give a number: ");
-        float number = scanner.nextFloat();
+		System.out.println("Please give a number: ");
+		float number = scanner.nextFloat();
 
-        System.out.println(number * number);
-        scanner.close();
-    }
+		System.out.println(number * number);
+		scanner.close();
+	}
 }
 ```
 Look at that! We're getting somewhere! I think you know enough to where I can direct you to the exercises. 
