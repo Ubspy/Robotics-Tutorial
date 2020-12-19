@@ -19,7 +19,9 @@
 	13. [Else if statements](#else-if-statements)
 	14. [Else statements](#else-statements)
 	15. [For loops](#for-loops)
-	
+		* [Variable initializattion and declaration](variable-initializattion-and-declaration)
+		* [Looping condition](#looping-condition)
+		* [Variable manipulation](#variable-manipulation)
 
 # Introduction
 Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2016 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
@@ -639,3 +641,56 @@ Why do we set it to 1? Well let's think about the strange cases, any number to t
 </details>
 
 My print line probably looks a little funny, you can have a string literal with variables in the same print statement? Well yes, all you need to do is add them to the string. Adding strings isn't like adding numbers, so if you add "Hi there!" and "my name is Jack." The result will be "Hi there!my name is Jack." (that's also why I have spaces in somewhat weird looking spots). You can also add any variable type to a string, and it'll treat it as if it were a string. So if we input 5, this should say "2 to the power of 5 is: 32" which is infact 2^5.
+
+## While loops
+What if we don't know how many times we want to loop? Let's use our previous program, if they put in a negative number it will way 1, which we know isn't true. Let's set up a loop that will ask for input until they give a number that isn't negative. In this case we will use a `while loop`. These are much less complicated, the only thing you need is a `boolean statement`. When this `boolean statement` is `true`, it will continue looping, when it's `false`, it stops the loop. Let's take a look at the structure of a `while loop`:
+```
+while([boolean statement])
+{
+	[what to do in the loop];
+}
+```
+
+One thing that needs to be said, the variables you use in the `boolean statement` for your loop need to be changed. You *really* want to avoid something called an `infinite loop`. This is when the `boolean statement` in the while loop will always be true. This will completely stop the program from running, since it's still trying to finish the while loop, and it will also crash your repl.it page (at least the last time I tried it), so please avoid it. Let's go ahead and check if out input variable is negative.
+```Java
+while(powerNum < 0)
+{
+	System.out.println("That's not a valid number, please enter a positive number:")
+	powerNum = scanner.nextInt();
+}
+```
+
+Here all we're doing is checking is `powerNum` is less than 0, and if that's not true, it asks again. This will happen until they enter a potisive number. You'll notice that if we run the program with just that at the start (of course after delaring `powerNum` beforehand). Before they give input, it'll tell them they have the wrong number, or it will skip, it seems at random. That's because it is, because we didn't give `powerNum` a value, so the computer uses whatever was there before. Either way, we should ask for a number first, then check for negative numbers. Here is what the final program should look like:
+```Java
+import java.util.Scanner;
+
+	class Main
+	{
+		public static void main(String[] args)
+		{
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.println("What power of two do you want? ");
+			int powerNum = scanner.nextInt();
+
+			while(powerNum < 0)
+			{
+				System.out.println("That's not a valid number, please enter a positive number:")
+				powerNum = scanner.nextInt();
+			}
+
+			int result = 1;
+
+			for(int i = 0; i < powerNum; i++)
+			{
+				result *= 2;
+			}
+
+			System.out.println("2 to the power of " + powerNum + " is: " + result);
+			scanner.close();
+		}
+	}
+```
+
+Now the program should only allow you to have positive powers! Good job. We've finished with loops! I will make an exercise, but since we don't use loops in robot code I'll make it optional. It's good practice, but you really don't need to do it. If you'd like, look for `exercise-loops` in the `exercise` folder.
+

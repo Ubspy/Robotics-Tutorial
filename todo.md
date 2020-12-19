@@ -7,8 +7,8 @@
 - [x] If statements
 - [x] Boolean operations
 - [x] Else if/else statements
-- [ ] For loops
-- [ ] While/do while loops
+- [x] For loops
+- [x] While/do while loops
 - [ ] Nested loops (brief)
 - [ ] Strings
 - [ ] Arrays
