@@ -291,16 +291,16 @@ import java.util.Scanner;
 
 class Main
 {
-	public static void main(String[] args)
-	{
-		Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Please give a number: ");
-		float number = scanner.nextFloat();
+        System.out.println("Please give a number: ");
+        float number = scanner.nextFloat();
 
-		System.out.println(number * number);
-		scanner.close();
-	}
+        System.out.println(number * number);
+        scanner.close();
+    }
 }
 ```
 Look at that! We're getting somewhere! I think you know enough to where I can direct you to the exercises. 
@@ -458,28 +458,28 @@ import java.util.Scanner;
 
 class Main
 {
-public static void main(String[] args)
-{
-	Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
 
-	System.out.println("Please enter a number:");
-	double motorSpeed = scanner.nextDouble();
+        System.out.println("Please enter a number:");
+        double motorSpeed = scanner.nextDouble();
 
-	if(motorSpeed > 0)
-	{
-		System.out.println("The robot is moving forwards"); 
-	}
-	else if(motorSpeed == 0)
-	{
-		System.out.println("The robot is not moving");
-	}
-	else if(motorSpeed < 0)
-	{
-		System.out.println("The robot is moving backwards");
-	}
+        if(motorSpeed > 0)
+        {
+            System.out.println("The robot is moving forwards"); 
+        }
+        else if(motorSpeed == 0)
+        {
+            System.out.println("The robot is not moving");
+        }
+        else if(motorSpeed < 0)
+        {
+            System.out.println("The robot is moving backwards");
+        }
 
-	scanner.close();
-}
+        scanner.close();
+    }
 }
 ```
 
