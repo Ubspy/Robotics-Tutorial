@@ -143,13 +143,13 @@ This will now successfully print the number you stored in! Keep in mind, you sti
 ```Java
 class Main
 {
-	public static void main(String[] args)
-	{
-		int number;
-		number = 5;
+    public static void main(String[] args)
+    {
+        int number;
+        number = 5;
 
-		System.out.println(number);
-	}
+        System.out.println(number);
+    }
 }
 ```
 You can now create and assign numbers. You might be asking what is the point of a variable? Why not just write in 5? Well sometimes we get variables from input from a controller for example, and we need to store those numbers to use later in the program. We'll be getting to input really soon actually.
@@ -502,28 +502,28 @@ import java.util.Scanner;
 
 class Main
 {
-public static void main(String[] args)
-{
-	Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
 
-	System.out.println("Please enter a number:");
-	double motorSpeed = scanner.nextDouble();
+        System.out.println("Please enter a number:");
+        double motorSpeed = scanner.nextDouble();
 
-	if(motorSpeed > 0)
-	{
-		System.out.println("The robot is moving forwards"); 
-	}
-	else if(motorSpeed == 0)
-	{
-		System.out.println("The robot is not moving");
-	}
-	else
-	{
-		System.out.println("The robot is moving backwards");
-	}
+        if(motorSpeed > 0)
+        {
+            System.out.println("The robot is moving forwards"); 
+        }
+        else if(motorSpeed == 0)
+        {
+            System.out.println("The robot is not moving");
+        }
+        else
+        {
+            System.out.println("The robot is moving backwards");
+        }
 
-	scanner.close();
-}
+        scanner.close();
+    }
 }
 ```
 In this case, if we find that `motorSpeed > 0` is false, and `motorSpeed == 0` is also false, then `motorSpeed` **has** to be less than 0, which is why we have an alse statement. This way, the maximum amount of conditions we will need to test is now two instead of three. You won't always have an `else` or `else if` with your `if statements`, but they certainly help move things along much faster.
@@ -542,19 +542,19 @@ The first type of loop I'm going to cover is a loop where we know how many times
 
 	class Main
 	{
-		public static void main(String[] args)
-		{
-			Scanner scanner = new Scanner(System.in);
+        public static void main(String[] args)
+        {
+            Scanner scanner = new Scanner(System.in);
 
-			System.out.println("What power of two do you want? ");
+            System.out.println("What power of two do you want? ");
 
-			// We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
-			int powerNum = scanner.nextInt();
+            // We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
+            int powerNum = scanner.nextInt();
 
-			// TODO: get the powerNum-th power of 2
+            // TODO: get the powerNum-th power of 2
 
-			scanner.close();
-		}
+            scanner.close();
+        }
 	}
 	```
 </details>
@@ -617,25 +617,25 @@ Why do we set it to 1? Well let's think about the strange cases, any number to t
 
 	class Main
 	{
-		public static void main(String[] args)
-		{
-			Scanner scanner = new Scanner(System.in);
+        public static void main(String[] args)
+        {
+            Scanner scanner = new Scanner(System.in);
 
-			System.out.println("What power of two do you want? ");
+            System.out.println("What power of two do you want? ");
 
-			// We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
-			int powerNum = scanner.nextInt();
+            // We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
+            int powerNum = scanner.nextInt();
 
-			int result = 1;
+            int result = 1;
 
-			for(int i = 0; i < powerNum; i++)
-			{
-				result *= 2;
-			}
+            for(int i = 0; i < powerNum; i++)
+            {
+                result *= 2;
+            }
 
-			System.out.println("2 to the power of " + powerNum + " is: " + result);
-			scanner.close();
-		}
+            System.out.println("2 to the power of " + powerNum + " is: " + result);
+            scanner.close();
+        }
 	}
 	```
 </details>
@@ -664,32 +664,32 @@ Here all we're doing is checking is `powerNum` is less than 0, and if that's not
 ```Java
 import java.util.Scanner;
 
-	class Main
-	{
-		public static void main(String[] args)
-		{
-			Scanner scanner = new Scanner(System.in);
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
 
-			System.out.println("What power of two do you want? ");
-			int powerNum = scanner.nextInt();
+        System.out.println("What power of two do you want? ");
+        int powerNum = scanner.nextInt();
 
-			while(powerNum < 0)
-			{
-				System.out.println("That's not a valid number, please enter a positive number:")
-				powerNum = scanner.nextInt();
-			}
+        while(powerNum < 0)
+        {
+            System.out.println("That's not a valid number, please enter a positive number:")
+            powerNum = scanner.nextInt();
+        }
 
-			int result = 1;
+        int result = 1;
 
-			for(int i = 0; i < powerNum; i++)
-			{
-				result *= 2;
-			}
+        for(int i = 0; i < powerNum; i++)
+        {
+            result *= 2;
+        }
 
-			System.out.println("2 to the power of " + powerNum + " is: " + result);
-			scanner.close();
-		}
-	}
+        System.out.println("2 to the power of " + powerNum + " is: " + result);
+        scanner.close();
+    }
+}
 ```
 
 Now the program should only allow you to have positive powers! Good job. We've finished with loops! I will make an exercise, but since we don't use loops in robot code I'll make it optional. It's good practice, but you really don't need to do it. If you'd like, look for `exercise-loops` in the `exercise` folder.
