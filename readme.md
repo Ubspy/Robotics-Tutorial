@@ -346,6 +346,20 @@ Operator	| Description
 <=			| less than or equal to, please note that the equals sign *has* to come after the <, meaning you can't type "=<"
 \>=			| greater than or equal to, the order is just as important as it was for the other ones
 
+There are also ways to check several conditions at once:
+
+Operator	| Description
+-----------	| -----------
+&& 			| this is the AND operator, it checks if the condition to the left, AND the condition to the right are true
+||          | this is the OR operator, it checks if the condition to the left, OR the condidion to the right are true
+
+You can use as many ANDs and ORs as you want, and just like with arithmetic operators, you can use parentheses to tell the compiler what you want to check first.
+To give an example, let's say I wand to see if a number is in between 1 and 10, I would use:
+```Java
+num > 0 && num <= 10
+```
+You could also have `num >= 1` or `num < 11` it doesn't matter, but this is just a quick example to show you how they work. 
+
 That's it! That wasn't so bad, was it? Now that we have the comparison operator, let's take a look at an example `boolean statement`. Let's keep using this example of negative numbers. Let's say we have a variable called `userInput`, and it is a number, doesn't really matter what type. To see if it's negative, all we need to do is check if it's less than zero. See if you can write out what the boolean statement will be before looking at it.
 
 Here is what that boolean statement will look like:
