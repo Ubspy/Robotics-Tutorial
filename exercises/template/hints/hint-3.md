@@ -1,1 +1,0 @@
-If you are still stuck, we basically did this already in the examples in the main readme file, go take a look at it.
