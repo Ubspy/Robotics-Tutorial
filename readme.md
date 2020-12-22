@@ -22,6 +22,7 @@
 		* [Variable initializattion and declaration](variable-initializattion-and-declaration)
 		* [Looping condition](#looping-condition)
 		* [Variable manipulation](#variable-manipulation)
+    16. [Strings](#strings)
 
 # Introduction
 Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2016 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
@@ -708,3 +709,47 @@ class Main
 
 Now the program should only allow you to have positive powers! Good job. We've finished with loops! I will make an exercise, but since we don't use loops in robot code I'll make it optional. It's good practice, but you really don't need to do it. If you'd like, look for `exercise-loops` in the `exercise` folder.
 
+## Strings
+You'll notice we haven't touched strings a lot, that's because they're a pretty different kind of variable. As we delve into strings, you'll notice a *ton* of things we don't have (or at least that I haven't mentioned, but trust me it's unique to strings) for any other variable types.
+
+The first thing I want to talk about is getting input with a string, you'll notice it's a little different than getting input for other variables. The first thing is `nextString()` isn't a function, you have to use `next()`. I'll go ahead and put a simple program belown, and explain the behavior.
+```Java
+import java.util.Scanner;
+
+class Main // The class name has to be the same as the file name
+{
+	public static void main(String[] args)
+	{
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Input a string:");
+		String input = scanner.next();
+
+		System.out.println(input);
+
+	scanner.close();
+	}
+}
+```
+
+One thing you'll notice, `String` is capitalized, there's a good reason for this, but just take it as it is for now. Now this will work as you would expect, until you try to add spaces. Go ahead and try to put something with a space into it like `test string`. Here's the problem, you'll notice the output is just `test`. As soon as the scanner encounters a space it stops getting input. I'd like to note you can still have spaces in strings, this is entirely a problem with the `scanner`.
+
+The next thing strings can do that's special, is that you can get any character from a string. Let's say you ask the user for their name, so you can get their first initial. To get a character from a string, you use this format.
+```Java
+String name = "Jack";
+char firstInitial = name[0];
+```
+
+First thing you'll notice is that we're storing it in a `char`, that's because it is just one character, so the value Java will return is of the type `char`. The next thing is what's this weird [] nonsense? Well you can consider it like an operator, that is how some languages treat it. When we do `variable[index]`, it will get the index-th character of a string. The last think you'll notice, is I asked to get the 0th character. Why the 0th? Remember why I asked you to use 0 for the start of a `for loop`? This is part of the reason why. There is a good reason, and I'll explain it soon in the next section. I understand I'm asking you to trust me a lot, but in the next section I will actually explain this.
+
+The next cool thing you can do, is you can get the length of the string. Let's say you want to write a program that will check if the last character is a period, so you can see if it's a complete sentence. Kind of a weird example but just follow me here. Let's go ahead and write an if statement for it:
+```Java
+String testString = "This is a sentence";
+
+if(testString[testString.length() - 1] == '.')
+{
+
+}
+```
+
+Now let's cover this bit of code in the same way we did last time. The first thing you'll see is how we actually got the length: `testString.length()`. When the program runs, it sees that as an integer, so it will subtract one and get that index. It will then get that character, and compare it to the `'.'` literal. The next thing you notice is I subtracted one from the length, this is because we start at 0. So if the length is 12 characters, you want to get the 11th character. I know it's a bit confusing but there is a good reason for it. The next thing you probably noticed is I used single quotes `'` instead of double quotes `"`. If you remember, a string is denoted with the double quotes `"`, and a character is denoted with single quotes `'`. Since `testString[testString.length() - 1]` returns a chracter, we need to compare it to a character. That's why I used single quotes.

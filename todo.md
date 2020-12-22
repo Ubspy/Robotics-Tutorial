@@ -9,8 +9,7 @@
 - [x] Else if/else statements
 - [x] For loops
 - [x] While/do while loops
-- [ ] Nested loops (brief)
-- [ ] Strings
+- [x] Strings
 - [ ] Arrays
 - [ ] 2D-Arrays?
 - [ ] ArrayList?
