@@ -737,19 +737,25 @@ One thing you'll notice, `String` is capitalized, there's a good reason for this
 The next thing strings can do that's special, is that you can get any character from a string. Let's say you ask the user for their name, so you can get their first initial. To get a character from a string, you use this format.
 ```Java
 String name = "Jack";
-char firstInitial = name[0];
+char firstInitial = name.charAt(0);
 ```
 
-First thing you'll notice is that we're storing it in a `char`, that's because it is just one character, so the value Java will return is of the type `char`. The next thing is what's this weird [] nonsense? Well you can consider it like an operator, that is how some languages treat it. When we do `variable[index]`, it will get the index-th character of a string. The last think you'll notice, is I asked to get the 0th character. Why the 0th? Remember why I asked you to use 0 for the start of a `for loop`? This is part of the reason why. There is a good reason, and I'll explain it soon in the next section. I understand I'm asking you to trust me a lot, but in the next section I will actually explain this.
+First thing you'll notice is that we're storing it in a `char`, that's because it is just one character, so the value Java will return is of the type `char`. The next thing is what's this weird [] nonsense? Well you can consider it like an operator, that is how some languages treat it. When we do `variable.charAt(index)`, it will get the index-th character of a string. The last think you'll notice, is I asked to get the 0th character. Why the 0th? Remember why I asked you to use 0 for the start of a `for loop`? This is part of the reason why. There is a good reason, and I'll explain it soon in the next section. I understand I'm asking you to trust me a lot, but in the next section I will actually explain this.
 
 The next cool thing you can do, is you can get the length of the string. Let's say you want to write a program that will check if the last character is a period, so you can see if it's a complete sentence. Kind of a weird example but just follow me here. Let's go ahead and write an if statement for it:
 ```Java
 String testString = "This is a sentence";
 
-if(testString[testString.length() - 1] == '.')
+if(testString.charAt(testString.length() - 1) == '.')
 {
 
 }
 ```
 
-Now let's cover this bit of code in the same way we did last time. The first thing you'll see is how we actually got the length: `testString.length()`. When the program runs, it sees that as an integer, so it will subtract one and get that index. It will then get that character, and compare it to the `'.'` literal. The next thing you notice is I subtracted one from the length, this is because we start at 0. So if the length is 12 characters, you want to get the 11th character. I know it's a bit confusing but there is a good reason for it. The next thing you probably noticed is I used single quotes `'` instead of double quotes `"`. If you remember, a string is denoted with the double quotes `"`, and a character is denoted with single quotes `'`. Since `testString[testString.length() - 1]` returns a chracter, we need to compare it to a character. That's why I used single quotes.
+Now let's cover this bit of code in the same way we did last time. The first thing you'll see is how we actually got the length: `testString.length()`. When the program runs, it sees that as an integer, so it will subtract one and get that index. It will then get that character, and compare it to the `'.'` literal. The next thing you notice is I subtracted one from the length, this is because we start at 0. So if the length is 12 characters, you want to get the 11th character. I know it's a bit confusing but there is a good reason for it. The next thing you probably noticed is I used single quotes `'` instead of double quotes `"`. If you remember, a string is denoted with the double quotes `"`, and a character is denoted with single quotes `'`. Since `testString.charAt(testString.length() - 1)` returns a chracter, we need to compare it to a character. That's why I used single quotes.
+
+I would again like to note, that we unfortunately couldn't use this with our `scanner`, since each time it encounters a space it will treat it as a new string. Luckily, we won't be using `scanner` a lot with our robot code, so it's not something we need to worry about too much.
+
+Even though strings are kind of a short topic, I'd like to have an (also short) exercise over them. Go ahead and complete exercise 3, because you've learned a lot more than you probably realize.
+
+## Arrays
