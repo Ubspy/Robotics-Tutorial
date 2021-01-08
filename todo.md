@@ -10,8 +10,7 @@
 - [x] For loops
 - [x] While/do while loops
 - [x] Strings
-- [ ] Arrays
-- [ ] 2D-Arrays?
+- [x] Arrays
 - [ ] ArrayList?
 
 # Object Oritented Programming
