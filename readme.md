@@ -26,6 +26,8 @@
     17. [Arrays](#arrays)
         * [Why do arrays start at 0?](#why-do-arrays-start-at-0)
 4. [Object Oritented Programming](#object-oritented-programming)
+    1. [Basic Functions](#basic-functions)
+    2. [Deeper look at functions](#deeper-look-at-functions)
 
 # Introduction
 Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2016 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
@@ -730,7 +732,7 @@ class Main // The class name has to be the same as the file name
 
 		System.out.println(input);
 
-	scanner.close();
+	    scanner.close();
 	}
 }
 ```
@@ -902,3 +904,266 @@ Sometimes when we're using an array, we don't know the size that the array will 
 
 
 # Object Oritented Programming
+## Introduction
+First off, I genuinely want to congradulate you. You've made it really far since the beginning, you now have everything you need to write basic programs. Fully understanding variable manupulation, boolean comparisons, loops, arrays, and strings is nothing to sneeze at. You have all the essential building blocks, from here we'll just be building on top of them. At the beginning it may not seem like so, but we will continue to use most of what we covered before.
+
+It's now time to move onto what is called `object oriented programming`, also known as `oop`. What does that mean? It's hard to explain exactly what `oop` is without covering all of it, but luckily for you that's exactly what's going to happen. The whole idea of `oop` is to make your code a lot more structured and organized. You'll find there are parts of your code that you'll be repeating, and instead of copy pasting them, we can wrap them up and turn them into a single line each time we need to use it. There are also ways to create custom variables, that's right, variables that can store whatever you want. Additionally, you can have these variables have these `wrappings` that can be used to manipulate our variables. Remember the `str.length()`, that's an example of exactly that.
+
+Instead of continuing about `oop` can do, why don't we jump right into the first topic?
+
+## Functions
+Remember those `wrappings` I talked about, well that's the first topic. `Functions` are way to package a certain set of instructions in our code. While this may sound scary, functions are something you have already been using. The best example I have is `println()`. Believe it or not, that's a function. There's a good amount of code for managing writing streams to a console like in repl.it, but the `println()` function makes it so we only need to type out what we want to show up. There's plenty of functions you're probably familiary with on your calculator also, like `sin` or `cos`. You'll notice for those functions, we need to give them values. We can't just say `take the sin` to a computer, because it has no idea what we're taking the sine of. Those are called `parameters`. Things you pass in to functions when you `call` them. You'll also notice, when it comes to math functions like `abs, sqrt, sin and cos`, you will actually want a value from them. Assuming that those functions are defined, you would want to do something like `double squareRootOfTwo = sqrt(2);`. This means that `sqrt()` will end up having a value that we can set our variable to when we `call the function`. The last thing I'd like to mention before I go on, is that when we do something like `System.out.println("Hi");`, that's called a `function call`, it's where we actually invoke the function we wrote. I wanted that to be explicitly written before we continue.
+
+So how do we make a function? Well here's what the basic structure of a function looks like
+```
+returnType functionName(parameters)
+{
+    // What you do inside the function
+
+    return valueToReturn;
+}
+```
+
+Let's walk this through, first thing is `returnType`. This is a placeholder for a variable type. With the example I used before: `double squareRootOfTwo = sqrt(2);`. The `sqrt()` function would have to return a double, so instead of `returnType` we would type `double`. When you're writing a function, you have to explicitly state what type of variable it's going to return, if any.
+
+Next is the `functionName`, this is just like a variable name. You can name your variable whatever you want, it follows the same naming rules as variables. We normally use `cammelCase` just like we do for variables. Please also appropriately name your functions, I don't want to see any `customFunction1()`, make it so people reading it have a good idea of what it does.
+
+This next one is a little fun, `parameters` are things you can pass into a function. In the case of `sqrt(2)`, 2 is a parameter. When you define parameters, you need two things: a variable type, and a name. In this case, `sqrt()` should be able to take decimal point numbers, so let's say we want a double. Now when we name it, we usually want to give it a proper name, but since there's only one parameter and there won't be many variables, let's just name it `num`. So now we have our parameters, it will look like `double num`. In the body of the code, when you read, change, or access `num`, it will be whatever number is passed in when calling the function. For example, if you call `sqrt(2)`, then `num` will be equal to 2.
+
+One other thing I woule like to note, by default function will do what's called `pass by value`. This means if you pass in a variable, the variable will not be changed. When the `parameter` variables are created, the values are copied over, and it creates a new variable. This means if you were to make a function to divide a number by two, and you just change the `parameter`, it will not work.
+
+The last thing you'll notice that looks out of the scope of what we've been talking about, is `return`, `return` is a key word, and it's behavior is pretty special. When we `return`, the function stops running. It doesn't matter if there's any code after the `return` statement, the function will stop. So what does `return` do? Well remember we're trying to get a value, so in our example `double squareRootOfTwo = sqrt(2);`, when we `return` that's the actual value the function will evaluate as.
+
+With all those building blocks, let's try to make our own function. Now even **I** don't know how to make a square root function, so let's do something easier. Let's do the inverse of square root, let's do a `square()` function. Let's do it one by one, first let's make it take and give back a `double`. Go ahead and write the first line, you can name the parameter `num` just like we did before.
+
+<details>
+	<summary>It should look like this: </summary>
+
+    ```Java
+    double square(double num)
+    {
+
+    }
+    ```
+</details>
+
+I will explain again, we have a function that will give a value back of type `double`, and it takes in one variable that has to also be a `double`. Now let's make it give something back, say we have the following line of code (provided we got a `double input` somewhere else in the code):
+```Java
+double inputSquared = square(input);
+```
+
+Now we only need one line inside our square function, go ahead and see if you can write the `return` statement for it.
+<details>
+	<summary>It should look like this: </summary>
+
+    ```Java
+    double square(double num)
+    {
+        return num * num;
+    }
+    ```
+</details>
+
+That's it! You have a function! If you don't quite get it, I'll go over the return statement one more time. When we call the function `square(2)`, that function call itself will end up being seen as a value, and that value is what the function `returns`. That being said, the `return` statement inside the function sets what that value will be, so when we `return num * num` it tells the function call to set itself to the square of that number. We now have a function that can square numbers!
+
+One more important note I would like to make, any functions you write in code need to come *before* your main function. The Java compiler reads from top to bottom, so if your main function runs first, then calls a function the compiler hasn't seen yet, it will throw an error saying it doesn't exist.
+
+## Deeper look at functions
+We now have a look at `basic` functions, let's continue a little further in. First, let's say you want a function to print a string. Typing `System.out.println()` each time gets a little tedious, so let's (as an example, I wouldn't do this in a real program) make a function called `print()` that takes a string, and calls `System.out.println()`.
+
+Now before we write this, you're probably wondering `what return type is that?`. If you think about it, `System.out.println()` doesn't actually give any values, what gives? Well there's a very special return type. I told you before, all the return types consist of variable types we've seen before, but there's one case where you can have a return type that isn't a variable type, and that's a `void function`. A `void function` is a function that doesn't return anything at all, which is exactly what we need for our `print()` function. That being said, let's write it below:
+```Java
+void print(String toPrint)
+{
+    System.out.println(toPrint);
+}
+```
+
+You might think `what's the point of a void function?`, well to be honest with you, we use them in robot code a ton. For example, functions that turn motors on and off, we don't need to get any values for this, we just want to tell the motors to go or not, for this we use a `void function`. When you have a `void function`, you can still return, but it won't actually do anything except for stop the program. This can be useful though, there are times you want to stop running a function, so you could just call `return;` and it will do just that. Let's say we have a function to read a file, if that file doesn't exist we don't want to call all the logic for trying to read it, `returning` would be one way to stop the function.
+
+The next thing is elaborating on parameters, you can realistically have as many parameters as you want, you can also have no parameters in a function. If you want to add more parameters, all you need to do is add a comma between each parameter. I'll give you an example below:
+```Java
+int sum(int a, int b, int c)
+{
+    return a + b + c;
+}
+```
+
+Not much practical use for this function, but it's a good example for showing a function with multiple parameters. They also don't all need to be the same type, you can have as many different types as you'd like.
+
+Now that was a lot of information, don't worry, it's time to sit back a bit and apply what we learned. Remember back in the beginning, when I said to not worry about `public static void main(String[] args)`? Well you now understand a lot of that. Hopefully you recognize by now that `void main(String args[])` means we have a function called `main`, and it's a `void function`. You should also recognize that `String args[]` is a parameter that is an array of strings. Now we call the function `main` because that's what Java specifically looks for to start the running of the program, it looks specifically for a function called `main` with those parameters. Now what exactly does that parameter mean? Well when you run a program from any language you can run it with command line arguments, and that array holds all of them. If that doesn't make sense to you, don't worry, we don't be touching it at all. Also, for `public` and `static`, we will get to that very soon, in the next section or so actually.
+
+You've learned a lot, it's time to sit back and apply it with an exercise. Go ahead and nagivate to the exercise folder and complete `exercise-5`.
+You've come a long way, and functions are a huge part of Java, so take your time and make sure you understand it.
+
+## Classes intro
+It's time to get exited! because classes are the main part of Java, it's what the entire language is built off of. It's also essential to understanding robot code. We've seen classes before with `class Main` in all of our code, but what does it mean and how do we use it? Well the best analogy for a class (at least to start) is that it's like a toolbox. A class contains functions, and variables that can be used all for whatever purposes they need. Let's say we're writing a program that uses a lot of geometry, and we want to be able to do quick math with circles. So to do that, let's create a new file to contain our `Circle` class.
+
+To create a new file, go ahead and click this button here, and call it `Circle.java`:
+![New File](pictures/new-file.png)
+
+You'll notice the file is completely empty, so let's give it some stuff to work with. Every new file in Java needs a class, and if you remember properly, the main class of a file needs to be the same name as a file name. Let's go ahead and add our new `Circle class`:
+```Java
+class Circle
+{
+
+}
+```
+
+You'll notice unlike normal variable names, we're capitalizing the first letter of the class name. That is by design, so we can differentiate between classes and variable names, we use `PascalCase` when naming classes. Now that we have our class, what do we put in it? Well realistically, we need to store some values of our circles. Now you can store the diameter, the radius, or even the circumference of a circle, but let's all stick to the same scheme here and say we'll store the radius. So let's go ahead and create a variable inside the class that will store the radius.
+```Java
+class Circle
+{
+    double radius;
+}
+```
+
+Now this isn't a ton of use to us, so let's go ahead and add some more, let's make a function that will give us the area of a circle. Now this function won't take any parameters, because we're treating our class as one particular circle, and we already have a radius, so go ahead and write a function in the `Circle` class that will return the radius of the circle.
+
+<details>
+	<summary>Your class should look like this:</summary>
+
+    ```Java
+    class Circle
+    {
+        double radius;
+
+        double getArea()
+        {
+            return radius * radius * 3.14;
+        }
+    }
+    ```
+</details>
+
+Ok we're getting somewhere now. We can now make `Circles` and give them radii, and get their area. Before we continue, let's make one minor tweak, we know that PI is a mathamtical constant, and since we probably don't want to have a variable for it. Now because it's a mathmatical constant, let's make it so we can't change the variable. This is something that we can actually do, if we add the `modifier` of `final` before a variable, Java will *not* let you change the variable after you've initialized it.
+
+Our class should now look like this:
+```Java
+class Circle
+{
+    double radius;
+    final double pi = 3.14159;
+
+    double getArea()
+    {
+        return radius * radius * pi;
+    }
+}
+```
+
+Now what if we want to use it in our `Main.java`? Well there's one big thing need to do first. Right now, we can't access our class anywhere else, since it's in another file. We need to tell Java that we want the class to be accessible elsewhere, or that we want the class to be `public`. That's a really simple fix, all we need to do is add `public` before the `class Circle`. So now it should read `public class Circle`. This means that we can access this class from outside of the file. Now that's unfortunately not all, because we can't access the `radius` variable or `getArea()` from outside the file either. This is an easy fix though, all we need to do is tell them to be `public` as well.
+
+Your class should now look something like this:
+```Java
+public class Circle
+{
+    public double radius;
+    final double pi = 3.14159;
+
+    public double getArea()
+    {
+        return radius * radius * pi;
+    }
+}
+```
+
+Let's go ahead and stop for a second, because I've been throwing a lot at you. Most of this shouldn't be new information. All we've done is opened up a new file, and created a container called `Circle`. Inside of this container, we have two variables, `radius` and `pi`. Since we don't want to change `pi`, we made it a `final` variable, so it can't be changed. We also added the function `getArea()` so we can get the area from our container. The only new things here should be `final` and `public`.
+
+Going back to our `Main` class, let's make a program to use our new `Circle` class. Let's make a program that uses this new `Circle` class, it'll ask the user for a radius, and return the circle's area. The first thing we should do is ask for an radius from the user, hopefully you know how to do that by now.
+```Java
+import java.util.Scanner;
+
+class Main
+{
+	public static void main(String[] args)
+	{
+		Scanner scanner = new Scanner(System.in);
+
+        System.out.print("What is the radius of your circle? ");
+        double circleRadius = scanner.nextDouble();
+
+		scanner.close();
+	}
+}
+```
+
+Now it's time to make our circle. So how do we use it? Well the idea around classes in Java is that they're able to be used multiple times. If we did have a program that dealt with a lot of circles, woudln't you want to be able to make as many as you needed? I mean imagine having to add a new `radius` inside the `Circle` class each time we wanted to add another circle, kind of gross. That being said, you can actually use a class as a variable type. That's right, you just made your own variable type called `Circle` without even knowing it.
+
+Your first instinct is probably to go and test it out and type:
+```Java
+Circle myCircle;
+```
+
+Which is correct, we can now treat `Circle` as a variable type! Except there's a couple of big differences, normally when we `initialize` variables we have to set them to something, their `literal`. For example, it we make an int like `int number`, we set initialize it by setting it to an `integer literal`, something like `1, -5 or 10`. But what's a `Circle literal`? Or in other words: what do we set `myCircle` to equal? Well this is where `objects` come in.
+
+See `myCircle` isn't a regular variable type, it's an `object`. Or more specifically: it's an `object` of the `Circle` class, it's a `Circle object`. So when `initializing` our `Circle object`, we need to set it to a `new instance` of `Circle`. Now slow down, what the heck is an `instance`? Well saying `an instance of a class` is a fancy of saying `a copy of a class`. You can think of the `Circle` class as a template, we have it set up to have two variables, and a function. When we create an `instance` of the `Circle` class, it will copy all of that over into the `object`, that way nothing do to any `Circle objects` will affect our other `Circle objects`.
+
+Hopefully I haven't lost you, but when you make `an instance` of `Circle`, it will basically copy the two variables, as well as the function into a variable that we can use. So how do we do that? Well remember the `new` keyword? That's right, we have to use that. We tell Java that we want `myCircle` to by a `new instance` of `Circle`. So here's what that will look like:
+```Java
+Circle myCircle = new Circle();
+```
+
+Wow, that was a lot of information. Let me quickly summarize this line. We've created a new variable called `myCircle`, which is an `object` of the `Circle` class we just made. To be able to use this `object`, we need to `initialize` it by using the `new` keyword, telling Java that `myCircle` is going to be a `new instance` of the `Circle` class. This means that `myCircle` will have its own `radius` variable, its own `pi` variable, and even its own `getArea()` function, that are completely separate from other `Circle` objects.
+
+Now what about this `Circle()` business, is `Circle` a function too? Well this will be one of those things I ask you to put on hold, the next section is actually on this topic, but for now just treat this as how it is.
+
+Now we have our `myCircle` variable, let's use it. We already have a value we want to use for the radius, so how do we set it? Well we use the `dot operator`. What is the `dot operator`? Well it's just a dot `.`, and we use it to access `members` of a class or object. What is a `member`? It's a fancy way of saying a variable/function that is a part of a class. So using our `Circle` class, `radius` is a member of the `Circle class`, because it's contained inside. Likewise, `getArea()` is a `member function` of the `Circle` class. 
+
+Now using the `dot operator` is pretty easy, well we need to do is `myCircle.radius` to access the `radius member variable`. If you make new circles, it will always be `.radius`, since that's the variable name we established in the `Circle` class. Let's now set the radius to what we got from the user input. Go ahead and try it for yourself.
+<details>
+	<summary>Your program should look kind of like this:</summary>
+
+    ```Java
+    import java.util.Scanner;
+
+    class Main
+    {
+        public static void main(String[] args)
+        {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("What is the radius of your circle? ");
+            double circleRadius = scanner.nextDouble();
+
+            Circle myCircle = new Circle();
+            myCircle.radius = circleRadius;
+
+            scanner.close();
+        }
+    }
+    ```
+</details>
+
+Not so bad right? The most confusing part will be remembering all this vocabulary I've been spewing at you. Don't worry, I'll keep mentioning it as we go along.
+
+Now you're very close to having your first working class. Go ahead and see if you can get your program to print out the circle's area. Recall that we have a function specifically for that.
+<details>
+	<summary>Your program should look like this:</summary>
+
+    ```Java
+    import java.util.Scanner;
+
+    class Main
+    {
+        public static void main(String[] args)
+        {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("What is the radius of your circle? ");
+            double circleRadius = scanner.nextDouble();
+
+            Circle myCircle = new Circle();
+            myCircle.radius = circleRadius;
+
+            System.out.println("Area of your circle: " + myCircle.getArea());
+
+            scanner.close();
+        }
+    }
+    ```
+</details>
+
+Now that was a *lot* of information, so let's recap a little bit. We made a class called `Circle`. You can think of that class as a sort of template, so when we make `instances` of the `Circle` class, it copies over all of of the `member variables and functions` into the object so we can mess with them. We then set the `radius member` of our `circle object`, and call the `getArea() member function` to get the area for our circle. Those members that we access have to be `public` since we're accessing them from a different file.
+
+Hopefully that wasn't too bad, but if you need another example feel free to go back over it.

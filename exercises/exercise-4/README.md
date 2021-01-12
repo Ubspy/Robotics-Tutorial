@@ -5,6 +5,7 @@ As before, please only use the information I provide in the repository to help y
 
 ## Rules
 * You must use an array
+* You can assume every word will have a different length, no need to account for if there's two or more shortest words or longest words
 
 ## Examples
 Your output doesn't need to look exactly like mine, but it should be somewhat similar:

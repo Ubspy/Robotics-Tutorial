@@ -14,13 +14,11 @@
 - [ ] ArrayList?
 
 # Object Oritented Programming
-- [ ] Functions (void no parameters)
-- [ ] Function parameters
-- [ ] Function return types
+- [x] Basic Functions
+- [X] More Advanced Functions
 - [ ] Classes intro
+- [ ] Constructors
 - [ ] Static classes
-- [ ] Object classes
-- [ ] Objects and calling methods
 - [ ] Class scope
 
 # Advanced Java
