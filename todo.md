@@ -16,7 +16,7 @@
 # Object Oritented Programming
 - [x] Basic Functions
 - [X] More Advanced Functions
-- [ ] Classes intro
+- [X] Classes intro
 - [ ] Constructors
 - [ ] Static classes
 - [ ] Class scope
