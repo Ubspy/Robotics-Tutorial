@@ -281,7 +281,7 @@ One more thing I would like to note: you can get input as many times as you want
 <details>
 	<summary>Here is what it should look like:</summary>
 
-```java
+```Java
 System.out.println(userInput * userInput);
 ```
 </details>
@@ -386,9 +386,9 @@ Let's go ahead and continue with our previous example of getting rid of negative
 <details>
 	<summary>Click here for the answer</summary>
 
-	```Java
-	userInput *= -1;
-	```
+```Java
+userInput *= -1;
+```
 </details>
 All we need to do is set `userInput` equal to itself, but multiplied by negative one. Those of you who remember from math, a negative number times a negative number is a positive one. And any number times 1 is itself, so this will do exactly what we want. I want you to go ahead and try writing that out now to see what it might look like. You have every part you need, you just need to put it together.
 ```Java
@@ -430,37 +430,37 @@ I'm going to give you a quick idea for a program, I want you to tell me is a var
 <details>
 	<summary>It should look something like this:</summary>
 
-	```Java
-	import java.util.Scanner;
+```Java
+import java.util.Scanner;
 
-	class Main
-	{
-		public static void main(String[] args)
-		{
-			Scanner scanner = new Scanner(System.in);
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
 
-			System.out.println("Please enter a number:");
-			double motorSpeed = scanner.nextDouble();
+        System.out.println("Please enter a number:");
+        double motorSpeed = scanner.nextDouble();
 
-			if(motorSpeed > 0)
-			{
-				System.out.println("The robot is moving forwards"); 
-			}
+        if(motorSpeed > 0)
+        {
+            System.out.println("The robot is moving forwards"); 
+        }
 
-			if(motorSpeed == 0)
-			{
-				System.out.println("The robot is not moving");
-			}
+        if(motorSpeed == 0)
+        {
+            System.out.println("The robot is not moving");
+        }
 
-			if(motorSpeed < 0)
-			{
-				System.out.println("The robot is moving backwards");
-			}
+        if(motorSpeed < 0)
+        {
+            System.out.println("The robot is moving backwards");
+        }
 
-			scanner.close();
-		}
-	}
-	```
+        scanner.close();
+    }
+}
+```
 </details>
 
 This is perfectly correct, but there's some problems with it. The problem is `effeciency`, this code will run, but let's say `motorSpeed` is less than 0, and the robot is moving backwards. You'll notice that even if the robot is moving backward it will check if it's still, and then if it's going forwards. While just this running one time isn't that bad, what if this bit of code was looping multiple times a second? Just like it would during the robot code. What we want is a way to have it not check the other two conditions as long as the first one is true. Well lucky us, that's exactly what an `else if` statement is.
@@ -558,26 +558,26 @@ The first type of loop I'm going to cover is a loop where we know how many times
 <details>
 	<summary>It should look something like this:</summary>
 
-	```Java
-	import java.util.Scanner;
+```Java
+import java.util.Scanner;
 
-	class Main
-	{
-        public static void main(String[] args)
-        {
-            Scanner scanner = new Scanner(System.in);
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
 
-            System.out.println("What power of two do you want? ");
+        System.out.println("What power of two do you want? ");
 
-            // We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
-            int powerNum = scanner.nextInt();
+        // We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
+        int powerNum = scanner.nextInt();
 
-            // TODO: get the powerNum-th power of 2
+        // TODO: get the powerNum-th power of 2
 
-            scanner.close();
-        }
-	}
-	```
+        scanner.close();
+    }
+}
+```
 </details>
 
 Now it's time for the for loop. There's three main parts of the `for loop` statement. There's the `variable initializattion and declaration`, the `looping condition`, and the `variable manipulation`. I should note these aren't official, I am just calling it that. You're familiar with all these sections, so all you need to do is figure out how to apply them to for loops.
@@ -616,12 +616,12 @@ Using what we have go ahead and try to write out the for loop we'll use for find
 <details>
 	<summary>This is what you should have: </summary>
 
-	```Java
-	for(int i = 0; i < powerNum; i++)
-	{
+```Java
+for(int i = 0; i < powerNum; i++)
+{
 
-	}
-	```
+}
+```
 </details>
 
 As for what to put inside the for loop? Well I think we should create a variable to store what the final result will end up being. One important note, **do not create this variable inside the for loop**. What this will do is every single time we loop, it will reset the variable to the value we give it, so it won't ever change. So before the for loop, let's create a int for it (powers of two won't be decimals, so we'll use an int):
@@ -633,32 +633,32 @@ Why do we set it to 1? Well let's think about the strange cases, any number to t
 <details>
 	<summary>It should look something like this:</summary>
 
-	```Java
-	import java.util.Scanner;
+```Java
+import java.util.Scanner;
 
-	class Main
-	{
-        public static void main(String[] args)
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("What power of two do you want? ");
+
+        // We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
+        int powerNum = scanner.nextInt();
+
+        int result = 1;
+
+        for(int i = 0; i < powerNum; i++)
         {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("What power of two do you want? ");
-
-            // We're using an int because 2^(2.3) isn't really easy to do, so let's stick with whole numbers
-            int powerNum = scanner.nextInt();
-
-            int result = 1;
-
-            for(int i = 0; i < powerNum; i++)
-            {
-                result *= 2;
-            }
-
-            System.out.println("2 to the power of " + powerNum + " is: " + result);
-            scanner.close();
+            result *= 2;
         }
-	}
-	```
+
+        System.out.println("2 to the power of " + powerNum + " is: " + result);
+        scanner.close();
+    }
+}
+```
 </details>
 
 My print line probably looks a little funny, you can have a string literal with variables in the same print statement? Well yes, all you need to do is add them to the string. Adding strings isn't like adding numbers, so if you add "Hi there!" and "my name is Jack." The result will be "Hi there!my name is Jack." (that's also why I have spaces in somewhat weird looking spots). You can also add any variable type to a string, and it'll treat it as if it were a string. So if we input 5, this should say "2 to the power of 5 is: 32" which is infact 2^5.
@@ -831,22 +831,22 @@ Now we should set up the array, go ahead and set that one up, we'll use doubles 
 <details>
 	<summary>Here is how I set up my array</summary>
 
-    ```Java
-    double[] testScores = new double[scoreCount];
-    ```
+```Java
+double[] testScores = new double[scoreCount];
+```
 </details>
 
 That's right! You can use variables to dictate the size of arrays. So now we have the array, let's ask the user for each test score. Go ahead and try this one out for yourself.
 <details>
 	<summary>There's a couple ways to do this, but this is what I did:</summary>
 
-    ```Java
-    for(int i = 0; i < scoreCount; i++)
-    {
-        System.out.print("Please enter test score #" + i + ": ");
-        testScores[i] = scanner.nextDouble();
-    }
-    ```
+```Java
+for(int i = 0; i < scoreCount; i++)
+{
+    System.out.print("Please enter test score #" + i + ": ");
+    testScores[i] = scanner.nextDouble();
+}
+```
 </details>
 
 All this does it loop for the amount of times we said before, and sets the i-th index, where i is from 0 to the `scoreCount - 1` index. Now we have a full program. It will ask for the test scores and get the average. You'll notice we end up doing two for loops in this case, and there's not really any need for an array, all we need to do is ask for the numbers and add those directly to the total count. But this program is `expandable`, meaning if we wanted to add more statistics later, like the mix score, the max score, the standard deviation, we have the array set up with all the data.
@@ -854,39 +854,39 @@ All this does it loop for the amount of times we said before, and sets the i-th 
 <details>
 	<summary>The final program should look like this:</summary>
 
-    ```Java
-    import java.util.Scanner;
+```Java
+import java.util.Scanner;
 
-    class Main
+class Main
+{
+    public static void main(String[] args)
     {
-        public static void main(String[] args)
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("How many test scores are there? ");
+        int scoreCount = scanner.nextInt();
+
+        double[] testScores = new double[scoreCount];
+
+        for(int i = 0; i < scoreCount; i++)
         {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.print("How many test scores are there? ");
-            int scoreCount = scanner.nextInt();
-
-            double[] testScores = new double[scoreCount];
-
-            for(int i = 0; i < scoreCount; i++)
-            {
-                System.out.print("Please enter test score #" + i + ": ");
-                testScores[i] = scanner.nextDouble();
-            }
-
-            int totalScore = 0;
-
-            for(int i = 0; i < testScores.length; i++)
-            {
-                totalScore += testScores[i];
-            }
-
-            double testScoreAverage = totalScore / testScores.length;
-
-            System.out.println("The average of all " + scoreCount + " scores is: " + testScoreAverage);
+            System.out.print("Please enter test score #" + i + ": ");
+            testScores[i] = scanner.nextDouble();
         }
+
+        int totalScore = 0;
+
+        for(int i = 0; i < testScores.length; i++)
+        {
+            totalScore += testScores[i];
+        }
+
+        double testScoreAverage = totalScore / testScores.length;
+
+        System.out.println("The average of all " + scoreCount + " scores is: " + testScoreAverage);
     }
-    ```
+}
+```
 </details>
 
 ### Why do arrays start at 0?
@@ -940,12 +940,12 @@ With all those building blocks, let's try to make our own function. Now even **I
 <details>
 	<summary>It should look like this: </summary>
 
-    ```Java
-    double square(double num)
-    {
+```Java
+double square(double num)
+{
 
-    }
-    ```
+}
+```
 </details>
 
 I will explain again, we have a function that will give a value back of type `double`, and it takes in one variable that has to also be a `double`. Now let's make it give something back, say we have the following line of code (provided we got a `double input` somewhere else in the code):
@@ -957,12 +957,12 @@ Now we only need one line inside our square function, go ahead and see if you ca
 <details>
 	<summary>It should look like this: </summary>
 
-    ```Java
-    double square(double num)
-    {
-        return num * num;
-    }
-    ```
+```Java
+double square(double num)
+{
+    return num * num;
+}
+```
 </details>
 
 That's it! You have a function! If you don't quite get it, I'll go over the return statement one more time. When we call the function `square(2)`, that function call itself will end up being seen as a value, and that value is what the function `returns`. That being said, the `return` statement inside the function sets what that value will be, so when we `return num * num` it tells the function call to set itself to the square of that number. We now have a function that can square numbers!
@@ -1024,17 +1024,17 @@ Now this isn't a ton of use to us, so let's go ahead and add some more, let's ma
 <details>
 	<summary>Your class should look like this:</summary>
 
-    ```Java
-    class Circle
-    {
-        double radius;
+```Java
+class Circle
+{
+    double radius;
 
-        double getArea()
-        {
-            return radius * radius * 3.14;
-        }
+    double getArea()
+    {
+        return radius * radius * 3.14;
     }
-    ```
+}
+```
 </details>
 
 Ok we're getting somewhere now. We can now make `Circles` and give them radii, and get their area. Before we continue, let's make one minor tweak, we know that PI is a mathamtical constant, and since we probably don't want to have a variable for it. Now because it's a mathmatical constant, let's make it so we can't change the variable. This is something that we can actually do, if we add the `modifier` of `final` before a variable, Java will *not* let you change the variable after you've initialized it.
@@ -1115,25 +1115,25 @@ Now using the `dot operator` is pretty easy, well we need to do is `myCircle.rad
 <details>
 	<summary>Your program should look kind of like this:</summary>
 
-    ```Java
-    import java.util.Scanner;
+```Java
+import java.util.Scanner;
 
-    class Main
+class Main
+{
+    public static void main(String[] args)
     {
-        public static void main(String[] args)
-        {
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-            System.out.print("What is the radius of your circle? ");
-            double circleRadius = scanner.nextDouble();
+        System.out.print("What is the radius of your circle? ");
+        double circleRadius = scanner.nextDouble();
 
-            Circle myCircle = new Circle();
-            myCircle.radius = circleRadius;
+        Circle myCircle = new Circle();
+        myCircle.radius = circleRadius;
 
-            scanner.close();
-        }
+        scanner.close();
     }
-    ```
+}
+```
 </details>
 
 Not so bad right? The most confusing part will be remembering all this vocabulary I've been spewing at you. Don't worry, I'll keep mentioning it as we go along.
@@ -1142,27 +1142,27 @@ Now you're very close to having your first working class. Go ahead and see if yo
 <details>
 	<summary>Your program should look like this:</summary>
 
-    ```Java
-    import java.util.Scanner;
+```Java
+import java.util.Scanner;
 
-    class Main
+class Main
+{
+    public static void main(String[] args)
     {
-        public static void main(String[] args)
-        {
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-            System.out.print("What is the radius of your circle? ");
-            double circleRadius = scanner.nextDouble();
+        System.out.print("What is the radius of your circle? ");
+        double circleRadius = scanner.nextDouble();
 
-            Circle myCircle = new Circle();
-            myCircle.radius = circleRadius;
+        Circle myCircle = new Circle();
+        myCircle.radius = circleRadius;
 
-            System.out.println("Area of your circle: " + myCircle.getArea());
+        System.out.println("Area of your circle: " + myCircle.getArea());
 
-            scanner.close();
-        }
+        scanner.close();
     }
-    ```
+}
+```
 </details>
 
 Now that was a *lot* of information, so let's recap a little bit. We made a class called `Circle`. You can think of that class as a sort of template, so when we make `instances` of the `Circle` class, it copies over all of of the `member variables and functions` into the object so we can mess with them. We then set the `radius member` of our `circle object`, and call the `getArea() member function` to get the area for our circle. Those members that we access have to be `public` since we're accessing them from a different file.
