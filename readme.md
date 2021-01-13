@@ -281,9 +281,9 @@ One more thing I would like to note: you can get input as many times as you want
 <details>
 	<summary>Here is what it should look like:</summary>
 
-	```Java
-	System.out.println(userInput * userInput);
-	```
+```java
+System.out.println(userInput * userInput);
+```
 </details>
 
 Now we're really close, but you might notice repl shows a little warning that we need to close the scanner. You can leave it alone, but at the very end I would add this line:
