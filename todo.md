@@ -17,11 +17,12 @@
 - [x] Basic Functions
 - [X] More Advanced Functions
 - [X] Classes intro
-- [ ] Constructors
-- [ ] Static classes
+- [X] Constructors
 - [ ] Class scope
+- [X] Getters and setters
+- [ ] Static classes
 
-# Advanced Java
+# Advanced OOP
 - [ ] Inheritence Intro
 - [ ] Overriding methods
 

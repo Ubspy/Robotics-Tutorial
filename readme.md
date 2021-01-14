@@ -29,6 +29,8 @@
     1. [Basic Functions](#basic-functions)
     2. [Deeper look at functions](#deeper-look-at-functions)
     3. [Classes intro](#classes-intro)
+    4. [Constructors](#constructors)
+    5. [Getters and Setters](#getters-and-setters)
 
 # Introduction
 Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2016 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
@@ -424,6 +426,8 @@ class Main
 ```
 Before I end this section, I'd like to point out where I put the if statement, I put them after `userInput` was assigned, and before it printed. If I put there if statement after the print, then the number would still be negative. While yes, at the end of the program the numbers would no longer be negative, the unfortunate part is we'd print before we changed them back to positive.
 
+While we're here, I would like to talk about something called `scope`. `Scope` is just a way of saying where a variable is still accessible. For example, our variable `userInput` is in the `scope` of the main function. Therefore, it can be accessed from anywhere within the main function. Let's say for some reason we define the `userInput` variable inside of the `if statement`. The `scope` would no longer be in all of the main function, it would only be in that `if statement`. Meaning that you could only access them inside that `if statement`. This is something to keep in mind when coding. A good rule of thumb is that if you create a variable inside an area with curly brackets (`{}`), you can't access them outside of those brackets.
+
 ## Else if statements
 I'm going to give you a quick idea for a program, I want you to tell me is a variable `motorSpeed` (for right now just make this from console input) is positive, negative, or zero. This on a robot would correspond to if the robot is moving forward, backward, or isn't moving at all. You don't need to write it, this isn't a full exercise, but I encourage you to practice. 
 
@@ -629,6 +633,8 @@ As for what to put inside the for loop? Well I think we should create a variable
 int result = 1;
 ```
 
+Additionally, if you created the variable inside the `for loop`, remember scope. The `scope` of that variable would be stuck to inside the for loop, and we wouldn't be able to access it outside the for loop.
+
 Why do we set it to 1? Well let's think about the strange cases, any number to the 0th power is one, so let's talk about is `powerNum` is 0. In that case, we will get to the for loop, it'll set `i` to 0, and check if `i < powerNum`. Since they're both 0, this is the same as `0 < 0`, which is false. This means the loop will not run, and the final value of `result` will be 1. If they type in 1, it'll multiply 1 by 2, and we'll have 2. Similar with higher powers. Now all we need to do is multiply result by 2 each time we loop, and print out the result. Go ahead and try that out.
 <details>
 	<summary>It should look something like this:</summary>
@@ -662,6 +668,20 @@ class Main
 </details>
 
 My print line probably looks a little funny, you can have a string literal with variables in the same print statement? Well yes, all you need to do is add them to the string. Adding strings isn't like adding numbers, so if you add "Hi there!" and "my name is Jack." The result will be "Hi there!my name is Jack." (that's also why I have spaces in somewhat weird looking spots). You can also add any variable type to a string, and it'll treat it as if it were a string. So if we input 5, this should say "2 to the power of 5 is: 32" which is infact 2^5.
+
+### Breaks
+There's one small thing I'd like to talk about, and that's a `break`. There are times when you'll want to stop the running of a for loop. I don't want to give any examples, becasue it's kind of hard with the knowledge you currently have, but let's say there's a certain condition you have in mind, that if it returns true, the loop stops. Here is how that will look:
+```
+for([variable initialization and declaration]; [looping condition]; [variable manipulation])
+{
+	[what to do in the loop];
+
+    if([that condition])
+    {
+        break; // This stops the loop and cancels all the other iterations of the loop
+    }
+}
+```
 
 ## While loops
 What if we don't know how many times we want to loop? Let's use our previous program, if they put in a negative number it will way 1, which we know isn't true. Let's set up a loop that will ask for input until they give a number that isn't negative. In this case we will use a `while loop`. These are much less complicated, the only thing you need is a `boolean statement`. When this `boolean statement` is `true`, it will continue looping, when it's `false`, it stops the loop. Let's take a look at the structure of a `while loop`:
@@ -714,6 +734,8 @@ class Main
 ```
 
 Now the program should only allow you to have positive powers! Good job. We've finished with loops! I will make an exercise, but since we don't use loops in robot code I'll make it optional. It's good practice, but you really don't need to do it. If you'd like, look for `exercise-loops` in the `exercise` folder.
+
+I would like to mention `scope` once more, because it applies to `while loops` as well. If you define a variable inside of a `while loop`, you can only access it inside of that `while loop`, and once it's over the variable is gone. Do be careful about `scope` when creating variables.
 
 ## Strings
 You'll notice we haven't touched strings a lot, that's because they're a pretty different kind of variable. As we delve into strings, you'll notice a *ton* of things we don't have (or at least that I haven't mentioned, but trust me it's unique to strings) for any other variable types.
@@ -967,6 +989,8 @@ double square(double num)
 
 That's it! You have a function! If you don't quite get it, I'll go over the return statement one more time. When we call the function `square(2)`, that function call itself will end up being seen as a value, and that value is what the function `returns`. That being said, the `return` statement inside the function sets what that value will be, so when we `return num * num` it tells the function call to set itself to the square of that number. We now have a function that can square numbers!
 
+You also want to be careful about your variable `scopes`. The reason we have to pass in a `parameter` to the function is because the main function and the square function have two entirely different `scopes`. Meaning that any variable defined inside of either function, is only accessible to that function. So everything we create in `main` **cannot** be accessed inside of our `square` function. This is why we need to pass stuff by parameters. Additionally, it would be kind of a bad idea to just have other functions be able to mess with our main function's variables whenever they wanted.
+
 One more important note I would like to make, any functions you write in code need to come *before* your main function. The Java compiler reads from top to bottom, so if your main function runs first, then calls a function the compiler hasn't seen yet, it will throw an error saying it doesn't exist.
 
 ## Deeper look at functions
@@ -1098,7 +1122,7 @@ Circle myCircle;
 
 Which is correct, we can now treat `Circle` as a variable type! Except there's a couple of big differences, normally when we `initialize` variables we have to set them to something, their `literal`. For example, it we make an int like `int number`, we set initialize it by setting it to an `integer literal`, something like `1, -5 or 10`. But what's a `Circle literal`? Or in other words: what do we set `myCircle` to equal? Well this is where `objects` come in.
 
-See `myCircle` isn't a regular variable type, it's an `object`. Or more specifically: it's an `object` of the `Circle` class, it's a `Circle object`. So when `initializing` our `Circle object`, we need to set it to a `new instance` of `Circle`. Now slow down, what the heck is an `instance`? Well saying `an instance of a class` is a fancy of saying `a copy of a class`. You can think of the `Circle` class as a template, we have it set up to have two variables, and a function. When we create an `instance` of the `Circle` class, it will copy all of that over into the `object`, that way nothing do to any `Circle objects` will affect our other `Circle objects`.
+See `myCircle` isn't a regular variable type, it's an `object`. Or more specifically: it's an `object` of the `Circle class`, it's a `Circle object`. So when `initializing` our `Circle object`, we need to set it to a `new instance` of `Circle`. Now slow down, what the heck is an `instance`? Well saying `an instance of a class` is a fancy of saying `a copy of a class`. You can think of the `Circle` class as a template, we have it set up to have two variables, and a function. When we create an `instance` of the `Circle` class, it will copy all of that over into the `object`, that way nothing do to any `Circle objects` will affect our other `Circle objects`.
 
 Hopefully I haven't lost you, but when you make `an instance` of `Circle`, it will basically copy the two variables, as well as the function into a variable that we can use. So how do we do that? Well remember the `new` keyword? That's right, we have to use that. We tell Java that we want `myCircle` to by a `new instance` of `Circle`. So here's what that will look like:
 ```Java
@@ -1167,4 +1191,126 @@ class Main
 
 Now that was a *lot* of information, so let's recap a little bit. We made a class called `Circle`. You can think of that class as a sort of template, so when we make `instances` of the `Circle` class, it copies over all of of the `member variables and functions` into the object so we can mess with them. We then set the `radius member` of our `circle object`, and call the `getArea() member function` to get the area for our circle. Those members that we access have to be `public` since we're accessing them from a different file.
 
-Hopefully that wasn't too bad, but if you need another example feel free to go back over it.
+Here's another little `aha!` moment for you. Remember how `String` is the only basic variable type we use that's capitalized? Well that's because it's a class. We don't have to create new instances of it because Java it set up to handle doing that when you give it a `string literal`. But think about it this way, `length()` is a member variable or the `String class`, and so is `charAt()`. They both `return` their appropriate values.
+
+Hopefully that wasn't too bad, but if you need another example, I'll put a `Student` class below and explain it also. I won't be doing anything in the `main` function, I'll just make another class.
+
+Say we're designing a class to hold data about a student, what's some important information we need to store? The things that come to mind are an ID number for the student, a name, the year they graduate, and their gpa. The ID number and the graduation year should both be `integers`. Their name should obviously be a `String`, and their gpa should be a `double` or a `float` since it's not a whole number.
+
+I'll actually write the class out here:
+```Java
+public class Student
+{
+    public int id;
+    public int graduationYear;
+    public double gpa;
+    public String name;
+
+    public boolean isGraduated(int currentYear)
+    {
+        return currentYear > graduationYear;
+    }
+}
+```
+
+You'll notice I don't have any member functions, that's because there's not really much to do with the student. I added a member function called `isGraduated()` to tell you if a student has graduated. Obviously this won't work perfectly but shh let's just take it at face value. We have member variables that we all have to set, and a function to (kind of) see if the student is graduated.
+
+## Constructors
+You've probably noticed something a little off. Each time we make a new `object` for our Circle class, we have to do through and individually set their member variables. Additionally, sometimes there's a bit of code you want to run whenver you create an object. Say for example you're programming a light on the robot, when you create the light object you want to make sure it's turned off (or turned on, either way it's something we want to do). To do this, we use something called a `constructor`. A `constructor` is a function that runs every time we create an object, let's go ahead and see it's anatomy, I'll show you how it will look for our Circle class.
+```
+public Circle(parameters)
+{
+
+}
+```
+
+That's it! You'll notice it looks exactly like a regular function, except it doesn't have a return type. It acts like a `void function`, but the way Java knows it's a `constructor` is by not having a return type. Now what about the parameters? Does that have to be anything specific? No, actually, they can be anything you want.
+
+Now that we know how to define a `constructor`, let's actually design one. You'll notice each time we make an `object` for our Circle class, we need to set it's member variable `radius` on the next line. This is bad for a number of reasons. The first reason is the obvious "programmers are lazy" approach where an extra like is a massive waste of our time. The second reason is that what if someone forgets to set that? That wouldn't be great would it? Especially if they try to calculate the area when there's not a defined radius. The last, and most important reason, is we really shouldn't have our `member variables` being public. It is a huge nono to have other classes be able to change `member variables` without the class knowing. I repeat **do not make member variables public unless they are constant**. So let's create a constructor that will assign our `radius` member variable to the parameter inside the `constructor`. While we're at it, let's make `radius` a `private variable`, which means it cannot be accessed outside the Circle class, which is exactly what we want. Also typically, constructors are defined before any other function, since they're normally what we look for first.
+```Java
+public class Circle
+{
+    private double radius;
+    final double pi = 3.14159;
+
+    public Circle(double givenRadius)
+    {
+        radius = givenRadius;
+    }
+
+    public double getArea()
+    {
+        return radius * radius * pi;
+    }
+}
+```
+
+There you go! Now when we create a circcle object, we have to also set a radius. Let me show you how our code will change in our main function:
+```Java
+Circle myCircle = new Circle(5);
+```
+
+Remember last section how I said to ignore `Circle()`, well that was calling the constructor. You'll notice we didn't define a constructor though, so how did `Circle()` do anything? Well Java gives every class what's called a `default constructor`, which is just a constructor that does nothing, and takes no parameters. That way if there's a class you don't need a constructor for a class where you don't be making one. Now I want to show something really cool off, and that's that you can actually have multiple constructors. Let's say we want a default radius, if the user doesn't provide one let's make the `unit circle` (which is just a circle with radius of 1). Go ahead and see if you can write this constructor yourself with the knowledge you have.
+
+<details>
+	<summary>This is what your constructor should look like:</summary>
+
+```Java
+public Circle()
+{
+    radius = 1;
+}
+```
+</details>
+
+All we need to do, is add that before (or after, but since it's a `default constructor` I'm going to add it before). Your Circle class should look like this:
+```Java
+public class Circle
+{
+    private double radius;
+    final double pi = 3.14159;
+
+    public Circle()
+    {
+        radius = 1;
+    }
+
+    public Circle(double givenRadius)
+    {
+        radius = givenRadius;
+    }
+
+    public double getArea()
+    {
+        return radius * radius * pi;
+    }
+}
+```
+
+You may be wondering why we don't just set the `radius member variable` equal to 1 inside the class. This is a **huge** nono. Please do not ever do this. While in Java, this will work, it's good practice not to do that, since the `constructor` is where everything is supposed to be initialized. Additionally, Java is pretty much the only OOP heavy language that allows this, in C# or C++ doing that would cause the compiler to freak out. Now you'll say `what about pi? we did that for pi`. Well pi is a `final variable`, meaning that its value *has* to be set when it's defined, and you cannot change the value, so there's no other option.
+
+Congrats! Now you understand `constructors`, which are an essential part of Java development when it comes to `object oriented programming`. There's two more topic I want to cover before an exercise, but `constructors` and juse base `classes` are the hardest part.
+
+## Class scope
+I would like to dedicate some time to talking about `scope` when it comes to classes. You'll notice `scope` doesn't work exactly like it does for everything else, there's ways to actually define what `scope` we want a particular member variable or function to have. By default, everything in Java when it comes to classes is `private`, but only in the sense of things in the same file. If you were to make another class in the `Circle.java` file, you could access all the member variables as long as they don't have a modifier. You've noticed there are modifiers we can add though to change this behavior though. There's three overall, but right now we're going to worry about just two of them. There's `public`, which means you can access that function or variable from any part of any file, which is to be used sparingly. There's also `private`, this means that *nothing* outside of the class it's contained in can access that `member variable` or `member function`. For clarification, if you have something as `private`, anything inside that class (including functions) can access it.
+
+## Getters and setters
+Remember how I said changing variables outside of a class was a pretty big nono? Well I bet you're wondering how we can see the radius once we set it, or what if we want to change the radius afterwards? That's where we use `getters` and `setters`. While this sounds scary, it's really not, they're most of the time a function with one line of code used to set and get a certain `private member variable`. In fact, we already wrote a `getter` for area. Even though we didn't store the area in a member variable, it still follows the same idea. Go ahead and see if you can guess how the `getter` and `setter` functions would work for the `radius variable`.
+<details>
+	<summary>They look like this:</summary>
+
+```Java
+public double getRadius()
+{
+    return radius;
+}
+
+public void setRadius(double newRadius)
+{
+    radius = newRadius;
+}
+```
+</details>
+
+That's it! Those are getters and setters. You may find it tedious to do that for each member variable, but the good news is a lot of the time you won't need to write getters and setters for a lot of member variables. I think we're ready to get into an exercise for classes. I'll warn you, this is a pretty big one, but considering how big of a topic classes are, I think it's fair to give a pretty big assignment to make sure you properly understand them. Go ahead and go to the exercise folder and complete `exercise-6`.
+
