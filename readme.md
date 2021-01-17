@@ -934,7 +934,7 @@ It's now time to move onto what is called `object oriented programming`, also kn
 
 Instead of continuing about `oop` can do, why don't we jump right into the first topic?
 
-## Functions
+## Basic Functions
 Remember those `wrappings` I talked about, well that's the first topic. `Functions` are way to package a certain set of instructions in our code. While this may sound scary, functions are something you have already been using. The best example I have is `println()`. Believe it or not, that's a function. There's a good amount of code for managing writing streams to a console like in repl.it, but the `println()` function makes it so we only need to type out what we want to show up. There's plenty of functions you're probably familiary with on your calculator also, like `sin` or `cos`. You'll notice for those functions, we need to give them values. We can't just say `take the sin` to a computer, because it has no idea what we're taking the sine of. Those are called `parameters`. Things you pass in to functions when you `call` them. You'll also notice, when it comes to math functions like `abs, sqrt, sin and cos`, you will actually want a value from them. Assuming that those functions are defined, you would want to do something like `double squareRootOfTwo = sqrt(2);`. This means that `sqrt()` will end up having a value that we can set our variable to when we `call the function`. The last thing I'd like to mention before I go on, is that when we do something like `System.out.println("Hi");`, that's called a `function call`, it's where we actually invoke the function we wrote. I wanted that to be explicitly written before we continue.
 
 So how do we make a function? Well here's what the basic structure of a function looks like

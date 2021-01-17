@@ -1,8 +1,8 @@
 # Exercise 5
-This exercise will be a bit different, here you'll program an actual interface. The goal is this program will be to write a number analysis program.
+This exercise will be a bit different, here you'll program an actual interface. The goal of this program will be to write a number analysis program.
 
 Your main function should contain as little as possible, it shouldn't be longer than 20 lines.
-When you first run the program, you should ask for how many numbers you'd like to input for a data set, then you should allow the user to input that many numbers (remember, this we did this before (: ), here's an example of what it should look like:
+When you first run the program, you should ask for how many numbers you'd like to input for a data set, then you should allow the user to input that those (remember, we did this before (: ), here's an example of what it should look like:
 ```
 How many numbers do you have? 5
 Enter number 1: 24
@@ -22,7 +22,7 @@ Then you will have a menu, this menu will show up quite a bit, it should look li
 6) Exit
 ```
 
-If they give a number outside the range, you it will look like this:
+If they give a number outside the range, it will look like this:
 ```
 1) Data set statistics
 2) Print data set
@@ -113,6 +113,8 @@ Min value: 6.0
 Max value: 120.0
 Most value: 24.0
 ```
+
+Just incase you don't get what `Most value` means, it's the value that appears the largest number of times in a data set.
 
 ### Print data set
 ```
