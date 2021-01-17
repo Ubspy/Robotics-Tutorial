@@ -43,6 +43,11 @@ That's not a valid choice, please try again
 Please pick one: 
 ```
 
+You should be able to keep inputting numbers until they choose to exit.
+
+## Scanners
+We will be opening scanner objects inside of functions here, because you'll be getting input inside of the functions. It will work just like it would in main, except **you do not want to close the scanners until you're done using all of them**. Once you close one scanner, none of them will work.
+
 ## Rules
 The first rule is, your main file should only have a single line in it, and that should be the `run()` function:
 ```Java
@@ -103,10 +108,10 @@ Here I will show example for each part of the program. All of this will use the 
 Please pick one: 1
 
 Your data set has these statistics:
-Mean/Average: 
-Min value:
-Max value:
-Most value:
+Mean/Average: 38.0
+Min value: 6.0
+Max value: 120.0
+Most value: 24.0
 ```
 
 ### Print data set
