@@ -204,7 +204,7 @@ spinCount = spinCount + 1;
 ```
 Hopefully you see how this works, you take the `spinCount` variable and set it to itself plus 1. But, programmers are lazy. This was too much typing, so later they came up with these assignment operators, that are shorthand, or just a shorter way or writing the above expression:
 Operator	| Description											| Example
------------	| ----------------------------------------------------- | -------
+-----------	| ----------------------------------------------------- | ----------------------------------------------------
 += 			| this sets a variable to itself plus a number			| `number += 5;` is the same as `number = number + 5;`
 -= 			| this sets a variable to itself minus a number			| `number -= 5;` is the same as `number = number - 5;`
 *= 			| this sets a variable to itself multiplied by a number	| `number *= 5;` is the same as `number = number * 5;`
@@ -212,7 +212,7 @@ Operator	| Description											| Example
 
 The last two are a little bit more unusual, but because programmers like to add one to a variable so often, we created an even smaller shortcut for that
 Operator	| Description										| Example
------------	| ------------------------------------------------- | -------
+-----------	| ------------------------------------------------- | -------------------------------------------------------------------
 ++ 			| this adds one to a variable, or `increments` it	| `number++;` is the same as `number += 1;` or `number = number + 1;`
 -- 			| this adds one to a variable, or `decrements` it	| `number--;` is the same as `number -= 1;` or `number = number - 1;`
 
