@@ -30,7 +30,14 @@
     2. [Deeper look at functions](#deeper-look-at-functions)
     3. [Classes intro](#classes-intro)
     4. [Constructors](#constructors)
-    5. [Getters and Setters](#getters-and-setters)
+    5. [Class scope](#class-scope)
+    6. [Getters and setters](#getters-and-setters)
+    7. [Static classes](#static-classes)
+5. [Advanced OOP](#advanced-oop)
+    1. [Inheritance Intro](#inheritance-intro)
+    2. [Abstract classes](#abstract-classes)
+    3. [Overriding methods](#overriding-methods)
+    4. [Abstract methods](#abstract-methods)
 
 # Introduction
 Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2016 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
@@ -1484,12 +1491,12 @@ public class Enemy
         }
     }
 
-    private void spawn()
+    protected void spawn()
     {
         System.out.println("Enemy has spawned in!");
     }
 
-    private void die()
+    protected void die()
     {
         System.out.println("Enemy has died.");
     }
@@ -1497,6 +1504,8 @@ public class Enemy
 ```
 
 If you run the code again, you'll notice that our `Zombie` object doesn't die anymore! Our `Zombie` object can use all the logic from our `Enemy` class, and that's the beauty of `inheritance`.
+
+You'll also notice we changed the `private` methods to be `protected`, that's because we want to be able to call them from within our `Zombie` class also.
 
 ## Abstract classes
 There's something that should strike you a little odd about our setup: in our "game" we can spawn a base enemy. That really shouldn't happen. Eventually, when it comes to a real game, the `Zombie` class will have a model and texture to actually render, but you can imagine we won't ever give one to the `Enemy` class since it's made to handle logic, not actually be spawned in. Is there a way we can stop anyone from creating an object of `Enemy`? Actually yes there is! It's called an `abstract class`.
@@ -1511,3 +1520,31 @@ abstract class Enemy
 That's it!
 
 ## Overriding methods
+Let's talk about overriding methods. You'll notice it tries to spawn just our base `Enemy`, so instead of typing "Zombie has spawned in!" in the constructor, let's `override` the `spawn()` function. It's actually not that hard, all you need to is rewrite the `spawn()` function with the same return type and parameters as they were in the `Enemy` class.Let's go ahead and first, remove the print statement from the constructor of `Zombie` (hopefully I don't need to show you what it looks like now, just an empty constructor). Now in the `Zombie` class, let's `override` the `spawn()` method:
+```Java
+@Override
+protected void spawn()
+{
+    System.out.println("Zombie has spawned in!");
+}
+```
+
+There you go, we have now `overrided the function`. I'd like to mention that `@Override` isn't necessary, but it's a nice visual queue to tell anyone reading your code that you're overriding a method from a parent class.
+
+We're slowly getting there, but let's say we're talking about a real game, actual Minecraft, the `Zombie` spawn should call the `Enemy` spawn method, but under the condition that it's dark enough. Now we don't exactly have a way to check that since we're not making a real game, so let's just pretent we have a boolean variable called `isDark` that tells us if the `Zombie` can spawn.
+
+So that's where the `super` object comes in. The `parent-child` relationship I talked about is also often called `super-sub` relationship. The `parent class` is called the `super class`, and all `child classes` are called `sub classes`. That's where `super` comes from. Using the `super` object, we can call the `Enemy` version of the `spawn()` function just like this:
+```Java
+@Overrode
+protected void spawn()
+{
+    if(isDark)
+    {
+        super.spawn();
+    }
+}
+```
+
+Now in our context, it will still say `Enemy has spawnned in!`, but if you think about it in the context of the game, we don't want to reprogram the logic for spawning each thing in, so we can use `super` to call the original `spawn()` function while still writing our own.
+
+## Abstract methods

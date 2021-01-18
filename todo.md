@@ -23,7 +23,9 @@
 - [X] Static classes
 
 # Advanced OOP
-- [ ] Inheritence Intro
-- [ ] Overriding methods
-
+- [X] Inheritance intro
+- [X] Abstract classes
+- [X] Overriding methods
+- [ ] Abstract methods
+ 
 # Robot coding
