@@ -939,7 +939,7 @@ Remember those `wrappings` I talked about, well that's the first topic. `Functio
 
 So how do we make a function? Well here's what the basic structure of a function looks like
 ```
-returnType functionName(parameters)
+static returnType functionName(parameters)
 {
     // What you do inside the function
 
@@ -947,7 +947,9 @@ returnType functionName(parameters)
 }
 ```
 
-Let's walk this through, first thing is `returnType`. This is a placeholder for a variable type. With the example I used before: `double squareRootOfTwo = sqrt(2);`. The `sqrt()` function would have to return a double, so instead of `returnType` we would type `double`. When you're writing a function, you have to explicitly state what type of variable it's going to return, if any.
+First I want to say `static` will be explained later (in a couple of sections), just for now put it in your function inside the `Main` class.
+
+Let's walk this through, `returnType`. This is a placeholder for a variable type. With the example I used before: `double squareRootOfTwo = sqrt(2);`. The `sqrt()` function would have to return a double, so instead of `returnType` we would type `double`. When you're writing a function, you have to explicitly state what type of variable it's going to return, if any.
 
 Next is the `functionName`, this is just like a variable name. You can name your variable whatever you want, it follows the same naming rules as variables. We normally use `cammelCase` just like we do for variables. Please also appropriately name your functions, I don't want to see any `customFunction1()`, make it so people reading it have a good idea of what it does.
 
@@ -963,7 +965,7 @@ With all those building blocks, let's try to make our own function. Now even **I
 	<summary>It should look like this: </summary>
 
 ```Java
-double square(double num)
+static double square(double num)
 {
 
 }
@@ -980,7 +982,7 @@ Now we only need one line inside our square function, go ahead and see if you ca
 	<summary>It should look like this: </summary>
 
 ```Java
-double square(double num)
+static double square(double num)
 {
     return num * num;
 }
@@ -998,7 +1000,7 @@ We now have a look at `basic` functions, let's continue a little further in. Fir
 
 Now before we write this, you're probably wondering `what return type is that?`. If you think about it, `System.out.println()` doesn't actually give any values, what gives? Well there's a very special return type. I told you before, all the return types consist of variable types we've seen before, but there's one case where you can have a return type that isn't a variable type, and that's a `void function`. A `void function` is a function that doesn't return anything at all, which is exactly what we need for our `print()` function. That being said, let's write it below:
 ```Java
-void print(String toPrint)
+static void print(String toPrint)
 {
     System.out.println(toPrint);
 }
@@ -1008,7 +1010,7 @@ You might think `what's the point of a void function?`, well to be honest with y
 
 The next thing is elaborating on parameters, you can realistically have as many parameters as you want, you can also have no parameters in a function. If you want to add more parameters, all you need to do is add a comma between each parameter. I'll give you an example below:
 ```Java
-int sum(int a, int b, int c)
+static int sum(int a, int b, int c)
 {
     return a + b + c;
 }
@@ -1018,8 +1020,9 @@ Not much practical use for this function, but it's a good example for showing a 
 
 Now that was a lot of information, don't worry, it's time to sit back a bit and apply what we learned. Remember back in the beginning, when I said to not worry about `public static void main(String[] args)`? Well you now understand a lot of that. Hopefully you recognize by now that `void main(String args[])` means we have a function called `main`, and it's a `void function`. You should also recognize that `String args[]` is a parameter that is an array of strings. Now we call the function `main` because that's what Java specifically looks for to start the running of the program, it looks specifically for a function called `main` with those parameters. Now what exactly does that parameter mean? Well when you run a program from any language you can run it with command line arguments, and that array holds all of them. If that doesn't make sense to you, don't worry, we don't be touching it at all. Also, for `public` and `static`, we will get to that very soon, in the next section or so actually.
 
-You've learned a lot, it's time to sit back and apply it with an exercise. Go ahead and nagivate to the exercise folder and complete `exercise-5`.
-You've come a long way, and functions are a huge part of Java, so take your time and make sure you understand it.
+That's it! Those are functions! You're not ready for the next exercise: `exercise-5`. I will warn you, since we've learned a lot, and functions is where it all starts to come together, this will be a largest exercise than the previous ones.
+
+But this is a pretty big topic, I have faith you'll get through it.
 
 ## Classes intro
 It's time to get exited! because classes are the main part of Java, it's what the entire language is built off of. It's also essential to understanding robot code. We've seen classes before with `class Main` in all of our code, but what does it mean and how do we use it? Well the best analogy for a class (at least to start) is that it's like a toolbox. A class contains functions, and variables that can be used all for whatever purposes they need. Let's say we're writing a program that uses a lot of geometry, and we want to be able to do quick math with circles. So to do that, let's create a new file to contain our `Circle` class.
@@ -1062,6 +1065,8 @@ class Circle
 </details>
 
 Ok we're getting somewhere now. We can now make `Circles` and give them radii, and get their area. Before we continue, let's make one minor tweak, we know that PI is a mathamtical constant, and since we probably don't want to have a variable for it. Now because it's a mathmatical constant, let's make it so we can't change the variable. This is something that we can actually do, if we add the `modifier` of `final` before a variable, Java will *not* let you change the variable after you've initialized it.
+
+But where's `static`? Well we don't need those in our `Circle` class. I promise shortly I will explain, but for now just go with it.
 
 Our class should now look like this:
 ```Java
@@ -1314,3 +1319,195 @@ public void setRadius(double newRadius)
 
 That's it! Those are getters and setters. You may find it tedious to do that for each member variable, but the good news is a lot of the time you won't need to write getters and setters for a lot of member variables. I think we're ready to get into an exercise for classes. I'll warn you, this is a pretty big one, but considering how big of a topic classes are, I think it's fair to give a pretty big assignment to make sure you properly understand them. Go ahead and go to the exercise folder and complete `exercise-6`.
 
+## Static classes
+Ok now this `static` keyword, what does it mean? I want to start by covering an example where we would use `static`. If you've tried to look up how to take a square root in Java, you'll notice that you have to use the `Math` class. If you want to see how to use it, let me show you:
+```Java
+double squareRootOfTwo = Math.sqrt(2);
+```
+
+Ok so what's the deal? `Math` is a class, but we didn't make an object? Well that's because `sqrt()` is a `static function`. What does that mean? Simple, it doesn't need an object to call the function. Let's step back for a second, imagine if you had to make an object of the `Math` class just to take a square root, why? It would be so bad, if the `Math` class wasn't *massive*. It has more functions than I can even comprehend, so making an object and copying all of that just to use one function, really bad.
+
+So why did we have to use `static` in the functions section? Well that's because `main` is a static function. For this let's look at our `Main` class. We're adding a function to be called from `main`, which is a `static function`. In Java, you cannot call a non-static member in a `static scope`, meaning that since `main` is static, the other functions have to be too. But for our `Circle` class, since we make an object, it's totally ok. To show you an example, let's say we want PI to be accessible from the `Circle` class without needing to make an object, we can make it a `static variable`:
+```Java
+public class Circle
+{
+    private double radius;
+    public static final double pi = 3.14159;
+
+    public Circle()
+    {
+        radius = 1;
+    }
+
+    public Circle(double givenRadius)
+    {
+        radius = givenRadius;
+    }
+
+    public double getArea()
+    {
+        return radius * radius * pi;
+    }
+}
+```
+
+Now if we want, anywhere in our `Main`, we can get that `pi` variable by calling `Circle.pi`. If you don't believe me, try to print it out for yourself.
+
+You've learned a lot, it's time to sit back and apply it with an exercise. Go ahead and nagivate to the exercise folder and complete `exercise-6`.
+You've come a long way, and functions are a huge part of Java, so take your time and make sure you understand it. This is also the end of this main section, so good on you! You're one step closer to understanding robot code!
+
+# Advanced OOP
+Not to say regular `oop` isn't an advanced topic, but this is where those ideas get taken further. The following concepts are going to be used quite a bit in the robot code, and I want you to understand them. There's a lot of times where not understanding this stuff wouldn't affect much, but I think to better understand the code overall, getting this under your belt is a good first step.
+
+## Inheritance intro
+What is `inheritance`? Well my favorite way to explain this is to go straight into an example. Not a code example, but an actual example of where we would use inheritance in code. I'm going to use the popular video game: `Minecraft`. Let's talk about the enemies in this game, most of you will know there's 4 basic enemies: zomebie, skeleton, creeper and spider. Sure there's more, but let's focus on those four for the time being. What are things all of those have in common? Well there's quite a bit actually:
+* The ability to take and dish out damage
+* Dropping items and xp on death
+* Spawning in the world
+* Moving around
+
+Sure that's not it, but it gives you a good idea for now. Now let's say each enemy gets its own class, so we'll have a `Zombie` class, a `Skeleton` class, a `Spider` class and a `Creeper` class. Do you want to write the logic for all that in each class? Where each one has its own spawning, moving around, item dropping and damage? If you think about it, don't they all do these things differently? Why not code each one seperately? Well the simple answer is because they're all going to be similar. The only thing that will change for dropping items will be which items drop, and how much XP will drop. Do you want to code the logic for dropping an item on the ground for each enemy class? Probably not.
+
+This is where `inheritance` will come in. How will it save us? Well we can write a lot of the base logic in a basic `Enemy` class, and have each enemy take from that base class. So when they drop XP on death, it will use the logic in the `Enemy` class, just the amount of XP will differ from enemy to enemy.
+
+So how does this work? Well let's code it! Don't get too exited though, I'm not going to be using minecraft code, we'll be sticking to console input and output. Let's think about what we want to put in our `Enemy` class. We want it to spawn in at a location, we want it to have health and take damage, and we want it to die when its health reaches 0. Let's make something:
+```Java
+public class Enemy
+{
+    private int _health;
+
+    public Enemy()
+    {
+        _health = 20;
+        spawn();
+    }
+
+    public void takeDamage(int damage)
+    {
+        _health -= damage;
+
+        if(_health <= 0)
+        {
+            die();
+        }
+    }
+
+    private void spawn()
+    {
+        System.out.println("Enemy has spawned in!");
+    }
+
+    private void die()
+    {
+        System.out.println("Enemy has died.");
+    }
+}
+```
+
+Ok let's talk about `_health` and `_name`. Why do I have an underscore there? It's convention to start private member variables with an `_`. Why? Well it's for two reasons. The first reason is so just by looking at a member variable we know if its public or private. The second is that if we were to write `myEnemy._name`, it would look pretty odd. It's sort of a way for us to check if we make what should be a private variable accessible outside.
+
+As for the rest of this code, what's going on? All we have are some basic functions, we alert the user if their enemy has died, and we tell it to subtract from health if `takeDamage` is called. Also if the health goes below 0, we call `die`. Also, when the `Enemy` is created, we give it its name, and its default health of 20, we then spawn it. If you were to make an object of `Enemy` it would behave exactly like you would expect. Let's now make a `Zombie` class that will take behaviors from it. It will be super simple, we just want to tell `Zombie` to take behaviors from our `Enemy` class. This is what we'll call a `parent-child relationship`. Our child class `Zombie` will take elements form its parent `Enemy`, but it won't work the other way around. Another way to think about it is using the `is a` test. `Zombie` will get stuff from `Enemy` because `Zombie is an Enemy`, but it doesn't go the other way around.
+
+Here is our `Zombie` class, it will be really basic:
+```Java
+public class Zombie extends Enemy
+{
+    public Zombie()
+    {
+        System.out.println("Zombie has spawned in!");
+    }
+}
+```
+
+Now let's make a `Zombie` object in our `main function` and see what happens. Hopefully you know how to do this by now.
+<details>
+    <summary>Here is what my main file looks like:</summary>
+
+```Java
+public class Zombie extends Enemy
+{
+    public Zombie()
+    {
+        System.out.println("Zombie has spawned in!");
+    }
+}
+```
+</details>
+
+Now if you run your program you'll notice the output:
+```
+Enemy has spawned in!
+Zombie has spawned in!
+```
+
+How cool is that? We never made an `Enemy` object, but it's constructor is still being called. We can of course take this a step further, let's add this line into our main function:
+```Java
+myZombie.takeDamage(20);
+```
+
+You can do that? Yes absolutely. Since `Zombie` is a child of `Enemy`, it gets all of its members, all member variables and member functions will also belong to a `Zombie` object. If you run it, you'll notice the output changes to add:
+```
+Enemy has died.
+```
+
+But we can go **even further**. Let's say we want `Zombie` to be a particularly powerful enemy. Inside of its constructor, let's change it's health to `30` instead of `20`:
+```Java
+public class Zombie extends Enemy
+{
+    public Zombie()
+    {
+        _health = 30;
+        System.out.println("Zombie has spawned in!");
+    }
+}
+```
+
+But this doesn't work. Remember we set `_health` to private, but that means `Zombie` can't access it either. What do we do now? Make it public? God no, if you recall, there was a third `scope modifier` I didn't talk about. That `scope modifier` is called `protected`, and it works just like private, except any class that `inherits` or `extends` the class will have access to it. Meaning to every other class, `_health` will still be private, but now `Zombie` can change it too:
+```Java
+public class Enemy
+{
+    protected int _health;
+
+    public Enemy()
+    {
+        _health = 20;
+        spawn();
+    }
+
+    public void takeDamage(int damage)
+    {
+        _health -= damage;
+
+        if(_health <= 0)
+        {
+            die();
+        }
+    }
+
+    private void spawn()
+    {
+        System.out.println("Enemy has spawned in!");
+    }
+
+    private void die()
+    {
+        System.out.println("Enemy has died.");
+    }
+}
+```
+
+If you run the code again, you'll notice that our `Zombie` object doesn't die anymore! Our `Zombie` object can use all the logic from our `Enemy` class, and that's the beauty of `inheritance`.
+
+## Abstract classes
+There's something that should strike you a little odd about our setup: in our "game" we can spawn a base enemy. That really shouldn't happen. Eventually, when it comes to a real game, the `Zombie` class will have a model and texture to actually render, but you can imagine we won't ever give one to the `Enemy` class since it's made to handle logic, not actually be spawned in. Is there a way we can stop anyone from creating an object of `Enemy`? Actually yes there is! It's called an `abstract class`.
+
+So what is an `abstract class`? Well it's pretty simple! It's a class that you can't make an object of. The purpose of it is to make it a parent class that you do not wish to have objects created of. Apart from our `Enemy` example, imagine for the robot code there's a `MotorController` class, that handles the basic logic of sending signals to motor controllers. But each motor controller has its own class, you wouldn't want anyone to make a `MotorController` object, since it doesn't work on any real life motor controller.
+
+How do we make an `abstract class`? All we need to do is add the `abstract` keyword before `class`:
+```Java
+abstract class Enemy
+```
+
+That's it!
+
+## Overriding methods

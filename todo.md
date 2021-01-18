@@ -18,9 +18,9 @@
 - [X] More Advanced Functions
 - [X] Classes intro
 - [X] Constructors
-- [ ] Class scope
+- [X] Class scope
 - [X] Getters and setters
-- [ ] Static classes
+- [X] Static classes
 
 # Advanced OOP
 - [ ] Inheritence Intro
