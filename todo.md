@@ -26,6 +26,11 @@
 - [X] Inheritance intro
 - [X] Abstract classes
 - [X] Overriding methods
-- [ ] Abstract methods
+- [X] Abstract methods
  
+# Github
+- [ ] What is github and git?
+- [ ] Why do we use it?
+- [ ] How do I use it? 
+
 # Robot coding

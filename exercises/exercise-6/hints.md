@@ -1,0 +1,1 @@
+Most of what's in this exercise isn't new, except for putting stuff inside the class. The only part you may need hints for is knowing equations, which you can look up, or the intersecting circles, which I told you how to do. Happy coding!

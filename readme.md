@@ -391,7 +391,7 @@ if([boolean statement])
 }
 ```
 
-Let's go ahead and continue with our previous example of getting rid of negative numbers. If we want to turn a negative number into a positive one, what to do we? There is the absolute value, but let's pretent that doesn't exist in Java (it does, but I'm going to stay away from it for now). Using the operators we know, how can we turn a negative number into a positive one? Well the easiest way I can think of is to do the following:
+Let's go ahead and continue with our previous example of getting rid of negative numbers. If we want to turn a negative number into a positive one, what to do we? There is the absolute value, but let's pretend that doesn't exist in Java (it does, but I'm going to stay away from it for now). Using the operators we know, how can we turn a negative number into a positive one? Well the easiest way I can think of is to do the following:
 <details>
 	<summary>Click here for the answer</summary>
 
@@ -1413,7 +1413,7 @@ public class Enemy
 
 Ok let's talk about `_health` and `_name`. Why do I have an underscore there? It's convention to start private member variables with an `_`. Why? Well it's for two reasons. The first reason is so just by looking at a member variable we know if its public or private. The second is that if we were to write `myEnemy._name`, it would look pretty odd. It's sort of a way for us to check if we make what should be a private variable accessible outside.
 
-As for the rest of this code, what's going on? All we have are some basic functions, we alert the user if their enemy has died, and we tell it to subtract from health if `takeDamage` is called. Also if the health goes below 0, we call `die`. Also, when the `Enemy` is created, we give it its name, and its default health of 20, we then spawn it. If you were to make an object of `Enemy` it would behave exactly like you would expect. Let's now make a `Zombie` class that will take behaviors from it. It will be super simple, we just want to tell `Zombie` to take behaviors from our `Enemy` class. This is what we'll call a `parent-child relationship`. Our child class `Zombie` will take elements form its parent `Enemy`, but it won't work the other way around. Another way to think about it is using the `is a` test. `Zombie` will get stuff from `Enemy` because `Zombie is an Enemy`, but it doesn't go the other way around.
+As for the rest of this code, what's going on? All we have are some basic functions, we alert the user if their enemy has died, and we tell it to subtract from health if `takeDamage` is called. Also if the health goes below 0, we call `die`. Also, when the `Enemy` is created, we give it its name, and its default health of 20, we then spawn it. If you were to make an object of `Enemy` it would behave exactly like you would expect. Let's now make a `Zombie` class that will take behaviors from it. It will be super simple, we just want to tell `Zombie` to take behaviors from our `Enemy` class. This is what we'll call a `super-sub relationship`. Our subclass class `Zombie` will take elements form its superclass `Enemy`, but it won't work the other way around. Another way to think about it is using the `is a` test. `Zombie` will get stuff from `Enemy` because `Zombie is an Enemy`, but it doesn't go the other way around.
 
 Here is our `Zombie` class, it will be really basic:
 ```Java
@@ -1452,7 +1452,7 @@ How cool is that? We never made an `Enemy` object, but it's constructor is still
 myZombie.takeDamage(20);
 ```
 
-You can do that? Yes absolutely. Since `Zombie` is a child of `Enemy`, it gets all of its members, all member variables and member functions will also belong to a `Zombie` object. If you run it, you'll notice the output changes to add:
+You can do that? Yes absolutely. Since `Zombie` is a subclass of `Enemy`, it gets all of its members, all member variables and member functions will also belong to a `Zombie` object. If you run it, you'll notice the output changes to add:
 ```
 Enemy has died.
 ```
@@ -1507,10 +1507,25 @@ If you run the code again, you'll notice that our `Zombie` object doesn't die an
 
 You'll also notice we changed the `private` methods to be `protected`, that's because we want to be able to call them from within our `Zombie` class also.
 
+## Making objects of inherited classes
+Now there's some special behavior when you're created object of classes that deal with inheritance. You can store subclass objects in a superclass wrapper. If that doesn't make sense, let's use our example. We can store a `Zombie` object inside of an `Enemy` variable type. Don't believe me, try it in your program:
+```Java
+class Main // The class name has to be the same as the file name
+{
+	public static void main(String[] args)
+	{
+        Enemy myZombie = new Zombie();
+        myZombie.takeDamage(20);
+	}
+}
+```
+
+Why does this work? Well here's how I like to think about it, we can set an `Enemy` to be a `Zombie` object because if the `is-a` relationship. Furthermore, a Zombie **is an** Enemy, so we can do this sort of trickery. Why would you want to do this? Well say you want an array of `Enemies`, this could hold all your `Enemy` types, wouldn't it make sense to have just one array of the `Enemy` class instead of arrays for each specific `Eneny` type?
+
 ## Abstract classes
 There's something that should strike you a little odd about our setup: in our "game" we can spawn a base enemy. That really shouldn't happen. Eventually, when it comes to a real game, the `Zombie` class will have a model and texture to actually render, but you can imagine we won't ever give one to the `Enemy` class since it's made to handle logic, not actually be spawned in. Is there a way we can stop anyone from creating an object of `Enemy`? Actually yes there is! It's called an `abstract class`.
 
-So what is an `abstract class`? Well it's pretty simple! It's a class that you can't make an object of. The purpose of it is to make it a parent class that you do not wish to have objects created of. Apart from our `Enemy` example, imagine for the robot code there's a `MotorController` class, that handles the basic logic of sending signals to motor controllers. But each motor controller has its own class, you wouldn't want anyone to make a `MotorController` object, since it doesn't work on any real life motor controller.
+So what is an `abstract class`? Well it's pretty simple! It's a class that you can't make an object of. The purpose of it is to make it a superclass that you do not wish to have objects created of. Apart from our `Enemy` example, imagine for the robot code there's a `MotorController` class, that handles the basic logic of sending signals to motor controllers. But each motor controller has its own class, you wouldn't want anyone to make a `MotorController` object, since it doesn't work on any real life motor controller.
 
 How do we make an `abstract class`? All we need to do is add the `abstract` keyword before `class`:
 ```Java
@@ -1520,7 +1535,7 @@ abstract class Enemy
 That's it!
 
 ## Overriding methods
-Let's talk about overriding methods. You'll notice it tries to spawn just our base `Enemy`, so instead of typing "Zombie has spawned in!" in the constructor, let's `override` the `spawn()` function. It's actually not that hard, all you need to is rewrite the `spawn()` function with the same return type and parameters as they were in the `Enemy` class.Let's go ahead and first, remove the print statement from the constructor of `Zombie` (hopefully I don't need to show you what it looks like now, just an empty constructor). Now in the `Zombie` class, let's `override` the `spawn()` method:
+Let's talk about overriding methods. You'll notice it tries to spawn just our base `Enemy`, so instead of typing "Zombie has spawned in!" in the constructor, let's `override` the `spawn()` function. It's actually not that hard, all you need to is rewrite the `spawn()` function with the same return type and parameters as they were in the `Enemy` class. Let's go ahead and first, remove the print statement from the constructor of `Zombie` (hopefully I don't need to show you what it looks like now, just an empty constructor). Now in the `Zombie` class, let's `override` the `spawn()` method:
 ```Java
 @Override
 protected void spawn()
@@ -1529,13 +1544,13 @@ protected void spawn()
 }
 ```
 
-There you go, we have now `overrided the function`. I'd like to mention that `@Override` isn't necessary, but it's a nice visual queue to tell anyone reading your code that you're overriding a method from a parent class.
+There you go, we have now `overrided the function`. I'd like to mention that `@Override` isn't necessary, but it's a nice visual queue to tell anyone reading your code that you're overriding a method from a superclass.
 
-We're slowly getting there, but let's say we're talking about a real game, actual Minecraft, the `Zombie` spawn should call the `Enemy` spawn method, but under the condition that it's dark enough. Now we don't exactly have a way to check that since we're not making a real game, so let's just pretent we have a boolean variable called `isDark` that tells us if the `Zombie` can spawn.
+We're slowly getting there, but let's say we're talking about a real game, actual Minecraft, the `Zombie` spawn should call the `Enemy` spawn method, but under the condition that it's dark enough. Now we don't exactly have a way to check that since we're not making a real game, so let's just pretend we have a boolean variable called `isDark` that tells us if the `Zombie` can spawn.
 
-So that's where the `super` object comes in. The `parent-child` relationship I talked about is also often called `super-sub` relationship. The `parent class` is called the `super class`, and all `child classes` are called `sub classes`. That's where `super` comes from. Using the `super` object, we can call the `Enemy` version of the `spawn()` function just like this:
+So that's where the `super` object comes in, `super` just refers to the `superclass` of any `subclass`. Using the `super` object, we can call the `Enemy` version of the `spawn()` function just like this:
 ```Java
-@Overrode
+@Override
 protected void spawn()
 {
     if(isDark)
@@ -1548,3 +1563,70 @@ protected void spawn()
 Now in our context, it will still say `Enemy has spawnned in!`, but if you think about it in the context of the game, we don't want to reprogram the logic for spawning each thing in, so we can use `super` to call the original `spawn()` function while still writing our own.
 
 ## Abstract methods
+We've talked about `abstract classes`, but what's an `abstract function`? In concept, it's pretty much the same. If you remember, an `abstract class` is a class you can't make an object of, and to use it you need to inherit the class. An `abstract function` is a function that has to be overridden. Why would we want to do this? Well let's say we have a `move()` function. It's safe to say that every `Enemy subclass` will move, but they'll all move differently. A `Zombie` would swarm the player, while a `Skeleton` would keep its distance, and a `Spider` would be able to climb walls. If we have an `Enemy` object like shown before, we still want to be able to call `move`, but we want its behavior to be different in each `subclass` of `Enemy`. So we make an empty, `abstract function`:
+```Java
+public abstract class Enemy
+{
+    protected int _health;
+
+    public Enemy()
+    {
+        _health = 20;
+        spawn();
+    }
+
+    public abstract void move();
+
+    public void takeDamage(int damage)
+    {
+        _health -= damage;
+
+        if(_health <= 0)
+        {
+            die();
+        }
+    }
+
+    protected void spawn()
+    {
+        System.out.println("Enemy has spawned in!");
+    }
+
+    protected void die()
+    {
+        System.out.println("Enemy has died.");
+    }
+}
+```
+If you make an `abstract function`, you can't define it, so it doesn't have a `body` defined by curly brackets, you just end it there. Now the `Enemy` class knows that each `subclass` has a function called `move()`, but it's not defined. Additionally, I want to mention you cannot have an `abstract function` in a class unless it is also `abstract`. I mean it makes sense doesn't it? You can't have a function that needs to be overridden by a `subclass` unless you can't make the object of the `superclass`.
+
+If you try to compile and run now, you'll get an error saying:
+```
+Zombie.java:1: error: Zombie is not abstract and does not override abstract method move() in Enemy
+```
+This is the exact behavior we described when talking about `abstract funcitons`, it needs to be re-written in our `Zombie` subclass. So let's do that.
+
+Obviously we don't have a real game, we can't actually make it move, but we can just have a print statement to get the point across. If you really want, you can have a private variable called `position` and update it, but I'm just going to be printing something:
+```Java
+public class Zombie extends Enemy
+{
+    public Zombie()
+    {
+        _health = 30;
+    }
+
+    @Override
+    public void move()
+    {
+        System.out.println("Zombie has moved!");
+    }
+
+    @Override
+    protected void spawn()
+    {
+        System.out.println("Zombie has spawned in!");
+        super.spawn();
+    }
+}
+```
+You should not write `abstract` when overriding a method, because it's not `abstract` anymore, you're making a real method. We could go way deeper into it, with more examples, but just understanding the fundamentals is enough for Java code. Congrats on making it to the end, next we're really close to getting right into the robot code! There is an exercise on inheritance, it won't be super long.
