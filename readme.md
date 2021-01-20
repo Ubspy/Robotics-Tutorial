@@ -40,7 +40,7 @@
     4. [Abstract methods](#abstract-methods)
 
 # Introduction
-Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2016 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
+Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2015 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
 
 # Resources
 Before we get started I want to make a section full of recourses you can use to look things up:
@@ -1629,4 +1629,4 @@ public class Zombie extends Enemy
     }
 }
 ```
-You should not write `abstract` when overriding a method, because it's not `abstract` anymore, you're making a real method. We could go way deeper into it, with more examples, but just understanding the fundamentals is enough for Java code. Congrats on making it to the end, next we're really close to getting right into the robot code! There is an exercise on inheritance, it won't be super long.
+You should not write `abstract` when overriding a method, because it's not `abstract` anymore, you're making a real method. We could go way deeper into it, with more examples, but just understanding the fundamentals is enough for Java code. Congrats on making it to the end, next we're really close to getting right into the robot code! There is an exercise on inheritance, it won't be super long. Go ahead and navigate to `exercise-7` in the `exercise` folder.

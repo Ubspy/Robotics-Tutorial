@@ -1,7 +1,7 @@
 # Exercise 5
 This exercise will be a bit different, here you'll program an actual interface. The goal of this program will be to write a number analysis program.
 
-Your main function should contain as little as possible, it shouldn't be longer than 20 lines.
+Your main function should contain as little as possible, it shouldn't be longer than 2 lines.
 When you first run the program, you should ask for how many numbers you'd like to input for a data set, then you should allow the user to input those numbers (remember, we did this before (: ), here's an example of what it should look like:
 ```
 How many numbers do you have? 5
@@ -93,6 +93,8 @@ double[] doubleData(double[] data)
 }
 ```
 Here we double every value in the array inside the `doubleData()` function, and then return it back so we can save it on the original array in `run()`.
+
+You only need to check for bad input on the menu, in any other function, you can assume the number given will be positive and of the right type.
 
 ## Examples
 Here I will show example for each part of the program. All of this will use the data shown above

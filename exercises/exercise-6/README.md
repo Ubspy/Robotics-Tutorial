@@ -31,6 +31,8 @@ Please keep the scope of all your stuff consistent, only make public what you ab
 If you need to look up any formulas for area or circumerence go right ahead.
 Also, don't worry if you don't understand intersecting, I will explain that
 
+You do not need to check for any bad input, you can assume all of it will be correctly inputted numbers.
+
 ## Math class
 For this, you'll need to use `pi` and possibly the `sqrt` funciton. For that you need to use the `Math class`. It's a static class, so here's how you get both:
 ```Java
