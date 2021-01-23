@@ -38,6 +38,13 @@
     2. [Abstract classes](#abstract-classes)
     3. [Overriding methods](#overriding-methods)
     4. [Abstract methods](#abstract-methods)
+    5. [Interfaces](#interfaces)
+6. [Git and GitHub](#git-and-github)
+    1. [What is Git and GitHub?](#what-is-git-and-github)
+    2. [Branching](#branching)
+    3. [How does git work?](#how-does-git-work)
+    4. [Installing Git](#installing-git)
+    5. [How do I use it?](#how-do-i-use-it)
 
 # Introduction
 Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2015 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
@@ -1633,7 +1640,7 @@ You should not write `abstract` when overriding a method, because it's not `abst
 
 You're done with Java! Everything you learn from here will be about more specific robot coding! You've seriously come a long way since the start. For reference, at the `University of Kansas`, the programming 1 class is mostly covered in this guide (to a lesser depth, but still), and inheritance starts in programming 2, which isn't a small feat at all.
 
-# GitHub and Git
+# Git and GitHub
 We're going to take a break from learning coding, but don't doze off, this stuff is still important. I'd like to talk about `version control`. That is to say an organized way of sharing your code with others. We're getting past where you're writing code by yourself and maybe with the help of another person. We're now going into full scale robot coding with multiple people editing multiple files in multiple different ways. That's when `version control` comes in. It's a way of controlling what version of the code everyone has on their own decice. The one we use is called `git`.
 
 ## What is Git and GitHub?
@@ -1643,12 +1650,14 @@ We're going to take a break from learning coding, but don't doze off, this stuff
 
 You may have heard of `GitHub` before, so why don't we use that? Well we actually will be! A big confusion between people starting out is that `Git` and `GitHub` are two different things entirely. While they are, `GitHub` uses `Git`. `Git` is out chosen method of version control, and to make it so people over several computers can upload and download that code, we need to upload it to some kind of central computer that will always have the most up to date code. That is called a `git server`, and the `git` software already has all of that sorted out. `GitHib` is our chosen `git server`. It has everything we need to collaborate between different users. So that is the main difference, `GitHub` is a `git server`, it uses `git`.
 
-## What is branching?
+## Branching
 `Branching` is an essential feature of `git`, it's where a lot of the `version control` actually comes from. Everything I described already might be nice, but it actually goes quite a bit further. One of the main ideas of `git`, is that each feature of major addition can lie separately from everything else. Let's imagine we have a robot with working drive code, and there are two other features being worked on: one of them is to control an arm, and the other is to shoot a ball. In addition to that, imagine the drive code is being completely overhauled. It's safe to say that if you're working on the arm, you don't want to constantly have to download the code other people are writing for the other sections. Especially since there's a very good chance that the overhauled drive code won't be working for a while, you'd probably like to be able to drive your robot around while testing out the code you wrote for your arm. This is where branching comes in.
 
 `Branching` allows you to essentially have a completely separate version the codebase only dedicated to what you would be working on. In `git`, each of the three people would make a new `branch` before starting their coding, that way there's now 4 main branches of the code: `master`, where everything works 100%. There'd be `arm`, for the new arm code, there'd also be `ball-shoot` for the code to shoot a ball. Lastly, there would be a `drive-overhaul` branch, each person would have their own separate version of the robot code, and can switch between whichever version whenever they need to. If for example the person working on the drive needs help, all the code on the other two branches is saved, and they can switch over to the `drive-overhaul` branch to actually help, and switch back whenever they need.
 
 `Merging` is another important topic of the `branching` feature. At some point, the `drive-overhaul` feature will be complete, and will work 100% as intended. This is when you can `merge` your new branch back into the `master`. The `master` branch is always meant to be the most up to date, but stable bit of code, so you want to make sure to thoroughly test it before changing it. But the idea is, that when we `merge` two branches, all the changes from the `drive-overhaul` branch will be put into `master`, and the new feature is added.
+
+This goes a little further, let's say the person working on the `arm` feature wants to use this new drive code, well they can merge the `master` branch back into their `arm` branch and just like that, they have the new drive code! This is why `git` is an amazing piece of software.
 
 ## How does git work?
 I've talked a lot about git in concept, but I think it's time to actually go into it. Let's start with what a `repository` is first. A `repository` is just a new project on git, each robot typically would have its own `repository`, or `repo` for short. Now for actually putting code onto the `GitHub repo`, there's three main steps: `adding files`, `staging a commit`, and `pusing the code`.
@@ -1661,9 +1670,76 @@ The next part is `staging a commit`. The way `git` tracks files is through indiv
 
 There is a small caveat to doing a `push`, and that's that your local `git repo` needs to be up to date. If it's not, don't worry, it's an easy fix. But before you `push`, you need to make sure that you actually have the correct version of your code locally. If you don't know if you do, don't worry, `git` will tell you. If this happens, you need to make sure your code is up to date. This is pretty simple, first you need to do a `fetch`. A `fetch` goes to the remote `github repository` and fetches any new changes that may have been added, updates the local repo so it knows its out of date. Then you need to `pull` that code. A `pull` is the opposite of a `push`, instead of adding local code to the remote `repository`, you're downloading the code from the remote `repo` on `GitHub` and adding it to your local code. After that you can `push` like normal!
 
+## Installing Git
+Now `vscode` comes with `git` integration, so it works right out of the box, as long as you have `git`. Unfortunately, the installer for `git` is a little scary, so that's why I have a section on it. If you don't have `git` installed, go ahead and navigate to [this page and install it](https://git-scm.com/). All the default settings can be left as is, the only thing you *might* want to change is this page:
+![Git Installation](pictures/git-install.png)
+
+The first option is just to add desktop shortcuts, doesn't matter too much. The second one is entirely up to you, it just adds other ways of using `git`. There's a graphical interface (the GUI) and a command line interface (that's git bash). Everything else you should keep it as I have there, unless you know what you're doing otherwise and disagree with it. It ultimately doesn't matter if you keep the GUI and bash programs, because you can always uninstall them later, and they don't take up that much space.
+
+There's a lot of options, so I'll walk you through them all, next is the default text editor, just keep it as default (which is `Vim`). For the page asking about branch names, also keep it as default (which is `Let Git decide`). When asking about PATH, keep it the same as well (the second option, the one marked `recommended`). Next is asks about `ssh` and `ssl`, you can keep those at the defaults too (`OpenSSH` and `OpenSSL`). For reference, the others options for all of this are purely for people who **really** know what they're doing. I personally use all default settings other than the page I had shown above. It's then going to ask about `end of line commit style`, this doesn't matter, just keep it default so it's not confusing. The `terminal emulator` can be default too, we won't be using it so that doesn't matter. As for default behavior of `pull`, keep it as `default`, since that's what 99% of people use. Next choose the default `credential helper`, for me it's marked as `new`. Almost there, next is extra options, `system caching` is a good idea, especially since you can always clear it if you need to. Go ahead and keep `symbolic links` off, it can get confusing. Finally, the last page, don't enable *any* experimental options, especially since we're still learning. Now you can install it, hopefully you made it through the install unscarred. 
+
 ## How do I use it?
+Now there are a *lot* of ways to actually use `git`. There's the traditional way using `git bash`, which involves a command line interface, there's GitHubs `GitHub Desktop`, which is a graphical program that helps you do all of this. The way I'm going to be showing you, is using the text editor `vscode`. `Vscode` is a text editor with a ton of extra features made by Microsoft, and as of 2020, it's what FRC wants you to use. It also happens to be my favorite way to code, but my decision is ultimately because all of the guides from official FRC sources are about `vscode`. So that is what I will be using.
 
+I'm going to show you a snippit of `exercise-7` that I've intentionally left some things out on. The two files I'm going to be looking at are `Main.java` and `Shape.java`. Here is what they look like right now:
 
+Here is `Main.java`:
+```Java
+class Main
+{
+    public static void main(String[] args)
+    {
+		ShapeController.run();
+    }
+}
+```
+
+Here is `Shape.java`:
+```Java
+class Shape
+{
+    double getArea();
+    String getShapeName();
+}
+```
+
+Hopefully you see what's wrong in each file, but I'll explain it if not. In `Main.java`, we're trying to use the `run()` function without an object. This is what's known as a `static call` to a function. But our `run()` function isn't static, so we need to create an object of `ShapeController` first. In `Shape.java`, neither the class, nor the methods are marked as `public` or `abstract`. I'm going to go ahead and make those changes, and show you how I would update those in the remote `GitHub repo`.
+
+Let's start with downloading a repo onto our computer. Once you have `vscode` open, you want to open the `command menu`. This will be something you use quite a bit, so it's best to learn the shortcut now. To do this, you use the keyboard shortcut: `ctrl + shift + p`. It will then open up a little drop down menu, it start with a `>` but don't delete that, that's how vscode knows you're trying to perform a command. Once that's open type in `clone` or `git clone`, it's a search so it will probably find it, then select `Git Clone`. It should look like this before you hit `enter` on it:
+![Git Clone Command](pictures/git-clone-1.png)
+
+Once you've pressed enter, it will ask you for a repo link. It's not that hard to get it, any `GitHub` repo has a link, and it's really easy to find it. For an example, I'm going to use the `DeepSpace-2019` repo on the `SargonRobotics` github account. If you go to the [webpage for this repository](https://github.com/SargonRobotics/DeepSpace-2019), you can find the link by doing what's shown below (this works for any repository):
+![Get Clone Link](picures/git-clone-2.png)
+
+Once you have it pasted in, it will ask you where to put it. The way `git clone` works, is it automatically creates a new folder, so there's no need to make your own separate folder for the `repo`. For example, if you clone it to your desktop (not the best idea, but it works), it won't have all the `.java` files sitting there, it will make a folder (in our case, called `DeepSpace-2019` on the desktop, and everything will be in there). Then it will ask you to open that up, go ahead and do that.
+
+Now I have a repo made for the `exercise-7`, and I'll show you how to actually `add`, `commit` and `push` the changes I talked about before. Once the changes have been made, we need to go ahead and `add` the files first. To do that, first navigate to the `git` tab in vscode, you can find it by clicking right here:
+![Open Git in VSCode](pictures/git-open.png)
+
+Now here it will show your changes, but if you've made changes and they aren't showing up, just click the refesh button:
+![Refreshing Git](pictures/git-refresh.png)
+
+Now you'll see your changes! Each file will have a set of changes, and if you see, I've clicked on `Main.java` so you can see what changes exactly I made, this is also helpful for when you're writing your `commit message`, because sometimes you forget everything you did. The `M` next to the files means that those files were `modified`. There's two other things it can be, `adding` a file (will have a green `A`), or `removing` a file (will have a red `R`). I'll go ahead and show you some of the buttons you can press:
+![Adding and checking out files](pictures/git-add.png)
+
+You can also where it says `Changes` and add, or revert all the files there. That's what I'm going to go ahead and do:
+![Adding or checkout out all the files](pictures/git-add-all.png)
+
+Now that we've added our files, let's `stage a commit`. All we need to do for this, is type the commit message in the box, and then hit the `commit` button:
+![Committing your changes](pictures/git-commit.png)
+
+There you are! There's a couple more things about using `git` in `vscode` that I'm going to mention, because we're not completely done. First is `pushing`. I can't show you because I don't have a remote repo set up, so I can't show you, but there's a button for it. It will also tell you how many commits you are either ahead or behind the local repo, so you know if you need to `push` or `pull`. The button for pushing and pulling will be right here, but will have a different icon for you since you'll have a remote repo:
+![Push/Pull button](pictures/git-push.png)
+
+When you do this, it may ask you for your `GitHub` login, there's ways to avoid doing that every time, but considering you'll probably be using computers that belong to the team, not you, just login on push for now.
+
+There's one more thing I want to talk about, and that's `using branches`. There is a `branch` button, that allows you to easily switch between branches as well as make new ones:
+![Branch button](pictures/git-branch.png)
+
+There's also a large set of other options, you don't need to worry about a lot of that, but it *is* how you merge. You can push and commit from there also if you want:
+![All git options](pictures/git-other.png)
+
+## Github etiquette
 
 # Robot Infrastructure
 This section isn't about the robot code, but more about the parts that make the robot work, as well as how to set them up properly. Unfortunately, you can't just get into coding an FRC robot with the parts out of the bad, you have to set them up. Additionally, I want to clarify that from now on, everything is subject to change. While robot parts aren't super likely to change, it does happen. In 2014, they did a radical overhaul of the robot systems, and at any time, they can do it again. If they do any big changes, hopefully someone will bring up an issue so I can address it and try to change it, but nothing is certain. All if the information you will need can be found on [WPI's Website](https://docs.wpilib.org/en/stable/). Unfortunately, that link can also change, but googling `WPI FRC` should hopefully get you there!

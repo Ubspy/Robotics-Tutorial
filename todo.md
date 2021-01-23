@@ -29,10 +29,12 @@
 - [X] Abstract methods
 - [ ] Interfaces
  
-# GitHub and Git
-- [ ] What is github and git?
-- [ ] What is branching?
-- [ ] How do I use it? 
+# Git and GitHub
+- [x] What is Git and GitHub?
+- [x] Branching
+- [x] How does git work?
+- [x] Installing git
+- [x] How do I use it? 
 - [ ] GitHub etiquette
 
 # Robot Infrastructure
