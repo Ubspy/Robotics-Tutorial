@@ -53,7 +53,7 @@
 - [x] Timed robot coding
 - [x] Documentation
 - [x] Port constants
-- [ ] Motor controllers
+- [x] Coding motor controllers
 - [ ] Controller input
 - [ ] Using a dashboard
 
