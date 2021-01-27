@@ -1087,14 +1087,16 @@ Our class should now look like this:
 class Circle
 {
     double radius;
-    final double pi = 3.14159;
+    final double PI = 3.14159;
 
     double getArea()
     {
-        return radius * radius * pi;
+        return radius * radius * PI;
     }
 }
 ```
+
+Why is `PI` in all caps? Well when you have a constant, or `final` variable, it's convention to put it in all capital letters. That way you can see by looking at it outside of the definition that it's `final`.
 
 Now what if we want to use it in our `Main.java`? Well there's one big thing need to do first. Right now, we can't access our class anywhere else, since it's in another file. We need to tell Java that we want the class to be accessible elsewhere, or that we want the class to be `public`. That's a really simple fix, all we need to do is add `public` before the `class Circle`. So now it should read `public class Circle`. This means that we can access this class from outside of the file. Now that's unfortunately not all, because we can't access the `radius` variable or `getArea()` from outside the file either. This is an easy fix though, all we need to do is tell them to be `public` as well.
 
@@ -1103,11 +1105,11 @@ Your class should now look something like this:
 public class Circle
 {
     public double radius;
-    final double pi = 3.14159;
+    final double PI = 3.14159;
 
     public double getArea()
     {
-        return radius * radius * pi;
+        return radius * radius * PI;
     }
 }
 ```
@@ -1250,7 +1252,7 @@ Now that we know how to define a `constructor`, let's actually design one. You'l
 public class Circle
 {
     private double radius;
-    final double pi = 3.14159;
+    final double PI = 3.14159;
 
     public Circle(double givenRadius)
     {
@@ -1287,7 +1289,7 @@ All we need to do, is add that before (or after, but since it's a `default const
 public class Circle
 {
     private double radius;
-    final double pi = 3.14159;
+    final double PI = 3.14159;
 
     public Circle()
     {
@@ -1306,7 +1308,7 @@ public class Circle
 }
 ```
 
-You may be wondering why we don't just set the `radius member variable` equal to 1 inside the class. This is a **huge** nono. Please do not ever do this. While in Java, this will work, it's good practice not to do that, since the `constructor` is where everything is supposed to be initialized. Additionally, Java is pretty much the only OOP heavy language that allows this, in C# or C++ doing that would cause the compiler to freak out. Now you'll say `what about pi? we did that for pi`. Well pi is a `final variable`, meaning that its value *has* to be set when it's defined, and you cannot change the value, so there's no other option.
+You may be wondering why we don't just set the `radius member variable` equal to 1 inside the class. This is a **huge** nono. Please do not ever do this. While in Java, this will work, it's good practice not to do that, since the `constructor` is where everything is supposed to be initialized. Additionally, Java is pretty much the only OOP heavy language that allows this, in C# or C++ doing that would cause the compiler to freak out. Now you'll say `what about pi? we did that for pi`. Well PI is a `final variable`, meaning that its value *has* to be set when it's defined, and you cannot change the value, so there's no other option.
 
 Congrats! Now you understand `constructors`, which are an essential part of Java development when it comes to `object oriented programming`. There's two more topic I want to cover before an exercise, but `constructors` and juse base `classes` are the hardest part.
 
@@ -1346,7 +1348,7 @@ So why did we have to use `static` in the functions section? Well that's because
 public class Circle
 {
     private double radius;
-    public static final double pi = 3.14159;
+    public static final double PI = 3.14159;
 
     public Circle()
     {
@@ -1689,7 +1691,7 @@ class Main
 {
     public static void main(String[] args)
     {
-		ShapeController.run();
+        ShapeController.run();
     }
 }
 ```
@@ -1740,7 +1742,199 @@ There's also a large set of other options, you don't need to worry about a lot o
 ![All git options](pictures/git-other.png)
 
 ## Github etiquette
+Now that you understand how to use `git` and what `GitHub` is, let's talk about some etiquette. These are sort of like variable naming schemes, sure you don't *need* to follow them, but please do. There are good reasons for what I'm going to talk about, and I'll mention it as I go along. The first big rule of thumb: `never commit directly to master`. I alluded to this before, but the master branch should always contain the last bit of stable code. If you want to make any changes, you don't want anyone else trying to start a new feature to make a branch from master when the commit you did broke the code in master unknowingly. So what do you do if you want to make a change? Well if you want to work on a new feature, like start drive code, you almost always want to make a new branch. The only time you should *ever* commit to master, is if your master branch currently isn't stable, and that commit will fix it. Ideally though, if you use branching right, that doesn't happen.
+
+The next thing is called a `pull request`. This is actually specific to `GitHub`. I've already expressed the importance of the `master` branch, and how we shouldn't directly commit to it. There's also an unwritten rule about never merging directly to master. How do we not merge directly to master? Well we use something called a `pull request`. To do this, you open up the webpage for the `GitHub repo`, you go to the `pull request` tab and create a new one. Once you're there, you pick which branch you want to merge into master, and then you `create the pull request`.
+
+After that, you create something describing your changes, and then other people can review it. This is nice because it's always really easy to miss some things when you're actually coding, so someone else can go over your code and if they see anything big, they can leave a note at a specific line in code describing the problem. Then once its approved you can actually merge it. The owner of the repository can actually force people to have at least one or two approvals for any merge request into the master branch. This isn't 100% something you need to do for FRC, especially considering the time crunch that build season tends to be. It's some good practice though for people trying to learn, and if you can fit it into your work flow I 100% recommend doing it.
 
 # Robot Infrastructure
 This section isn't about the robot code, but more about the parts that make the robot work, as well as how to set them up properly. Unfortunately, you can't just get into coding an FRC robot with the parts out of the bad, you have to set them up. Additionally, I want to clarify that from now on, everything is subject to change. While robot parts aren't super likely to change, it does happen. In 2014, they did a radical overhaul of the robot systems, and at any time, they can do it again. If they do any big changes, hopefully someone will bring up an issue so I can address it and try to change it, but nothing is certain. All if the information you will need can be found on [WPI's Website](https://docs.wpilib.org/en/stable/). Unfortunately, that link can also change, but googling `WPI FRC` should hopefully get you there!
 
+## Parts on the robot
+I want to cover really quick some essential components on the robot. There are some components that need some software installed on them before we can start using them, and it's usually the job of the programming team to do that. I won't be going over every component, if you want you can look at WPI's webpage and they have a detailed guide on all the components, but you should know how the robot works on a fundamental level before getting into it.
+
+## RoboRIO
+Let's start talking about parts on the robot. I won't be covering all of them, in fact this won't even be close, if you're curious you can check out [this link]() for more info on robot wiring. The main component of the robot is called the `roboRIO`. This is the brain of the robot, and when we actually deploy our code, that's where it goes. If you look at the component itself, it has a ton of ports on it, the wiring team will connecting them all (or you can learn if you'd like), but those are how we communicate with all the other parts on the robot, like the motors, the lights, and even the computer we control it with. When you first get a roboRIO out of the box, it's not just going to work, you'll need to `image` it. `Imaging` the `roboRIO` is basically the same thing as installing an operating system on it, except with a little more. Each year they come out with new images, so you want to keep it up to date when you can. WPI has a [pretty good guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html) on this, but I'll explain a the basics here. You want to get a computer that runs Windows, and then you want to open up a program called `roboRIO Imaging Tool`. This is a tool that comes with the `Labview FRC Software` which we install each season. If you don't have that installed on any computers you're using for your robot coding, you might want to see if you can get a key from someone on your team, or use a team dedicated machine that will have it. Then you want to connect your laptop to the `roboRIO` using a USB-A to USB-B cable, unlike other options, when imaging it's essential to use a USB interface. The ability to network using an ethernet cable is part of its image, so using a USB is the only way to fully image it. You also need to be powering the `roboRIO` to be able to image it, the USB cable does not provide enough power to keep it on. There are three options once you open it, there's `edit startup settings`, `format target` and `update firmware`. Each time a new season comes out you want to make sure to `format target`, then `update firmware`. Using `format target` will allow you to get all the new features of the upcoming season. `Updating firmware` will make sure that all the ports used for communication are working as best as they can be. Other than that, there's nothing else you need to do other than put your code on it.
+
+## Radio
+The `radio` is another essential component of the robot, and it's very particular to programming. The `radio` is how we actually communicate with the robot when driving. It's essentially a `router`, it creates a wireless network that your `drive station` can connect to so you can drive it wirelessly. It's also how you can deploy code wirelessly. You might be thinking "why do we call it a `radio`, and not a router?" Well a `router` is supposed to take in another connection and then spread that network to your devices, at your home your `router` is taking in the big network of computers which comprises the internet, and allowing your home devices to connect to it. The `radio` on the robot does no such thing, it's an `isolated network`, meaning it doesn't communicate with anything except for whatever is directly connected to it. When you first get the radio, as well as at the start of each new season, you will need to `program your radio` for robot usage. WPI has another [excellent guide here](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html). But it's really similar to the `roboRIO imaging`. While the radio is on, plug your laptop into it via an ethernet cable, will our your team number and whatever else you may need, and follow the on screen instructions.
+
+## Motor controller
+This one is *much* shorter, but I wanted to talk about it for a second, because we will be using these very soon. Now motors take a lot of power, like **a lot** of power. We don't want to have to route this power through our `roboRIO`, because it can easily fry the microchips inside. Also, our power source is constant at `12V`, we want a way to be able to give the motor less so it's not always spinning at max speed. This is where our `motor controllers` come in. They take 3 inputs: the positive and negative terminal for power, and a `signal` from the `roboRIO`. This signal will be generated by the code we write, and the `motor controller` is designed to give more or less power to the motor depending on the signal it gets.
+
+There's some important stuff to know about it, first there's the lights on the motor controller will change with what they're supposed to be doing. This can be helpful when the `motor controllers` aren't acting as they should be. Each one is different, but on the user manual for the `Victor SP`, this is the information they have on the lights:
+![Victor light colors](pictures/victor-light-colors.png)
+
+You can look up different `motor controllers` to see what all the colors mean. The other important thing about them is `calibrating them`. For the most part we won't need to worry about it, but sometimes you want to `recalibrate` the `motor controllers`. What does that mean? Well it tells the motor controller which signal values to use as the minimum, the zero, and the maximum. The `minimum` just means the highest speed in the reverse direction, `zero` means when the motor shouldn't be moving, and `max` is the highest speed in the forward direction. If you notice the motors aren't spinning correctly, or spinning when your controller isn't being pressed, you might want to `recalibrate` them. As always, you can look up how to do that based off which `motor controller` you have. The `Victor SP` has this on their `calibrate` section:
+![Victor calibrate](pictures/victor-calibrate.png)
+
+## Drive station
+These last two are not part of the robot, but they're essential to driving and testing the robot. The `drive station` is just a computer running the software to take controller input, and send it to the robot.
+
+## Dashboard
+The `dashboard` is a software the accompanies the `drive station` software. What it does, is display stuff from your robot code that we ask it to display (such as the camera, or motor values for debugging). There's not a whole lot to how the dashboard works, there's two main ones: the default labview one, and `Smartdashboard`. I personally recommend using `smartdashboard`, because you can move elements around, and only display what you need to. When we get to code, I'll talk about how to put stuff on there, but using either dashboard software is pretty intuitive. Setting your default dashboard is just an option of the `drive station` software. 
+
+# Basic robot coding 
+You've made it. You got through basic Java, learned OOP, inheritance, and gone through some basic robot infrastructure to help you understand the robot a bit better. It's now time to learn about robot coding. You've made it so far and you probably don't even realize it. Now unlike all the code you wrote for me so far, you won't be coding a robot completely from scratch, there's a lot already working for us. We use `libraries` from WPI for the robot. What is a `library`? It's just importing someone else's code. In this case, FRC has a bunch of code that is used to talk to the roboRIO, and use all of its ports to talk to the other components. This means, all the hard work is done for us, making a motor turn is as simple as calling a function! Additionally, a lot of the robot code has its own structure. The robot code runs off something called a `scheduler`. This is a bit of code that handles the timing on everything, and calls appropriate functions. I'll get into more specifics in the appropriate section, but coding on a robot is different from our "normal" coding. The biggest difference is that the robot code is continuously looping. This is the main reason we avoid `for and while loops`. Sometimes a for loop is necessary, but to be honest with you I've never used one while coding a robot. And `while` loops should be completely avoided. Anyways, let's get into coding for a robot!
+
+## Setup
+Just like `git`, there's some setup that needs to be done. I'm not giving you a step by step, because they have [their own setup guide here](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html). There's other software they tell you how to install, but for coding you only need that link. The `FRC Gametools` do need to be on one computer, because that's how you image the roboRIO, configure the radio, and actually drive the robot. But for coding this is the only link you need.
+
+Why do we need to install separate software? Well this will install all the libraries you use, this code doesn't come from nowhere, it actually needs to be installed on your system. Another thing, is that the roboRIO is a different architecture. If that means nothing to you, it's basically an entire different processor type. All laptop and desktop computers use the same architecture (x86_64), but the roboRIO is an ARM processor. This means we need extra tools to be able to compile code specifically for that type of processor. Once you have that all set up, it's time to make your first project!
+
+If you remember how to open the `command menu`, we'll need to open that. For those of you who forgot, it's ok! The shortcut is `ctrl + shift + p`. Now there will be a lot more commands since we have stuff for C++, Java and now FRC. What you want to do is type `WPI:`, that will filter the commands for stuff related to FRC robot programming. Then after that, type in `new project`. You should get something that looks similar to this:
+![VSCode new robot project](pictures/new-project.png)
+
+Now it's time for the settings. Promise this one is much shorter than the `git` install settings. Here is the menu that will pop up:
+![VSCode new robot project settings](pictures/new-project-settings.png)
+
+First, you want to select your project type. Your choices are between `example` and `template`. `Example` would be used if you want to see WPI's examples on a particular bit of code, like if you wanted to see drive code or something related to PID. When starting new robot code, you'll want to use `template` pretty much always. You then have to pick your language. Hopefully by now you know which one we're using. Then we select a project base. Then you select your project folder, give it a name (please do not put spaces in the project name, it will break everything), you pick if you want vscode to make a new folder, and you enter your team number. Unless you know what you're doing, just keep `enable desktop support` off. Especially since this can be changed later. Then click on `generate project`. Congrats! You have a robot project now!
+
+When you first create the project, vscode will have a lot of stuff to do. Just let it go until it's done, we don't want to worry about any of it, WPI did all the work for us.
+
+## Timed robot coding
+Ok we have code now? What do we do? Well let's talk about what we actually need to look at. The only things you'll be changing for the most part will be in the `src` folder. `Src` stands for `source`, and is where the `source code` of your project will lie. There's two folders in `src`. There's `deploy`, and there's `java`. As you can probably guess, all of our Java code will go in the `java` folder. The other folder is there for more complicated reasons. If there are like config files you want to upload to the robot, you put them in the `deploy` folder.
+
+As for what files you want to worry about in the `java` folder? Well first rule of thumb is **do not touch Main.java**. If you want, you can edit the formatting, like I do, but do not change any code in it. Everything we will be editing will be in the `Robot.java` file for now. Once inside the `Robot.java` file, there's a lot to look at. We're just going to go one by one. The first thing you'll notice is they format their classes and functions like:
+```Java
+public class Robot extends TimedRobot {
+
+}
+```
+Instead of what we're used to:
+```Java
+public class Robot extends TimedRobot
+{
+    
+}
+```
+
+This is purely personal preference, but I like to change all the stuff to look like it is below. I'm going to walk through the file and explain most of what is there. The first thing you'll notice is something alone the lines of:
+```Java
+package frc.robot;
+
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+```
+
+The first line just sets a Java `package`. This is essentially just the folder it's in. I wouldn't worry too much about it, since the `WPI` extension will handle all of this for us. Then there's the `import`. Remember before when I talked about using `libraries`, well we're importing classes from other `packages`. For example, `edu.wpi.first.wpilibj.TimedRobot` is a package, and we're importing it so our class `Robot` can inherit from it. If that looks scary to type, don't worry, vscode handles import for us with the right hotkey.
+
+Then we get to the class definition, which should look ok. We're making a public class called `Robot` that inherits from `TimedRobot`. Then we come to this bit of code:
+```Java
+private static final String kDefaultAuto = "Default";
+private static final String kCustomAuto = "My Auto";
+private String m_autoSelected;
+private final SendableChooser<String> m_chooser = new SendableChooser<>();
+```
+
+Most of this should look ok. They make two final strings (and that's why we initialize them outside of the constructor, because we can **only** set their value here). You might be asking "why do they name is `kDefaultAuto`. I have no idea if I'm being honest. It might mean `constant`, but normally we put constant variables in all caps. Good news if you can always change the variable names. The next thing is the `SendableChooser`. This one is probably a little confusing. `SendableChooser` is a class made by `WPI`, and it's something that gives us a multiple choice option in our `SmartDashboard`. This would be like if you wanted to start the robot by going forward, going forward and turing left, and going forward and turning right, you can pick just one. Now the good part about the `SendableChooser` class, is we don't need to know a thing about the code inside. Since it was made properly, we only need to worry about what functions we'll need to use.
+
+Before I continue, I should talk about `templated classes`. That's where the `<>` comes from. All this means, is when we create a `SendableChooser`, it needs to know what each entry is going to be. In this case, we want to display text like `Stay Still` or `Go Forward`, which is a `String`. That's why we have `String` inside the angle brackets `<>`. That's all you really need to know.
+
+Additionally, they choose to name it `m_chooser` instead of `_chooser`. Both are find, I leanred to do it without the m, so I like to change it.
+
+Now we have a plethora or functions, I'm going to explain what each ones does in a brief manner:
+Function                            | Purpose
+----------------------------------- | -------------
+public void robotInit()             | This server as your `Robot` class constructor. What happens is the constructor for the superclass `TimedRobot` calls the `abstract function` called `robotInit()` so treat it as your constructor. Note: **do not make a `Robot` constructor**
+public void robotPeriodic()         | This will loop periodically (about every 200ms) while the robot is on. There's honestly not much use for this, since you can't move any motors or get controller input unless the robot is `enabled`, but it's there if you need it
+public void autonomousInit()        | This will run one time when the robot is `enabled` in `autonomous mode`, which means there is 0 controller input.
+public void autonomousPeriodic()    | This will loop periodically (about every 200ms) when the robot is `enabled` in `autonomous mode`
+public void teleopInit()            | This will run one time when the robot is `enabled` in `teleop mode`, which means you're operating it remotely using a controller input
+public void teleopPeriodic()        | This will loop periodically (about every 200ms) when the robot is `enabled` in `teleop mode`
+public void disbledInit()           | This will run one time when the robot is `disabled`
+public void disabledPeriodic()      | This will run periodically when the robot is `disabled`. I have literally 0 idea what this is for, but it's there
+public void testInit()              | Hopefully you can guess what this does, it runs once when you enable `test mode`
+public void testPeriodic()          | This will loop periodically (about every 200ms) when the robot is `enabled` in `test mode`.
+
+There you are, those are all the main functions inside of our `Robot` class, and when to use them. For the most part, we will be coding in the `teleop` stuff for now. Down the line we can move onto others.
+
+## Documentation
+Moving along the `Robot.java` file, you can see we have some pre-generated code in the `autonomousInit()` function. Let's take a look:
+```Java
+m_autoSelected = m_chooser.getSelected();
+// m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+System.out.println("Auto selected: " + m_autoSelected);
+```
+
+What is `m_chooser.getSelected()`? Well I won't be here to explain every function, luckily there is documentation! If you go to the [WPI FRC Java documentation](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/index.html), and search for `SendableChooser`, you should be able to look at all the functions and what they do, including `getSelected()`. If you look for the function (also called a method), you'll see they tell you it returns type `V`, which just means what we set it to on creation, or in our case, a `String`. It also shows the name, as well as a description of what it does. So in the `SmartDashboard`, if you pick the option labled `"No movement"`, then `getSelected()` will return a String with the value `"No movement"`.
+![SendableChooser Documentation](pictures/chooser-docs.png)
+
+You'll notice I skipped over `robotInit()`, that was semi-intentional, there's three new functions there, and I wanted to explain `documentation` fost. See if you can use the documentation to find out what the function for `m_chooser` inside of the `robotInit()` function does. It should be self explanatory because of the function names, but it's good practice. As for `SmartDashboard.putData()`, first you'll notice that it's a static function, since we didn't need to make an object. But all it does is add something to the `SmartDashboard`, in those case it's the `Chooser` so we can pick which autonomous mode to start with.
+
+The only thing left to analyze is the code inside of the `autonomousPeriodic()` function. We're almost there:
+```Java
+switch (m_autoSelected)
+{
+    case kCustomAuto:
+        // Put custom auto code here
+        break;
+    case kDefaultAuto:
+    default:
+        // Put default auto code here
+        break;
+}
+```
+
+This is just a switch statement, and depending on which autonomous mode is being chosen. If you forgot switch statments, don't worry about it too much. We won't be using that code anyways.
+
+## Port constants
+What is a port constant? Well if you've looked at the roboRIO you'll notice there are a lot of ports. Just in the `PWM` section, there's about 10 ports. If we want to assign port number `2` to the left drive motor, you would proably not like to type `2` everywhere. What we want to do is make `constants`. Since we're only working with one file, you can just put them at the top of `Robot.java` for now, but eventually we will have them in their own file. Right now, at the top of the `Robot` class, let's make two constant integers for motor ports. Assuming we have a two wheel drive, we'll have one for the `left motor`, and one for the `right motor`. The ports can be what ever you want from 0 to 9, but I'm going to pick 0 and 1:
+```Java
+final int LEFT_MOTOR_PORT = 0;
+final int RIGHT_MOTOR_PORT = 1;
+```
+
+You'll notice I didn't set `static` or `private` like the others. Since right now we're only dealing with one file, there's no real reason to do that. In all honesty, I don't know why they bother to make those `static` if they're going to be `private`, but ours will work just fine.
+
+## Motor controllers
+It's time! We are not going to make the motor controller objects. Now the type of object you make sill be specific to the motor controllers your robot has, so consult with the mentors to see which motor controller you have on the robot you're coding for. Not all of them have names on them. I'm going to be using coding for `Sparks`, but lucky for you, all the methods and variables for each motor controller are the same. Since they're all based off of the same `MotorController` class, they can't overwrite the essential behavior of those classes. In other words, each motor controller class will have the exace same methods. First we need to make a member variable for our `Robot` class that will hold the two `Spark` objects. I'm going to do this below the constants, but above `robotInit()`:
+```Java
+Spark leftDriveMotor, rightDriveMotor;
+```
+
+Remember what I told you, we don't want to set their value until the constructor, which here is `robotInit()`. So let's go set those, the constructor only takes the port number and that's all.
+```Java
+@Override
+public void robotInit()
+{
+    leftDriveMotor = new Spark(LEFT_MOTOR_PORT);
+    rightDriveMotor = new Spark(RIGHT_MOTOR_PORT);
+
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
+}
+```
+
+There you have it, now we have some motor controllers. How do we actually use them? Well you've probably noticed by now that `vscode` is offering you suggestions on what you can type in. If you type in `leftDriveMotor.`, and then use the auto-complete shortcut `ctrl + space`, you'll get to see all the member variables and functions that are a part of that class, once that menu opens, you can use the arrow keys to navigate it:
+![VSCode Auto Complete](pictures/auto-complete.png)
+
+The function we really want to worry about is `set`. You can set it to any value and the motor will spin. The range on the numbers is from -1 to 1. `-1` is the fastest the motor will go in the reverse direction, and `1` is the fastest it will go on the forward direction. As you probably guessed, `0` is stopped. Let's go into the `teleopInit()` function and set both motors to move forward at a quarter speed. Why not the periodic? Well we're just setting them to go when we enable, and we don't change it, so that's why we put it in init. When we get controller input, we'll want to change that:
+```Java
+@Override
+public void teleopInit()
+{
+    leftDriveMotor.set(0.25);
+    rightDriveMotor.set(0.25);
+}
+```
+
+I wouldn't recommend running this robot code, because having motors just spin with no button to stop them is dangerous, but it shows you how to set motor controllers. You might be wondering `what if we want to stop it?`. Well when we `disable` the robot it automatically stops everything from moving, but let's go ahead and code it in to stop them anyways. For this, you can either use `set(0)`, or there is a `stopMotor()` function. I like to use the `stopMotor()` function. Go ahead and try it yourself, see if you can figure out which function that would go in:
+
+<details>
+	<summary>Here is what I have:</summary>
+
+```Java
+@Override
+public void disabledInit()
+{
+    leftDriveMotor.stopMotor();
+    rightDriveMotor.stopMotor();
+}
+```
+</details>
+
+Now you know how to set motors! You're coding robots!

@@ -7,6 +7,7 @@
 - [x] If statements
 - [x] Boolean operations
 - [x] Else if/else statements
+- [ ] Switch statements
 - [x] For loops
 - [x] While/do while loops
 - [x] Strings
@@ -35,28 +36,31 @@
 - [x] How does git work?
 - [x] Installing git
 - [x] How do I use it? 
-- [ ] GitHub etiquette
+- [x] GitHub etiquette
 
 # Robot Infrastructure
-- [ ] Robot infrastructure introduction
-- [ ] Parts on the robot
-- [ ] RoboRIO
-- [ ] Radio
-- [ ] Motor controller
-- [ ] What you need to do to get a working robot
+- [x] Robot infrastructure introduction
+- [x] Parts on the robot
+- [x] RoboRIO
+- [x] Radio
+- [x] Motor controller
+- [ ] Drive station
+- [x] Dashboard
 
 # Basic Robot Coding 
-- [ ] Robot coding introduction
-- [ ] How coding on a roboRIO is different
-- [ ] Iterative robot coding
-- [ ] Port constants
-- [ ] Controller input
+- [x] Robot coding introduction
+- [x] Setup
+- [x] Timed robot coding
+- [x] Documentation
+- [x] Port constants
 - [ ] Motor controllers
+- [ ] Controller input
 - [ ] Using a dashboard
 
 # Command Based Robot Coding
 - [ ] What is command based robot coding?
 - [ ] How does it work?
+- [ ] Port constants in their own file
 - [ ] Subsystems
 - [ ] Commands
 - [ ] Command groups
