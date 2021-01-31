@@ -1956,3 +1956,35 @@ public void disabledInit()
 Now you know how to set motors! You're coding robots!
 
 ## Controller input
+Obviously, just setting the motor to `just go forward and don't stop` is bad for multiple reasons. First of all, it's not safe, just tell the robot `yeah no don't worry about hitting anything`. Furthermore, it's not as fun, wouldn't you want to actually *drive* the robot? Well lucky for you, that's what we're doing next!
+
+Now getting controller input is entirely handled by the [Joystick class](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/Joystick.html). With this, you can get all the input, as well as (depending on the controller of course) activate lights on the controller, or rumble it. Now let's start like we did last time with having a class wide `Joystick object`, and we should initialize it with a constructor. I want you to try and do this yourself, now the constructor only takes one argument, and that's the number of controller on the driver station. If you remember the controller section, all of your controllers will have a number next to them:
+
+PUT PICTURE HERE
+
+This number is what goes in the constructor, and it's entirely dependant on how many controllers are plugged in. So if there's only one controller plugged, it will have the number `0` every time (unless the driver station messes up, which is something that happens). So when you initialize your `Joystick object`, your constructor parameter should be `0`. Go ahead and try it yourself.
+
+<details>
+    <summary>Here is what it should look like:</summary>
+
+```Java
+Joystick xboxController;
+
+@Override
+public void robotInit()
+{
+    xboxController = new Joystick(0); // Controller port 0
+    leftDriveMotor = new Spark(LEFT_MOTOR_PORT);
+    rightDriveMotor = new Spark(RIGHT_MOTOR_PORT);
+
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
+}
+```
+</details>
+
+If you took a look at the documentation for the `Joystick class`, you should hopefully already be understanding how this works. There are a ton of `getter functions` that you can use to get the different inputs of the controller. There's two main functions we will be looking at for now: `getRawAxis` and `getRawButton`. These are not a part of the `Joystick class` itself, but part of the `GenericHID class`, which `Joystick` inherits from. As you can imagine, `getRawAxis` will the the real time value of a particular joystick axis, and `getRawButton` will do the same but for a button. For these, you need to give the particular number for the axis or button you want.  Now your team may have different controllers at their disposal, but I will be using an xbox controller, and there's a popular chart showing which buttons and axes have what numbers:
+![]()
+
+But you can also figure that out in the driver station software, by moving the axes you want, or pressing the button you want, and look at the number there. Those will be the same numbers in the code.
