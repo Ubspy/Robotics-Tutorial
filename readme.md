@@ -1786,10 +1786,37 @@ You can look up different `motor controllers` to see what all the colors mean. T
 ![Victor calibrate](pictures/victor-calibrate.png)
 
 ## Drive station
-These last two are not part of the robot, but they're essential to driving and testing the robot. The `drive station` is just a computer running the software to take controller input, and send it to the robot.
+These last two are not part of the robot, but they're essential to driving and testing the robot. The `drive station` is just a computer running the software to take controller input, and send it to the robot. I want to have a basic overview of the driver station software, since it's pretty important. Here is what it will look like when you first start it up:
+![Driver Station Operation](pictures/ds-main.png)
+
+On the very left, there are 5 tabs. We'll go through each of these 1-by-1, right now we're on the `Operation` tab, which is the main one. Next you can see there are several robot modes, there's `teleop`, `autonomous`, `practice` and `test`. The `teleop` mode is when you're controlling it with a controller, like you would in a match. The `autonomous` mode is when the robot controls itself, this would happen in the first 15 seconds of a match. ADD DESC OF LAST TWO.
+
+Below there are two big buttons for `enable` and `disable`. The robot can only move when it's `enabled`, so if your controller input isn't working, make sure it's enabled. There's also two important keyboard shortcuts. If you press the `Enter` key, it will disable the robot until you re-enable it. If you press `space`, it will cause an **emergency stop**. This will disable the robot, and not allow it to be re-enabled until both the robot, and the driver station software are rebooted, so only used it in emergencies.
+
+Next is just some nice information: how long the robot has been enabled, your PC battery and how much CPU is being used. There's also a way to change how the windows behaves, and to set which station you're using (not too important most of the time).
+
+After that is some robot information, from here on won't change when you change tabs on the left side of the program. First is your team number (for now it's `xxyy`, which is the default, we'll manually set that soon). Then it will show the status of the battery, and there's three status indicators. `Communications` means that the driver station can communicate with the roboRIO. If you're connected to the radio, but that's not on, make sure the roboRIO is properly configured and connected to the radio. Next is `Robot Code`, if this is red, just re-deploy your robot code. Last is `Joysticks`, which tells you if any joysticks are connected to the driver station.
+
+The last part is the console output. This will show you errors in the robot code, as well as any warnings or print statements. This means if you have `System.out.println` in your code, it will show up there. If you click on the gear at the top of the console, you can set it to show only errors, errors + warnings, or everything. You can also enlarge the console, and look at the `log file` for the robot. This keeps track of how much power is being by the robot on each component.
+
+On the very right, you can change the tabs into two other modes. The middle tab is the `charts`. This shows your robots battery voltage, as well as packet loss. Packet loss is the amount of packets the driver station sent to the robot, but didn't get processed, the lower this is, the better. The lowest tab shows both the console and the charts. 
+
+![Driver Station Diagnostics](pictures/ds-diagnostics.png)
+This is the `diagnostics` tab, it shows what you're conneted to. `Enet link` is ethernet, it checks your computers ethernet port. `Robot radio` is, well the radio. `Robot` is the roboRIO. FMS is the `field management system`, this won't be on unless you're at competition. The last 4 are just different network devices you can connect to the internet with.
+
+![Driver Station Setup](pictures/ds-setup.png)
+This is the `setup` tab. This is where you set your team number. You can also set your type of dashboard, my personal recomendation is `SmartDashboard`, but you use what ever you think works best. Then on the right, you can set timings for the `practice mode`, which is default to what a real match would be.
+
+![Driver Station Input](pictures/ds-input.png)
+This is the `input` tab. This will show you all of your controllers you have connected. Now I tried for about three hours to get my xbox controller to connect to my virtual machine and show up in the `Driver Station`, but it just didn't want to. So this is someone else's picture. Under number `1` is a list of controllers. Most of the time, as long as you only have one controller plugged in, it will be in the `0th` slot. Sometimes it likes to think you still have a different controller plugged in, but you can change around the order by clicking and dragging. Under number `3` is all the buttons and axes. When eventually ask for button and axis numbers, this is how you can find them. Just move the particular axis, or press a particular button, and you can get its number from there.
+
+![Driver Station Power](pictures/ds-power.png)
+This is the last tab, the `power` tab. This tab isn't too important, but it shows you how much power is being used by different things.
+
+There is a lot more depth to this software, but I wanted to give a general overview of it before we went on.
 
 ## Dashboard
-The `dashboard` is a software the accompanies the `drive station` software. What it does, is display stuff from your robot code that we ask it to display (such as the camera, or motor values for debugging). There's not a whole lot to how the dashboard works, there's two main ones: the default labview one, and `Smartdashboard`. I personally recommend using `smartdashboard`, because you can move elements around, and only display what you need to. When we get to code, I'll talk about how to put stuff on there, but using either dashboard software is pretty intuitive. Setting your default dashboard is just an option of the `drive station` software. 
+The `dashboard` is a software the accompanies the `drive station` software. What it does, is display stuff from your robot code that we ask it to display (such as the camera, or motor values for debugging). There's not a whole lot to how the dashboard works, there's two main ones: the default labview one, and `Smartdashboard`. I personally recommend using `SmartDashboard`, because you can move elements around, and only display what you need to. When we get to code, I'll talk about how to put stuff on there, but using either dashboard software is pretty intuitive. Setting your default dashboard is just an option of the `drive station` software. 
 
 # Basic robot coding 
 You've made it. You got through basic Java, learned OOP, inheritance, and gone through some basic robot infrastructure to help you understand the robot a bit better. It's now time to learn about robot coding. You've made it so far and you probably don't even realize it. Now unlike all the code you wrote for me so far, you won't be coding a robot completely from scratch, there's a lot already working for us. We use `libraries` from WPI for the robot. What is a `library`? It's just importing someone else's code. In this case, FRC has a bunch of code that is used to talk to the roboRIO, and use all of its ports to talk to the other components. This means, all the hard work is done for us, making a motor turn is as simple as calling a function! Additionally, a lot of the robot code has its own structure. The robot code runs off something called a `scheduler`. This is a bit of code that handles the timing on everything, and calls appropriate functions. I'll get into more specifics in the appropriate section, but coding on a robot is different from our "normal" coding. The biggest difference is that the robot code is continuously looping. This is the main reason we avoid `for and while loops`. Sometimes a for loop is necessary, but to be honest with you I've never used one while coding a robot. And `while` loops should be completely avoided. Anyways, let's get into coding for a robot!
@@ -1985,6 +2012,23 @@ public void robotInit()
 </details>
 
 If you took a look at the documentation for the `Joystick class`, you should hopefully already be understanding how this works. There are a ton of `getter functions` that you can use to get the different inputs of the controller. There's two main functions we will be looking at for now: `getRawAxis` and `getRawButton`. These are not a part of the `Joystick class` itself, but part of the `GenericHID class`, which `Joystick` inherits from. As you can imagine, `getRawAxis` will the the real time value of a particular joystick axis, and `getRawButton` will do the same but for a button. For these, you need to give the particular number for the axis or button you want.  Now your team may have different controllers at their disposal, but I will be using an xbox controller, and there's a popular chart showing which buttons and axes have what numbers:
-![]()
+![Xbox 360 Controller Mapping](pictures/xbox-mapping.png)
 
 But you can also figure that out in the driver station software, by moving the axes you want, or pressing the button you want, and look at the number there. Those will be the same numbers in the code.
+
+So, now that we have the joystick object, let's get the joystick values and store them in a variable. Inside our `teleopInit` function, I'm going to add this line:
+```Java
+double moveVal = xboxController.getRawAxis(0);
+
+leftDriveMotor.set(moveVal);
+rightDriveMotor.set(moveVal);
+```
+
+This will now make the robot go forward and backward depending on your controller input. On a real robot, there's a chance that when you press forward on your stick that one of the motors is going the wrong way. Let's say in this case I press forward on the joystick, both motor controllers are lighting up green, but the left wheel is spinning backwards. We should tell the code that that motor needs to be inverted. This is pretty easy to do, since there's a method just for that:
+```Java
+leftDriveMotor.setInverted(true);
+```
+
+I would personally do this in `robotInit` right after we make all of our objects.
+
+But hopefully this is exiting, we are now taking on controller input, and driving the robot with it! You're actually getting there!
