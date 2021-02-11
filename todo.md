@@ -34,7 +34,7 @@
 - [x] What is Git and GitHub?
 - [x] Branching
 - [x] How does git work?
-- [x] Installing git
+- [x] Installing gits
 - [x] How do I use it? 
 - [x] GitHub etiquette
 
@@ -44,7 +44,7 @@
 - [x] RoboRIO
 - [x] Radio
 - [x] Motor controller
-- [ ] Drive station
+- [x] Drive station
 - [x] Dashboard
 
 # Basic Robot Coding 
@@ -54,8 +54,24 @@
 - [x] Documentation
 - [x] Port constants
 - [x] Coding motor controllers
-- [ ] Controller input
-- [ ] Using a dashboard
+- [x] Servo motors
+- [x] Controller axis input
+- [x] Controller button input
+- [x] Drive controllers
+- [x] Using a dashboard
+
+# Pneumatics programming
+- [ ] What are pneumatics
+- [ ] Getting started
+- [ ] Single solenoids
+- [ ] Double solenoids
+
+# Sensors
+- [ ] Limit switch
+- [ ] Ultrasonic
+- [ ] Gyroscope
+- [ ] Accelerometer
+- [ ] Potentiometer
 
 # Command Based Robot Coding
 - [ ] What is command based robot coding?
@@ -65,3 +81,10 @@
 - [ ] Commands
 - [ ] Command groups
 - [ ] Robot IO
+
+# Advanced robot control
+- [ ] PID Control
+- [ ] Vision coding
+- [ ] 
+
+Read the Docs + Sphinx to make a github.io page

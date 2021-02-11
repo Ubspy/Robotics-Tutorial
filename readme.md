@@ -59,8 +59,9 @@
     3. [Documentation](#documentation)
     4. [Port constants](#port-constants)
     5. [Coding motor controllers](#coding-motor-controllers)
-    6. [Controller input](#controller-input)
-    7. [Using a dashboard](#using-a-dashboard)
+    6. [Controller axis input](#controller-axis-input)
+    7. [Controller button input](#controller-button-input)
+    8. [Using a dashboard](#using-a-dashboard)
 
 # Introduction
 Welcome! This is a coding guide all the way from basic Java to vision code intended for FRC students, specifically those for Sargon Robotics team 2335 with little to no prior programming experience. My name is Jack Moren, I was the head programmer of the team from 2015 to 2019. Before my arrival, there was not a lot to learn from, with the FRC wiki being spotty at best and there only being one other programmer there wasn't a lot of time for me to learn. Additionally, our team wasn't too advanced in programming, so I had to learn a lot on my own. To preserve all I learned, I decided to write this guide. This is the 2.0 version, the first one being lost by SMSD erasing my Google Drive. Additionally, with there being a decent gap in FRC because of the pandemic, I figured it would be nice to have this all written down so when the robotics seasons continue, there's a good starting place.
@@ -1982,7 +1983,73 @@ public void disabledInit()
 
 Now you know how to set motors! You're coding robots!
 
-## Controller input
+## Servo motors
+I would like to talk about servo motors. Didn't we just code motors? Yes, we did, but those are regular dc motors. You tell them to spin, and they will spin. How is a servo motor different? Well instead of continually spinning, it has a specific range of angles it can be in. The motor can be anywhere from 0 degrees, to 180 degrees. Why would we want this? Well the cool thing about servo motors is you can tell the motor any angle to want it to go to, and it will position itself. This could be useful for so many different things, the best example I can think of is a claw, imagine that having the claw servo motor at 0 degrees means it's `closed`, and that at about 120 degrees it's `open`.
+
+Let's go ahead and have the robot open the claw when we enable it, and make sure it stays open. We'll do more with this in a bit, but I'd like to show the basics of servos.
+
+Just like before, we want to make a port for it. Let's use the 2nd port, and create an object of the [Servo class](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/Servo.html):
+```Java
+final int LEFT_MOTOR_PORT = 0;
+final int RIGHT_MOTOR_PORT = 1;
+final int CLAW_SERVO_PORT = 2;
+
+Spark leftDriveMotor, rightDriveMotor;
+Servo clawServo;
+```
+
+You may notice, if you type this in, you'll get an error saying something like `Servo is not a recognized type`. Now all of the other libraries were already imported into the robot. You may have gotteh this before, but for me the first time I saw it was when typing servo. This is because you need to import the `Servo` class. Oh no, that sounds complicated right? Especially since some imports look like `import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;`, how do I remember this. Good news: you don't need to! VSCode has an option to `organize imports`. There are two ways to do this: you can open the `command menu (ctrl+shift+p)` and type in `organize imports`, or you can use the built-in shortcut which is `alt+shift+o (that's the letter o)`. If you use this shortcut, VSCode will automatically add imports you need from the wpi libraries.
+
+Now, back to coding the servo, now we need to initialize it in `robotInit()`, the only argument the servo takes is the motor port, so let's do that:
+```Java
+@Override
+public void robotInit()
+{
+    leftDriveMotor = new Spark(LEFT_MOTOR_PORT);
+    rightDriveMotor = new Spark(RIGHT_MOTOR_PORT);
+    clawServo = new Servo(CLAW_SERVO_PORT);
+
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
+}
+```
+
+It's surprising how easy it is to set this up isn't it? This should ideally work for any servo motor, since they all use the same signals. Now for setting it. We don't want to constantly set it, this can be useful don't get me wrong, it's not forbidden. But what I want to do, is tell the servo to move to angle `120` if it's not there. If you really wanted to keep the servo at 120 for a long time, constantly setting it to `120` might be the better option, but I want to show you what a servo can do.
+
+So let's check if the angle is at `120`, and if it's not, we'll just set it to `120`. Unfortunately, instead of `0 to 180`, the values you use for `set` are between `0 and 1`. So using some quick math, we want to see how to convert our `120` to something from `0 to 1`. This shouldn't be too hard, just some basic algebra of `120/180 = x/1` and solve for `x` by just divinging 120 by 180, since `x/1` is just `x`. The resulting value is a repeating decimal, but luckily we can just type `120/180` into the code. That's enough math, let's check if the servo is at that value:
+```Java
+@Override
+public void teleopInit()
+{
+    leftDriveMotor.set(0.25);
+    rightDriveMotor.set(0.25);
+
+    if(clawServo.get() != (120 / 180))
+    {
+        // Do something if we aren't at the value
+    }
+}
+```
+
+It's pretty easy, if you look at the documentation, the `get()` function will return a value from 0 to 1, and it will tell you where the servo motor currently is. All we need to do is set the servo to the value we want now. If you looked at the documentation for the `Servo` class, or if you just took a decent guess, or even looked at the autocomplete, you'd know all we need to do is use the `set()` function for our servo motor object:
+```Java
+@Override
+public void teleopInit()
+{
+    leftDriveMotor.set(0.25);
+    rightDriveMotor.set(0.25);
+
+    if(clawServo.get() != (120 / 180))
+    {
+        clawServo.set(120/180);
+    }
+}
+```
+
+This is a very simple, and honestly quite odd application of a servo motor, but I wanted to introduce you to them before we got too into anything else.
+
+## Controller axis input
 Obviously, just setting the motor to `just go forward and don't stop` is bad for multiple reasons. First of all, it's not safe, just tell the robot `yeah no don't worry about hitting anything`. Furthermore, it's not as fun, wouldn't you want to actually *drive* the robot? Well lucky for you, that's what we're doing next!
 
 Now getting controller input is entirely handled by the [Joystick class](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/Joystick.html). With this, you can get all the input, as well as (depending on the controller of course) activate lights on the controller, or rumble it. Now let's start like we did last time with having a class wide `Joystick object`, and we should initialize it with a constructor. I want you to try and do this yourself, now the constructor only takes one argument, and that's the number of controller on the driver station. If you remember the controller section, all of your controllers will have a number next to them:
@@ -2016,19 +2083,229 @@ If you took a look at the documentation for the `Joystick class`, you should hop
 
 But you can also figure that out in the driver station software, by moving the axes you want, or pressing the button you want, and look at the number there. Those will be the same numbers in the code.
 
-So, now that we have the joystick object, let's get the joystick values and store them in a variable. Inside our `teleopInit` function, I'm going to add this line:
+So, now that we have the joystick object, let's get the joystick values and store them in a variable. Inside our `teleopPeriodic` function, I'm going to add this line:
 ```Java
-double moveVal = xboxController.getRawAxis(0);
+double moveVal = xboxController.getRawAxis(LEFT_JOYSTICK_Y);
 
 leftDriveMotor.set(moveVal);
 rightDriveMotor.set(moveVal);
 ```
+This is assuming we have another `final int` at the top called `LEFT_JOYSTICK_Y`, which represents the port for the left joystick on the y-axis. In my case, we'll have it set to 0 based off the chart above.
+
+We should also remove the code from `teleopInit` since we're not going to be using that code anymore.
 
 This will now make the robot go forward and backward depending on your controller input. On a real robot, there's a chance that when you press forward on your stick that one of the motors is going the wrong way. Let's say in this case I press forward on the joystick, both motor controllers are lighting up green, but the left wheel is spinning backwards. We should tell the code that that motor needs to be inverted. This is pretty easy to do, since there's a method just for that:
 ```Java
 leftDriveMotor.setInverted(true);
 ```
-
 I would personally do this in `robotInit` right after we make all of our objects.
 
 But hopefully this is exiting, we are now taking on controller input, and driving the robot with it! You're actually getting there!
+
+## Controller button input
+We're almost done with the absolute basics, but I want to quickly talk about buttons. There are cases where you'll want to use buttons. Let's wind back to servos for a second, before we just had it set itself to one angle and kept track of its position. Let's have an open an close button for the servo. Let's just get started with the basics. For this we need two `JoystickButton` objects. Alternatively, you can just use `controller.getInput(buttonPort)`. I think using `JoystickButton` is better. The constructor takes the `Joystick` object, and the button port.
+
+Hopefully by now you know what to do: define the ports and the objects, and initialize them in `robotInit()` (we're going to be using the servo, so I'm adding that back in):
+```Java
+Joystick controller;
+JoystickButton clawOpenButton, clawCloseButton;
+Spark leftDriveMotor, rightDriveMotor;
+Servo clawServo;
+
+@Override
+public void robotInit()
+{
+    controller = new Joystick(0);
+    clawOpenButton = new JoystickButton(controller, CLAW_OPEN_BUTTON);
+    clawCloseButton = new JoystickButton(controller, CLAW_CLOSE_BUTTON);
+
+    leftDriveMotor = new Spark(LEFT_MOTOR_PORT);
+    rightDriveMotor = new Spark(RIGHT_MOTOR_PORT);
+
+    clawServo = new Servo(CLAW_SERVO_PORT);
+
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
+}
+```
+
+Now before we continue into using our claw buttons, we need to consider some things. First off, our code is looping, so just having an if statement of `if button is pressed, do x`. Let's say we have the button held, do we want to continually have it set to open or close, or just set it once? It all depends on the problem, but we have a claw, presumably we want to grab something. Therefore, when grabbing having some force applied will ensure a better grip. Therefore, we should always be setting the servo to a value.
+
+Let's create a global variable to store the current servo value (I'm putting above all of our Joystick and other objects):
+```Java
+double clawServoVal;
+
+Joystick controller;
+JoystickButton clawOpenButton, clawCloseButton;
+Spark leftDriveMotor, rightDriveMotor;
+Servo clawServo;
+```
+
+Then, inside `robotInit()` we want to set it to the value we want be default, let's say we want it closed by default:
+Now what we want to do is make it so when we enable the robot, the claw starts out closed. We could do this in `robotInit()`, but if you enabled the robot, opened the claw, and then disabled it, the claw would stay open. I think it would be better if we put it in `teleopInit()` so that when you first enable the robot it always makes sure it's closed:
+```Java
+@Override
+public void teleopInit()
+{
+    clawServoVal = 0; // Sets initial value to closed
+}
+```
+
+Ok, now for the use of the button. So let's start with how you would do it using the `JoystickButton` class. All you need to do is `get()` and it will return a `boolean` of whether or not it's pressed. So if our open button is pressed, we'll set the servo val to `120/180`. If it's closed we'll set it to `0`. Go ahead and try this for yourself.
+
+<details>
+<sumarry>Here is what my code looks like: </sumarry>
+
+```Java
+@Override
+public void teleopPeriodic()
+{
+    double moveVal = controller.getRawAxis(LEFT_JOYSTICK_Y);
+    double rotateVal = controller.getRawAxis(LEFT_JOYSTICK_X);
+
+    SmartDashboard.putNumber("Controller Y Value", moveVal);
+
+    if(clawOpenButton.get())
+    {
+        clawServoVal = 120 / 180;
+    }
+    else if(clawCloseButton.get()) // Else if so they don't cause any weird behavior by pressing both buttons at once
+    {
+        clawServoVal = 0;
+    }
+}
+```
+</details>
+
+If you don't want to use `JoystickButton`, just replace the `clawOpenButton.get()` with `controller.getRawButton(CLAW_OPEN_BUTTON)`. Same difference with the close button. Same function, but use the close button port. When we move to command based coding though, we will be using JoystickButtons a lot, so I'd get used to them now.
+
+## Drive controllers
+Let's talk about actually driving the robot now. We have it moving forward and backward, which is fantastic, but I think we can all agree that's not exactly a functional drive system. I think the main concern is: what if we want to turn the robot? Well that's where a `drive controller` comes in. What a `drive controller` does it takes in different values, and then writes your motor controllers appropriately. There is a basic drive controller for a 2x2 or 4x4 drive system, and there's ones for more compliated drive systems like `mecanum wheels`, where your robot can strafe. In the end, you can also write your own controller like I did. In my junior year, I wanted to be able to turn slightly while going forward, so I programmed my own drive controller, if you want me to show you how it works, let me know. For now, let's stick to the basic ones.
+
+The most basic type of `drive controller` is the (Differential Drive)[https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/drive/DifferentialDrive.html] class. Now if you go to the docs, it literally shows you how to do exactly what you need, but I wanted to explain it a little more in depth. Let's talk about the rules of `differential drive`:
+* There are two modes: moving and turning
+* You can only be moving or turning, you cannot do both
+* When in the moving mode, both motors will spin in the same direction with the same power
+* When in turning mode, motors will spin in opposite directions, with the same power
+* When there is no controller input, both motors are off
+
+If you wanted some practice, you could easily program your own `Differential Drive` class, but either way let's talk about how to use it. Just like everything else, we need to make an object for it. In our example, we only have two motors, so the constructor parameters are as follows: `(leftMotor, rightMotor)`. You can give any motor controller object. Go ahead and do this on your own and see if you have the same code I do.
+<details>
+    <summary>Here is what I did:</summary>
+
+```Java
+final int LEFT_JOYSTICK_Y = 0;
+final int LEFT_MOTOR_PORT = 0;
+final int RIGHT_MOTOR_PORT = 1;
+
+private static final String kDefaultAuto = "Default";
+private static final String kCustomAuto = "My Auto";
+private String m_autoSelected;
+private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+Joystick controller;
+Spark leftDriveMotor, rightDriveMotor;
+DifferentialDrive drive;
+
+/**
+* This function is run when the robot is first started up and should be used for any
+* initialization code.
+*/
+@Override
+public void robotInit()
+{
+    controller = new Joystick(0);
+
+    leftDriveMotor = new Spark(LEFT_MOTOR_PORT);
+    rightDriveMotor = new Spark(RIGHT_MOTOR_PORT);
+
+    drive = new DifferentialDrive(leftDriveMotor, rightDriveMotor);
+
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
+}
+```
+</details>
+
+Now the type of drive I described is called `arcade drive`, there are other drive methods inside of the `Differential Drive` class but the simplest is the `arcade drive`. This method takes two parameters, the forward movement value, as well as the rotation value. Let's have the robot turn using the x-axis of the left joystick. See if you can properly call the `arcadeDrive` function (hint: you don't manually set the motor controllers).
+<details>
+    <summary>It should look like this (I left out funcitons that weren't important, but you shouldn't delete them)</summary>
+
+```Java
+final int LEFT_JOYSTICK_Y = 0;
+final int LEFT_JOYSTICK_X = 1;
+
+final int LEFT_MOTOR_PORT = 0;
+final int RIGHT_MOTOR_PORT = 1;
+
+private static final String kDefaultAuto = "Default";
+private static final String kCustomAuto = "My Auto";
+private String m_autoSelected;
+private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+Joystick controller;
+Spark leftDriveMotor, rightDriveMotor;
+DifferentialDrive drive;
+
+/**
+* This function is run when the robot is first started up and should be used for any
+* initialization code.
+*/
+@Override
+public void robotInit()
+{
+    controller = new Joystick(0);
+
+    leftDriveMotor = new Spark(LEFT_MOTOR_PORT);
+    rightDriveMotor = new Spark(RIGHT_MOTOR_PORT);
+
+    drive = new DifferentialDrive(leftDriveMotor, rightDriveMotor);
+
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
+}
+
+@Override
+public void teleopPeriodic()
+{
+    double moveVal = controller.getRawAxis(LEFT_JOYSTICK_Y);
+    double rotateVal = controller.getRawAxis(LEFT_JOYSTICK_X);
+
+    drive.arcadeDrive(moveVal, rotateVal);
+}
+```
+</details>
+
+Incase you're a little lost, let's go through this one by one. First, we create constants so we can easily find where we may need to change motor ports or controller ports. We then make four object, we make a `Joystick` object so we can get input from our controller. Then we made `Spark` objects, so we can use that to control our `Spark` motor controllers. If you have different motor controllers, use their appropriate class. Then we make the `DifferentialDrive` object so we can use its pre-written drive functions. We then call all of the constructors, using the parameters I described before. Finally, we set the periodic behavior of `teleopPeriodic` to get controller input, and send it to our `DifferentialDrive` object, so we can have an arcade type drive. Remember that the `teleopPeriodic` function is called several times a second continuously until we aren't enabled anymore.
+
+## Using a dashboard
+Now this section is going to be a little limited, because I don't have a real robot, and can't show you the results in the dashboard. I want to give you an example of debugging using the `SmartDashboard`. For this example I'll also show you how to use it on the `regular dashboard`. Let's say that your motors aren't moving when you press the joystick in a direction. You've looked at the driver station and see that it's showing the axis movement, and the motor controller lights are saying they're not getting any input. Let's go ahead and write out controller value to the dashboard.
+
+For `SmartDashboard`, you just need to put it on there using one of the methods. You could use `putNumber`, or `putString`. I'm just going to use `putNumber`. Here is what my `teleopPeriodic` will look like with that:
+```Java
+@Override
+public void teleopPeriodic()
+{
+    double moveVal = controller.getRawAxis(LEFT_JOYSTICK_Y);
+    double rotateVal = controller.getRawAxis(LEFT_JOYSTICK_X);
+
+    SmartDashboard.putNumber("Controller Y Value", moveVal);
+
+    drive.arcadeDrive(moveVal, rotateVal);
+}
+```
+
+The first parameter of any of the `put` functions is the string key you want to use. This will just be the string the `SmartDashboard` puts before displaying the number. When you enable the robot now, it will show the value it's reading from the controller. You may need to restart the dashboard for it to show up.
+
+If you want to use the regular dashboard, the default one it comes with, you'll need to use this bit of code instead:
+```Java
+SmartDashboard.putNumber("DB/String 0", moveVal);
+```
+
+This will put the value inside the `Basic` tab of the LabView dashboard. The reason you have to give it this weird string key is because the LabView dashboard has pre-determined spaces for certain spots on the dashboard, and the first one in the basic tab is `DB/String 0`, this goes all the way up to `DB/String 9`.
+
+There is a lot more you can do with the Dashboards, but this should hopefully be a good starting point.
+
